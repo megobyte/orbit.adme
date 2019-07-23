@@ -1,0 +1,22 @@
+@font-face {
+    font-family: 'Wrigley';
+    src: url('subset-WrigleyUnicode2007-Regular.eot');
+    src: local('Wrigley Unicode 2007'), local('WrigleyUnicode2007-Regular'),
+        url('subset-WrigleyUnicode2007-Regular.eot?#iefix') format('embedded-opentype'),
+        url('subset-WrigleyUnicode2007-Regular.woff2') format('woff2'),
+        url('subset-WrigleyUnicode2007-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Wrigley';
+    src: url('subset-WrigleyUnicode2007-Bold.eot');
+    src: local('Wrigley Unicode 2007 Bold'), local('WrigleyUnicode2007-Bold'),
+        url('subset-WrigleyUnicode2007-Bold.eot?#iefix') format('embedded-opentype'),
+        url('subset-WrigleyUnicode2007-Bold.woff2') format('woff2'),
+        url('subset-WrigleyUnicode2007-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+

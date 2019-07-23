@@ -1,0 +1,23 @@
+$bg: #23c2ec;
+$adme: #ffd401;
+$violet: #4d418d;
+$pink: #f2185e;
+
+$font: 'Wrigley';
+
+@mixin transition($t: all 500ms ease) {
+  -webkit-transition: $t;
+  transition: $t;
+}
+
+@mixin origin($t: 50% 50%) {
+  -webkit-transform-origin: $t;
+  transform-origin: $t;
+}
+
+@mixin flex($direction: column) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: center;
+  justify-content: center;
+}
