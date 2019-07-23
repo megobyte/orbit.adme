@@ -2,12 +2,8 @@
   .page#page2
     .face
     .text
-      .head
-        svg(x="0px", y="0px", viewBox="0 0 857.7 264.8", xml:space="preserve")
-          text(transform="matrix(1 0 0 1 0 115.937)")
-            tspan(x="0") ПРОВЕРЬ СЕБЯ НА
-            tspan(x="0", dy="123.1") СЛОЖНОЕ ЛИЦО
-        .button
+      h1 что такое<br />сложное лицо?
+      p Есть люди, которые даже в расслабленном состоянии выглядят неприветливо. Это явление известно как сложноe лицо, и причина его не в плохом характере, а в особом строении лица.
 
 </template>
 
@@ -65,6 +61,34 @@ export default {
       height: 100%;
       @include flex();
       align-items: flex-start;
+
+      h1 {
+        text-transform: uppercase;
+        line-height: 1em;
+        margin: 0;
+        padding: 0;
+        margin-bottom: 40px;
+        padding-bottom: 0px;
+
+        &::before {
+          content: '';
+          display: block;
+          width: 116px;
+          height: 120px;
+          background: url(/assets/images/quote.svg) no-repeat center;
+          background-size: contain;
+          position: absolute;
+          left: -150px;
+          top: -56px;
+        }
+      }
+
+      p {
+        padding: 0;
+        margin: 0;
+        font-size: 39px;
+        line-height: 1em;
+      }
 
       .head {
         width: 100%;
