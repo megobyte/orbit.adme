@@ -1,5 +1,5 @@
 <template lang="pug">
-  #global
+  #global(@wheel="scrollMe")
     header
       .left
         span при поддержке
@@ -10,16 +10,16 @@
     nuxt
     .logo
     ul.menu
-      li О сложном лице
-      li СЛОЖНОМЕТР
-      li #ЛИЦОПРОЩЕ С ОРБИТ
-      li ПРОМО
+      li(:class="{ active: checkPage(1)}", @click="goTo('/about')") О сложном лице
+      li(:class="{ active: checkPage(2)}", @click="goTo('/metr')") СЛОЖНОМЕТР
+      li(:class="{ active: checkPage(3)}", @click="goTo('/hash')") #ЛИЦОПРОЩЕ С ОРБИТ
+      li(:class="{ active: checkPage(4)}", @click="goTo('/promo')") ПРОМО
     .dots
-      .dot
-      .dot
-      .dot
-      .dot
-      .dot
+      .dot(:class="{ active: checkPage(0)}", @click="goTo('/')")
+      .dot(:class="{ active: checkPage(1)}", @click="goTo('/about')")
+      .dot(:class="{ active: checkPage(2)}", @click="goTo('/metr')")
+      .dot(:class="{ active: checkPage(3)}", @click="goTo('/hash')")
+      .dot(:class="{ active: checkPage(4)}", @click="goTo('/promo')")
     .onehk
     footer
       .grid
@@ -28,6 +28,85 @@
         div
         div
 </template>
+<script>
+export default {
+  data: function() {
+    return {
+      pagesi: {
+        "/": 0,
+        "/about": 1,
+        "/metr": 2,
+        "/hash": 3,
+        "/promo": 4,
+      }
+    }
+  },
+
+  computed: {
+    ipages: function() {
+      var r = [];
+      for(var c in this.pagesi) {
+        r[this.pagesi[c]] = c;
+      }
+      return r;
+    }
+  },
+
+  methods: {
+    scrollMe(event) {
+      event.preventDefault();
+      const deltaY = event.deltaY;
+
+      if (deltaY > 0) {
+        this.goToPage(1);
+      } else {
+        this.goToPage(-1);
+      }
+    },
+
+    goToPage(direction) {
+      var i = this.pagesi[this.$route.path];
+      if (direction < 0) {
+        if (i > 0) {
+          this.goTo(this.ipages[i-1]);
+        }
+      } else {
+        if (i < 4) {
+          this.goTo(this.ipages[i+1]);
+        }
+      }
+    },
+
+    goTo(uri) {
+      console.log(uri);
+      this.$router.push(uri);
+    },
+
+    checkPage(page) {
+      var r = false;
+      switch(page) {
+        case 0:
+          if (this.$route.path === "/") r = true;
+          break;
+        case 1:
+          if (this.$route.path === "/about") r = true;
+          break;
+        case 2:
+          if (this.$route.path === "/metr") r = true;
+          break;
+        case 3:
+          if (this.$route.path === "/hash") r = true;
+          break;
+        case 4:
+          if (this.$route.path === "/promo") r = true;
+          break;
+      }
+
+      return r;
+    }
+  },
+}
+</script>
 
 <style lang="scss">
 html,
@@ -59,6 +138,38 @@ $w: 100vw/12;
   margin-right: 10px;
 }
 
+.page-enter-active,
+.page-leave-active,
+.layout-enter-active,
+.layout-leave-active {
+  @include transition(all 500ms ease);
+  * {
+    @include transition(all 300ms ease);
+  }
+}
+.page-enter,
+.page-leave-active,
+.layout-enter,
+.layout-leave-active {
+  .face {
+    filter: blur(15px);
+    opacity: 0;
+  }
+  .text {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+
+  .bubble1 {
+    margin-left: -150px;
+    opacity: 0;
+  }
+  .bubble2 {
+    transform: translateX(150px);
+    opacity: 0;
+  }
+}
+
 #global {
   position: absolute;
   left: 0;
@@ -84,6 +195,7 @@ $w: 100vw/12;
       background-size: contain;
       background-repeat: no-repeat;
       background-position: center bottom;
+      @include transition;
     }
 
     .text {
@@ -151,7 +263,8 @@ $w: 100vw/12;
         background: $pink;
       }
 
-      &:hover{
+      &:hover,
+      &.active {
         &::before {
           transform: translateY(-53%) scaleX(1);
         }
@@ -211,7 +324,7 @@ $w: 100vw/12;
       justify-content: flex-start;
       padding-bottom: 17px;
       height: 100%;
-      width: $w*2;
+      width: $w*3;
       white-space: nowrap;
 
       span {
@@ -275,6 +388,7 @@ $w: 100vw/12;
       border-radius: 50%;
       background: #fff;
       opacity: .5;
+      cursor: pointer;
       @include transition;
 
       &.active {
