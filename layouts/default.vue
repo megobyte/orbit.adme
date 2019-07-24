@@ -8,7 +8,7 @@
         a.vk(href="#", target="_blank")
         a.fb(href="#", target="_blank")
     nuxt
-    .logo
+    .logo(@click="goTo('/')")
     ul.menu
       li(:class="{ active: checkPage(1)}", @click="goTo('/about')") О сложном лице
       li(:class="{ active: checkPage(2)}", @click="goTo('/metr')") СЛОЖНОМЕТР
