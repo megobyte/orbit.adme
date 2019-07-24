@@ -38,7 +38,8 @@ export default {
         "/metr": 2,
         "/hash": 3,
         "/promo": 4,
-      }
+      },
+      working: false
     }
   },
 
@@ -55,12 +56,15 @@ export default {
   methods: {
     scrollMe(event) {
       event.preventDefault();
-      const deltaY = event.deltaY;
-
-      if (deltaY > 0) {
-        this.goToPage(1);
-      } else {
-        this.goToPage(-1);
+      if (!this.working) {
+        const deltaY = event.deltaY;
+        this.working = true;
+        setTimeout(function(that) { that.working = false; }, 1000, this);
+        if (deltaY > 0) {
+          this.goToPage(1);
+        } else {
+          this.goToPage(-1);
+        }
       }
     },
 
@@ -146,6 +150,10 @@ $w: 100vw/12;
   * {
     @include transition(all 300ms ease);
   }
+
+  .text {
+    @include transition(all 500ms ease);
+  }
 }
 .page-enter,
 .page-leave-active,
@@ -156,8 +164,7 @@ $w: 100vw/12;
     opacity: 0;
   }
   .text {
-    transform: translateY(-50px);
-    opacity: 0;
+    transform: translateY(-100vh);
   }
 
   .bubble1 {
@@ -167,6 +174,11 @@ $w: 100vw/12;
   .bubble2 {
     transform: translateX(150px);
     opacity: 0;
+  }
+
+  .faceover {
+    opacity: 0;
+    transform: scaleY(0);
   }
 }
 
@@ -269,6 +281,12 @@ $w: 100vw/12;
           transform: translateY(-53%) scaleX(1);
         }
       }
+    }
+  }
+
+  @media screen and (max-width: 1280px){
+    .menu {
+      font-size: 24px;
     }
   }
 

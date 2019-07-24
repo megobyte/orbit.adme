@@ -1,0 +1,97 @@
+<svg id="face_recognition" data-name="face recognition" xmlns="http://www.w3.org/2000/svg" width="339.093" height="370.13" viewBox="0 0 339.093 370.13">
+  <metadata><?xpacket begin="﻿" id="W5M0MpCehiHzreSzNTczkc9d"?>
+<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 5.6-c140 79.160451, 2017/05/06-01:08:21        ">
+   <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <rdf:Description rdf:about=""/>
+   </rdf:RDF>
+</x:xmpmeta>
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                           
+<?xpacket end="w"?></metadata>
+<defs>
+    <style>
+      .cls-1, .cls-2, .cls-5 {
+        fill: none;
+        stroke: #fff;
+      }
+
+      .cls-1 {
+        stroke-width: 4px;
+      }
+
+      .cls-1, .cls-5 {
+        opacity: 0.5;
+      }
+
+      .cls-2 {
+        stroke-width: 12px;
+      }
+
+      .cls-2, .cls-4, .cls-5 {
+        fill-rule: evenodd;
+      }
+
+      .cls-3, .cls-4 {
+        fill: #fff;
+        opacity: 0.7;
+      }
+
+      .cls-5 {
+        stroke-width: 2px;
+      }
+    </style>
+  </defs>
+  <rect id="shape" class="cls-1" x="7.156" y="6" width="325.937" height="358.13"/>
+  <path id="angle_1" class="cls-2" d="M558.876,2699.38V2597.82H665.213" transform="translate(-551.719 -2591.81)"/>
+  <path id="angle_2" class="cls-2" d="M667.525,2955.93h-109.8v-98.35" transform="translate(-551.719 -2591.81)"/>
+  <path id="angle_3" class="cls-2" d="M884.822,2854.37v101.56H778.485" transform="translate(-551.719 -2591.81)"/>
+  <path id="angle_4" class="cls-2" d="M775.018,2597.82h109.8v98.35" transform="translate(-551.719 -2591.81)"/>
+  <g id="Dots">
+    <ellipse id="Ellipse_1" class="cls-3" cx="127.859" cy="86.19" rx="4.266" ry="4.28"/>
+    <ellipse id="Ellipse_2" class="cls-3" cx="81.906" cy="149.25" rx="4.281" ry="4.28"/>
+    <ellipse id="Ellipse_3" class="cls-3" cx="171.688" cy="210.19" rx="4.281" ry="4.28"/>
+    <circle id="Ellipse_4" class="cls-3" cx="132.14" cy="197.365" r="4.265"/>
+    <ellipse id="Ellipse_5" class="cls-3" cx="211.25" cy="188.815" rx="4.281" ry="4.285"/>
+    <ellipse id="Ellipse_6" class="cls-3" cx="182.374" cy="342.735" rx="4.281" ry="4.265"/>
+    <path id="Ellipse_7" class="cls-4" d="M808.922,2869.34a4.285,4.285,0,1,1-4.266,4.28A4.275,4.275,0,0,1,808.922,2869.34Z" transform="translate(-551.719 -2591.81)"/>
+    <circle id="Ellipse_8" class="cls-3" cx="110.75" cy="295.705" r="4.281"/>
+    <circle id="Ellipse_9" class="cls-3" cx="189.859" cy="77.63" r="4.266"/>
+    <path id="Ellipse_10" class="cls-4" d="M845.266,2655.56a4.265,4.265,0,1,1-4.266,4.27A4.267,4.267,0,0,1,845.266,2655.56Z" transform="translate(-551.719 -2591.81)"/>
+    <circle id="Ellipse_11" class="cls-3" cx="200.562" cy="108.63" r="4.281"/>
+    <ellipse id="Ellipse_12" class="cls-3" cx="279.656" cy="101.16" rx="4.281" ry="4.28"/>
+    <path id="Ellipse_13" class="cls-4" d="M800.375,2721.81a4.28,4.28,0,1,1-4.281,4.28A4.282,4.282,0,0,1,800.375,2721.81Z" transform="translate(-551.719 -2591.81)"/>
+    <ellipse id="Ellipse_14" class="cls-3" cx="40.218" cy="125.735" rx="4.282" ry="4.265"/>
+    <circle id="Ellipse_15" class="cls-3" cx="23.109" cy="190.94" r="4.266"/>
+    <circle id="Ellipse_16" class="cls-3" cx="318.14" cy="161.015" r="4.265"/>
+    <path id="Shape_1" class="cls-5" d="M575.893,2782.75l86.586,103.69Z" transform="translate(-551.719 -2591.81)"/>
+    <path id="Shape_2" class="cls-5" d="M591.927,2716.48l-16.034,66.27,85.517,104.76" transform="translate(-551.719 -2591.81)"/>
+    <path id="Shape_3" class="cls-5" d="M830.305,2692.96l40.621,59.86-62,120.8" transform="translate(-551.719 -2591.81)"/>
+    <ellipse id="Shape_4" class="cls-3" cx="26.312" cy="93.675" rx="4.281" ry="4.265"/>
+    <circle id="Shape_5" class="cls-3" cx="133.203" cy="117.19" r="4.266"/>
+    <path id="Shape_6" class="cls-5" d="M661.41,2887.51l73.758,48.11,73.758-62-44.9-93-41.69,20.31-38.482-12.83Z" transform="translate(-551.719 -2591.81)"/>
+    <path id="Shape_7" class="cls-5" d="M802.512,2727.17l5.345,145.38" transform="translate(-551.719 -2591.81)"/>
+    <path id="Shape_8" class="cls-5" d="M662.479,2888.58l-28.862-147.51-41.69-23.52-13.9-32.07L679.582,2678l5.345,31-50.241,31" transform="translate(-551.719 -2591.81)"/>
+    <path id="Shape_9" class="cls-5" d="M741.582,2668.38l104.758-8.56-14.966,33.14-31,34.21L751.2,2700.44Z" transform="translate(-551.719 -2591.81)"/>
+    <path id="Shape_10" class="cls-5" d="M684.927,2710.07l-1.069,76.96" transform="translate(-551.719 -2591.81)"/>
+    <path id="Shape_11" class="cls-5" d="M752.271,2700.44l11.759,80.18" transform="translate(-551.719 -2591.81)"/>
+  </g>
+</svg>
