@@ -25,8 +25,10 @@
     .text
       h1 #ЛИЦОПРОЩЕ<br />С ORBIT
       p Хочешь выглядеть приветливее? Попробуй жевательную резинку – жевание расслабляет мышцы и лицо становится дружелюбнее.
-      .button
+      //-.button
       .orbit
+      .upload
+        input(type="file", ref="face", accept="image/*", @change="uploadFace")
 </template>
 
 <script>
@@ -34,6 +36,7 @@
 export default {
   data: function() {
     return {
+      face: false,
       showSVG: false,
       interv: false,
       instyle: {},
@@ -44,7 +47,31 @@ export default {
     }
   },
 
+  computed: {
+    host () {
+      return this.$store.state.host
+    }
+  },
+
   methods: {
+    uploadFace(e) {
+      var that = this;
+      this.face = this.$refs.face.files[0];
+      const fd = new FormData();
+      fd.append('face', this.face);
+      this.$axios.post(this.host+'/task/', fd, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+        .then(response => {
+          that.$router.push('/face/'+response.data.id+'/');
+        })
+        .catch(error => {
+          console.log(error.response)
+        })
+    },
+
     takeLineCss(i) {
       var r = {
         transform: '',
@@ -65,18 +92,18 @@ export default {
       switch(i) {
         case 1:
           var text = this.$el.querySelector(".faceover .list .item:nth-child(1) span").getBoundingClientRect();
-          x2 = (face.width / 100) * (403 / (facew / 100));
-          y2 = (face.height / 100) * (420 / (faceh / 100) );
+          x2 = (face.width / 100) * (427 / (facew / 100));
+          y2 = (face.height / 100) * (400 / (faceh / 100) );
         break;
         case 2:
           var text = this.$el.querySelector(".faceover .list .item:nth-child(2) span").getBoundingClientRect();
-          x2 = (face.width / 100) * (405 / (facew / 100));
-          y2 = (face.height / 100) * (506 / (faceh / 100) );
+          x2 = (face.width / 100) * (435 / (facew / 100));
+          y2 = (face.height / 100) * (496 / (faceh / 100) );
         break;
         case 3:
           var text = this.$el.querySelector(".faceover .list .item:nth-child(3) span").getBoundingClientRect();
           x2 = (face.width / 100) * (460 / (facew / 100));
-          y2 = (face.height / 100) * (577 / (faceh / 100) );
+          y2 = (face.height / 100) * (557 / (faceh / 100) );
         break;
         case 4:
           var text = this.$el.querySelector(".faceover .list .item:nth-child(4) span").getBoundingClientRect();
@@ -207,9 +234,9 @@ export default {
         border-radius: 50%;
         border: 2px solid #fff;
         position: absolute;
-        left: 50%;
-        bottom: 28%;
-        transform: translateX(-54%);
+        left: 51%;
+        bottom: 25%;
+        transform: translateX(-50%);
         @include transition;
       }
 
@@ -286,6 +313,23 @@ export default {
         padding-top: ($w*2.3) * 0.33426966292134831;
         background: url(/assets/images/orbit.png) no-repeat center;
         background-size: contain;
+        margin-bottom: 40px;
+      }
+
+      .upload {
+        width: 27.864583333333333vw;
+        padding-top: 9.21875vw;
+        background: url(/assets/images/upload2.svg) no-repeat left center;
+        background-size: contain;
+
+        input {
+          opacity: 0;
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+        }
       }
     }
   }

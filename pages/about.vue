@@ -14,7 +14,7 @@
         .item Прикрытые<br /><span>глаза</span>
         .item Опущенные<br />уголки <span>рта</span>
         .item Сжатые <span>губы</span>
-      .result
+      //-.result
         .title Лицо может выражать:
         .items
           | Презрение
@@ -27,9 +27,13 @@
     .text
       h1 что такое<br />сложное лицо?
       p Есть люди, которые даже в расслабленном состоянии выглядят неприветливо. Это явление известно как сложноe лицо, и причина его не в плохом характере, а в особом строении лица.
-      .video
-        .container
-          .arrow-container
+      .row
+        p.center Посмотри истории
+        .video
+          .container
+        .video
+          .container
+          //-.arrow-container
             //-:style="{ backgroundImage: showSVG }").
             .arrow(v-if="Boolean(showSVG)").
               <svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -620,10 +624,24 @@ export default {
         line-height: 1em;
         @include transition;
         margin-bottom: 40px;
+
+        &.center {
+          text-align: center;
+          width: 100%;
+          margin-bottom: 20px;
+        }
+      }
+
+      .row {
+        width: 100%;
+
+        @include flex(row);
+        justify-content: space-between;
+        flex-wrap: wrap;
       }
 
       .video {
-        width: $w*2;
+        width: calc(#{$w*2} - 10px);
         height: 0;
         padding-top: $w*2 / 16 * 9;
 

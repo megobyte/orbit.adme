@@ -1,11 +1,13 @@
 <template lang="pug">
   .page#page5
     .face
+    .bot
     .faceover
       .list
         .item Купи любую<br />жевательную<br />резинку Wrigley’s
         .item Отправь фото<br />пачки в <span>чат-бот</span>
         .item Выигрывай до <br />100 000 рубей<br />и <a href="#">другие призы</a><br /><br />Ежедневный розыгрыш &mdash;<br />1000 рублей
+
     .text
       h1 Сделай <br />#лицопроще <br />и <span>выигрывай</span><br />100 000 рублей
       .juicyfruit
@@ -116,10 +118,23 @@ export default {
 
     }
 
+    .bot {
+        width: 47.34375vw;
+        padding-top: 43.802083333333333vw;
+        background: url(/assets/images/bot.png) no-repeat center bottom;
+        background-size:contain;
+        position: absolute;
+        left: calc(22px + #{$w*3});
+
+        bottom: 24px;
+    }
+
     .text {
       height: 100%;
       @include flex();
       align-items: flex-start;
+      z-index: 2;
+      left: calc(42px + #{$w * 8}) !important;
 
       h1 {
         text-transform: uppercase;
@@ -132,6 +147,23 @@ export default {
         @include transition;
 
       }
+
+      span {
+            position: relative;
+            display: inline-block;
+
+            &::before {
+              z-index: -1;
+              display: block;
+              content: '';
+              width: calc(100% + 10px);
+              height: calc(100% + 7px);
+              background: $pink;
+              position: absolute;
+              left: -5px;
+              top: -5px;
+            }
+          }
 
       p {
         padding: 0;
@@ -156,6 +188,9 @@ export default {
       .faceover {
         font-size: 28px;
       }
+
+
+
       .text {
         h1 {
           font-size:60px;
@@ -165,22 +200,7 @@ export default {
             transform: scale(0.6) translateY(-20px);
           }
 
-          span {
-            position: relative;
-            display: inline-block;
 
-            &::before {
-              z-index: -1;
-              display: block;
-              content: '';
-              width: calc(100% + 10px);
-              height: calc(100% + 7px);
-              background: $pink;
-              position: absolute;
-              left: -5px;
-              top: -5px;
-            }
-          }
         }
 
         p {

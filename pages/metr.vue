@@ -20,6 +20,7 @@
     .text
       p Думаешь, у тебя сложное лицо? Проверь себя на сложнометре от Orbit –  он проанализирует эмоции на твоем лице и определит уровень его сложности.
       .upload
+        input(type="file", ref="face", accept="image/*", @change="uploadFace")
 </template>
 
 <script>
@@ -29,6 +30,7 @@ export default {
     return {
       interv: false,
       instyle: {},
+      face: false,
       results: [
         {
           now: 0,
@@ -50,8 +52,30 @@ export default {
     }
   },
 
-  methods: {
+  computed: {
+    host () {
+      return this.$store.state.host
+    }
+  },
 
+  methods: {
+    uploadFace(e) {
+      var that = this;
+      this.face = this.$refs.face.files[0];
+      const fd = new FormData();
+      fd.append('face', this.face);
+      this.$axios.post(this.host+'/task/', fd, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+        .then(response => {
+          that.$router.push('/face/'+response.data.id+'/');
+        })
+        .catch(error => {
+          console.log(error.response)
+        })
+    }
   },
 
   mounted: function() {
@@ -150,8 +174,8 @@ export default {
           background: url(/assets/images/facedetect.svg) no-repeat center;
           background-size: contain;
           position: absolute;
-          left: 33.241252302025783%;
-          top: 35.655737704918033%;
+          left: 34.141252302025783%;
+          top: 35.955737704918033%;
           @include transition;
 
           .results {
@@ -214,6 +238,15 @@ export default {
         padding-top: $w * 3 * .31438721136767318;
         background: url(/assets/images/upload.svg) no-repeat left center;
         background-size: contain;
+
+        input {
+          opacity: 0;
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+        }
       }
     }
   }

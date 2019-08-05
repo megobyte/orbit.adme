@@ -4,7 +4,7 @@
       .left
         span при поддержке
         a.adme(href="//adme.ru/", target="_blank")
-      .right.col
+      //-.right.col
         a.vk(href="#", target="_blank")
         a.fb(href="#", target="_blank")
     nuxt
@@ -13,7 +13,7 @@
       li(:class="{ active: checkPage(1)}", @click="goTo('/about')") О сложном лице
       li(:class="{ active: checkPage(2)}", @click="goTo('/metr')") СЛОЖНОМЕТР
       li(:class="{ active: checkPage(3)}", @click="goTo('/hash')") #ЛИЦОПРОЩЕ С ОРБИТ
-      li(:class="{ active: checkPage(4)}", @click="goTo('/promo')") ПРОМО
+      li(:class="{ active: checkPage(4)}", @click="goTo('/promo')") Условия промо
     .dots
       .dot(:class="{ active: checkPage(0)}", @click="goTo('/')")
       .dot(:class="{ active: checkPage(1)}", @click="goTo('/about')")
@@ -27,6 +27,12 @@
         div
         div
         div
+      .social
+        a.heart(href="#", target="_blank")
+        a.fb(href="#", target="_blank")
+        a.ok(href="#", target="_blank")
+        a.tw(href="#", target="_blank")
+        a.vk(href="#", target="_blank")
 </template>
 <script>
 export default {
@@ -420,6 +426,37 @@ $w: 100vw/12;
     bottom: 0;
     left: 0;
     width: 100%;
+
+    .social {
+      position: absolute;
+      left: 22px;
+      bottom: 24px;
+      padding-left: $w*2/6;
+      @include flex(row);
+      justify-content: flex-start;
+
+      a {
+        display: block;
+        margin-right: 20px;
+        width: 40px;
+        height: 30px;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        opacity: .38;
+        @include transition;
+
+        &:hover {
+          opacity: 1;
+        }
+
+        &.heart { background-image: url(/assets/images/social/heart.svg); }
+        &.fb { background-image: url(/assets/images/social/fb.svg); }
+        &.vk { background-image: url(/assets/images/social/vk.svg); }
+        &.ok { background-image: url(/assets/images/social/ok.svg); }
+        &.tw { background-image: url(/assets/images/social/tw.svg); }
+      }
+    }
 
     .grid {
       width: $w*7;
