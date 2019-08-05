@@ -26,7 +26,7 @@
           | Недовольство
     .text
       h1 что такое<br />сложное лицо?
-      p Есть люди, которые даже в расслабленном состоянии выглядят неприветливо. Это явление известно как сложноe лицо, и причина его не в плохом характере, а в особом строении лица.
+      p Есть люди, которые даже в расслабленном состоянии могут выгядеть неприветливо. Это явление известно как сложное лицо, и причина его не в плохом характере, а в особом строении лица.
       .row
         p.center Посмотри истории
         .video
@@ -362,7 +362,7 @@
             span Посмотри истории
       .guardians
         i
-        a(href="https://www.washingtonpost.com/news/arts-and-entertainment/wp/2016/02/02/scientists-have-discovered-the-source-of-your-resting-bitch-face/?noredirect=on&utm_term=.d2792a3f18f9", target="_blank") в статьях the guardians
+        a(href="https://www.washingtonpost.com/news/arts-and-entertainment/wp/2016/02/02/scientists-have-discovered-the-source-of-your-resting-bitch-face/?noredirect=on&utm_term=.d2792a3f18f9", target="_blank") Узнать больше о сложном лице
 </template>
 
 <script>

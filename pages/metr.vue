@@ -18,7 +18,7 @@
               span(:class="{ active : (results[1].now == results[1].to)}") {{results[2].now}}%
               span(:class="{ active : (results[2].now == results[2].to)}") {{results[3].now}}%
     .text
-      p Думаешь, у тебя сложное лицо? Проверь себя на сложнометре от Orbit –  он проанализирует эмоции на твоем лице и определит уровень его сложности.
+      p Думаешь, у тебя сложное лицо? Проверь себя на сложнометре от Orbit! Он определит уровень сложности твоего лица, и ты узнаешь, какое впечатление производишь на окружающих.
       .upload(@click="clicked=true", :class="{click: clicked}")
         input(type="file", ref="face", accept="image/*", @change="uploadFace")
 </template>

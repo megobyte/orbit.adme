@@ -13,7 +13,7 @@
       li(:class="{ click: clicked[1], active: checkPage(1)}", @click="goTo('/metr')") СЛОЖНОМЕТР
       li(:class="{ click: clicked[2], active: checkPage(2)}", @click="goTo('/about')") О сложном лице
       li(:class="{ click: clicked[3], active: checkPage(3)}", @click="goTo('/hash')") #ЛИЦОПРОЩЕ С ОРБИТ
-      li(:class="{ click: clicked[4], active: checkPage(4)}", @click="goTo('/promo')") Условия промо
+      li(:class="{ click: clicked[4], active: checkPage(4)}", @click="goTo('/promo')") Акция
     .dots
       .dot(:class="{ active: checkPage(0)}", @click="goTo('/')")
       .dot(:class="{ active: checkPage(1)}", @click="goTo('/metr')")
