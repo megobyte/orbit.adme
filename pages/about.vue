@@ -362,7 +362,7 @@
             span Посмотри истории
       .guardians
         i
-        a(href="#", target="_blank") в статьях the guardians
+        a(href="https://www.washingtonpost.com/news/arts-and-entertainment/wp/2016/02/02/scientists-have-discovered-the-source-of-your-resting-bitch-face/?noredirect=on&utm_term=.d2792a3f18f9", target="_blank") в статьях the guardians
 </template>
 
 <script>

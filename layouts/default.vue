@@ -1,5 +1,5 @@
 <template lang="pug">
-  #global(@wheel="scrollMe")
+  #global(@wheel="scrollMe", :class="[homeClass]")
     header
       .left
         span при поддержке
@@ -10,17 +10,17 @@
     nuxt
     .logo(@click="goTo('/')")
     ul.menu
-      li(:class="{ active: checkPage(1)}", @click="goTo('/about')") О сложном лице
-      li(:class="{ active: checkPage(2)}", @click="goTo('/metr')") СЛОЖНОМЕТР
-      li(:class="{ active: checkPage(3)}", @click="goTo('/hash')") #ЛИЦОПРОЩЕ С ОРБИТ
-      li(:class="{ active: checkPage(4)}", @click="goTo('/promo')") Условия промо
+      li(:class="{ click: clicked[1], active: checkPage(1)}", @click="goTo('/metr')") СЛОЖНОМЕТР
+      li(:class="{ click: clicked[2], active: checkPage(2)}", @click="goTo('/about')") О сложном лице
+      li(:class="{ click: clicked[3], active: checkPage(3)}", @click="goTo('/hash')") #ЛИЦОПРОЩЕ С ОРБИТ
+      li(:class="{ click: clicked[4], active: checkPage(4)}", @click="goTo('/promo')") Условия промо
     .dots
       .dot(:class="{ active: checkPage(0)}", @click="goTo('/')")
-      .dot(:class="{ active: checkPage(1)}", @click="goTo('/about')")
-      .dot(:class="{ active: checkPage(2)}", @click="goTo('/metr')")
+      .dot(:class="{ active: checkPage(1)}", @click="goTo('/metr')")
+      .dot(:class="{ active: checkPage(2)}", @click="goTo('/about')")
       .dot(:class="{ active: checkPage(3)}", @click="goTo('/hash')")
       .dot(:class="{ active: checkPage(4)}", @click="goTo('/promo')")
-    .onehk
+    .onehk(@click="goTo('/promo')")
     footer
       .grid
         div
@@ -40,11 +40,18 @@ export default {
     return {
       pagesi: {
         "/": 0,
-        "/about": 1,
-        "/metr": 2,
+        "/metr": 1,
+        "/about": 2,
         "/hash": 3,
         "/promo": 4,
       },
+      clicked: [
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
       working: false
     }
   },
@@ -56,6 +63,13 @@ export default {
         r[this.pagesi[c]] = c;
       }
       return r;
+    },
+    homeClass: function() {
+      if (this.$route.path === "/promo") {
+        return "hidetop";
+      } else {
+        return "";
+      }
     }
   },
 
@@ -65,7 +79,7 @@ export default {
       if (!this.working) {
         const deltaY = event.deltaY;
         this.working = true;
-        setTimeout(function(that) { that.working = false; }, 1000, this);
+        setTimeout(function(that) { that.working = false; }, 3000, this);
         if (deltaY > 0) {
           this.goToPage(1);
         } else {
@@ -88,7 +102,11 @@ export default {
     },
 
     goTo(uri) {
-      console.log(uri);
+      /*this.clicked[this.pagesi[uri]] = true;
+      setTimeout(function(that, uri) {
+        console.log(that.clicked[uri]);
+        that.$set(that.clicked, uri, false);//that.clicked[uri] = false;
+      }, 200, this, this.pagesi[uri]);*/
       this.$router.push(uri);
     },
 
@@ -99,10 +117,10 @@ export default {
           if (this.$route.path === "/") r = true;
           break;
         case 1:
-          if (this.$route.path === "/about") r = true;
+          if (this.$route.path === "/metr") r = true;
           break;
         case 2:
-          if (this.$route.path === "/metr") r = true;
+          if (this.$route.path === "/about") r = true;
           break;
         case 3:
           if (this.$route.path === "/hash") r = true;
@@ -196,12 +214,37 @@ $w: 100vw/12;
   height: 100vh;
   overflow: hidden;
 
+  &.hidetop {
+    header {
+      transform: scaleY(0);
+      @include origin(0 0);
+    }
+
+    .page {
+      top: 0;
+      height: 100vh;
+    }
+
+    .menu {
+      top: 44px;
+    }
+
+    .onehk {
+      top: 44px;
+    }
+
+    .logo {
+      top: 44px;
+    }
+  }
+
   .page {
     position: absolute;
     left: 0;
     top: 60px;
     width: 100vw;
     height: calc(100vh - 60px);
+    @include transition;
 
     .face {
       $tw: $w*7;
@@ -231,6 +274,7 @@ $w: 100vw/12;
     position: absolute;
     left: 22px;
     top: 60px + 44px;
+    @include transition;
 
     &::before {
       background: url(/assets/images/logo.png) no-repeat center;
@@ -249,6 +293,7 @@ $w: 100vw/12;
     transform: translateX(82px);
     top: 60px + 44px;
     @include flex(row);
+    @include transition;
     justify-content: flex-start;
     position: absolute;
     font-size: 28px;
@@ -266,6 +311,11 @@ $w: 100vw/12;
       cursor: pointer;
       position: relative;
       display: block;
+      @include transition(100ms transform ease);
+
+      &:active {
+        transform: scale(0.9);
+      }
 
       &::before {
         content: '';
@@ -298,6 +348,11 @@ $w: 100vw/12;
 
   .button {
     width: 19.791666666666667vw;
+    @include transition;
+    &:active {
+      transform: scale(.9);
+    }
+
     &::before {
       background: url(/assets/images/button-check.svg) no-repeat center $pink;
       background-size: contain;
@@ -314,7 +369,13 @@ $w: 100vw/12;
     position: absolute;
     right: 0;
     top: 60px + 44px;
+    @include transition;
+    @include origin(100% 100%);
     cursor: pointer;
+
+    &:active {
+      transform: scaleX(.9);
+    }
 
     &::before {
       background: url(/assets/images/100k.png) no-repeat center;
@@ -339,6 +400,7 @@ $w: 100vw/12;
     text-transform: uppercase;
     padding: 0 22px;
     @include flex(row);
+    @include transition;
     justify-content: space-between;
 
     .left {

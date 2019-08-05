@@ -1,13 +1,16 @@
 <template lang="pug">
   .page#page5
     .face
-    .bot
     .faceover
       .list
         .item Купи любую<br />жевательную<br />резинку Wrigley’s
         .item Отправь фото<br />пачки в <span>чат-бот</span>
         .item Выигрывай до <br />100 000 рубей<br />и <a href="#">другие призы</a><br /><br />Ежедневный розыгрыш &mdash;<br />1000 рублей
-
+    .bot
+      .outer
+        .inner
+          #vk_community_messages
+            .loading Загружаю чат-бота
     .text
       h1 Сделай <br />#лицопроще <br />и <span>выигрывай</span><br />100 000 рублей
       .juicyfruit
@@ -27,7 +30,7 @@ export default {
   },
 
   mounted: function() {
-
+    //VK.Widgets.CommunityMessages("vk_community_messages", 140562021, {width: 400, expanded: "1",tooltipButtonText: "Есть вопрос?"});
   },
 
   beforeDestroy: function() {
@@ -119,14 +122,103 @@ export default {
     }
 
     .bot {
-        width: 47.34375vw;
-        padding-top: 43.802083333333333vw;
-        background: url(/assets/images/bot.png) no-repeat center bottom;
+        width: 469px;
+        padding-top: 77.407407407407407vh;
+        //background: url(/assets/images/bot.png) no-repeat center bottom;
         background-size:contain;
         position: absolute;
-        left: calc(22px + #{$w*3});
-
+        left: calc(22px + #{$w*4});
         bottom: 24px;
+        overflow: hidden;
+
+        &::before {
+          position: absolute;
+          right: 0;
+          bottom: 0;
+          display: block;
+          content: '';
+          height: 100%;
+          width: 60%;
+          background: url(/assets/images/hand.png) no-repeat right bottom;
+          background-size: contain;
+        }
+
+        &::after {
+          position: absolute;
+          right: 71px;
+          bottom: 145px;
+          display: block;
+          content: '';
+          z-index: 4;
+          width: 18%;
+          height: 100%;
+          background: url(/assets/images/finger.png) no-repeat right bottom;
+          background-size: contain;
+        }
+
+        .outer {
+          background: #21427c;
+          position: absolute ;
+          left: 0px;
+          top: 0px;
+          height: calc(100% - 100px + 16px);
+          width: 336px;
+          border-radius: 14px;
+        }
+
+        .inner {
+          position: absolute ;
+          left: 8px;
+          top: 8px;
+          height: calc(100% - 16px);
+          width: 320px;
+          overflow: hidden;
+          border-radius: 10px;
+          background: #fff;
+
+          $gap: 0.2;
+          @keyframes loading {
+            0% {   transform: translate(2px*$gap, 1px*$gap) rotate(0deg); }
+            10% {  transform: translate(-1px*$gap, -2px*$gap) rotate(-1deg); }
+            20% {  transform: translate(-3px*$gap, 0px*$gap) rotate(1deg); }
+            30% {  transform: translate(0px*$gap, 2px*$gap) rotate(0deg); }
+            40% {  transform: translate(1px*$gap, -1px*$gap) rotate(1deg); }
+            50% {  transform: translate(-1px*$gap, 2px*$gap) rotate(-1deg); }
+            60% {  transform: translate(-3px*$gap, 1px*$gap) rotate(0deg); }
+            70% {  transform: translate(2px*$gap, 1px*$gap) rotate(-1deg); }
+            80% {  transform: translate(-1px*$gap, -1px*$gap) rotate(1deg); }
+            90% {  transform: translate(2px*$gap, 2px*$gap) rotate(0deg); }
+            100% { transform: translate(2px*$gap, 1px*$gap) rotate(0deg); }
+          }
+
+          .loading {
+            width: 100%;
+            height: 100%;
+            @include flex;
+            animation-name: loading;
+            animation-duration: 2s;
+            transform-origin:50% 50%;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+            left: 26px;
+            color: $violet;
+          }
+        }
+
+        #vk_community_messages {
+          position: absolute !important;
+          left: -26px !important;
+          top: 0px !important;
+          height: 100% !important;
+          z-index: 3 !important;
+          width: 100%;
+
+
+          iframe {
+            height: 100% !important;
+            width: 100% !important;
+          }
+        }
     }
 
     .text {
@@ -189,8 +281,6 @@ export default {
         font-size: 28px;
       }
 
-
-
       .text {
         h1 {
           font-size:60px;
@@ -199,8 +289,6 @@ export default {
             @include origin(100% 100%);
             transform: scale(0.6) translateY(-20px);
           }
-
-
         }
 
         p {
@@ -222,6 +310,16 @@ export default {
           a {
             font-size: 20px;
           }
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 1440px){
+    #page5 {
+      .text {
+        h1 {
+          font-size:55px;
         }
       }
     }

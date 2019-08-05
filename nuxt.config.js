@@ -14,6 +14,9 @@ export default {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       { rel: 'stylesheet', href: '/assets/fonts/stylesheet.css' }
+    ],
+    script: [
+      { src: 'https://vk.com/js/api/openapi.js?162', type: 'text/javascript' }
     ]
   },
   /*

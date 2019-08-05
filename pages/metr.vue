@@ -19,7 +19,7 @@
               span(:class="{ active : (results[2].now == results[2].to)}") {{results[3].now}}%
     .text
       p Думаешь, у тебя сложное лицо? Проверь себя на сложнометре от Orbit –  он проанализирует эмоции на твоем лице и определит уровень его сложности.
-      .upload
+      .upload(@click="clicked=true", :class="{click: clicked}")
         input(type="file", ref="face", accept="image/*", @change="uploadFace")
 </template>
 
@@ -31,6 +31,7 @@ export default {
       interv: false,
       instyle: {},
       face: false,
+      clicked: false,
       results: [
         {
           now: 0,
@@ -49,6 +50,14 @@ export default {
           to: 45
         }
       ]
+    }
+  },
+
+  watch: {
+    clicked: function() {
+      if (this.clicked) {
+        setTimeout(function(that) { that.clicked = false; }, 500, this);
+      }
     }
   },
 
@@ -238,6 +247,11 @@ export default {
         padding-top: $w * 3 * .31438721136767318;
         background: url(/assets/images/upload.svg) no-repeat left center;
         background-size: contain;
+        @include transition;
+
+        &:active {
+          transform: scale(.9);
+        }
 
         input {
           opacity: 0;

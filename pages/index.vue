@@ -9,7 +9,7 @@
           text(transform="matrix(1 0 0 1 0 115.937)")
             tspan(x="0") ПРОВЕРЬ СЕБЯ НА
             tspan(x="0", dy="123.1") СЛОЖНОЕ ЛИЦО
-        .button
+        .button(@click="$router.push('/metr')")
 
 </template>
 
