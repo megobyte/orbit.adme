@@ -21,6 +21,8 @@
       p Думаешь, у тебя сложное лицо? Проверь себя на сложнометре от Orbit! Он определит уровень сложности твоего лица, и ты узнаешь, какое впечатление производишь на окружающих.
       .upload(@click="clicked=true", :class="{click: clicked}")
         input(type="file", ref="face", accept="image/*", @change="uploadFace")
+    .uploadd(@click="clicked=true", :class="{click: clicked}")
+      input(type="file", ref="face", accept="image/*", @change="uploadFace")
 </template>
 
 <script>
@@ -131,6 +133,8 @@ export default {
 
   #page3 {
     $w: 100vw/12;
+
+    .uploadd { display: none; }
 
     .title {
       width: calc(#{$w*10} - 40px);
@@ -271,6 +275,65 @@ export default {
       .text {
         p {
           font-size: 28px;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 768px){
+    #page3 {
+
+      .title {
+        display: none;
+      }
+      .face {
+        background-image: url(/assets/images/mobile-face/face2.jpg);
+      }
+
+      .faceover {
+        display: none;
+      }
+
+      .uploadd {
+        display: block;
+        position: fixed;
+        width: 142px;
+        height: 91px;
+        left: 50%;
+        bottom: 50px;
+        background: url(/assets/images/mobile-face/upload.svg) no-repeat center;
+        background-size: contain;
+        margin-left: -71px;
+
+        input {
+          opacity: 0;
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+    }
+
+    #global {
+      #page3.page {
+        .text {
+          position: absolute;
+          width: auto;
+          left: 40.9375%;
+          top: 0px;
+          justify-content: flex-start;
+
+          p {
+            font-size: 13px;
+            line-height: 16px;
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+          }
+
+          .upload { display: none; }
         }
       }
     }

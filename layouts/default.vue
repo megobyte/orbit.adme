@@ -1,6 +1,9 @@
 <template lang="pug">
-  #global(@wheel="scrollMe", :class="[homeClass]")
+  #global(@wheel="scrollMe", :class="[homeClass]", @click="dropHide")
     header
+      .hamburger.hamburger--collapse(:class="{'is-active': menu}", @click="menu = !menu")
+        span.hamburger-box
+          span.hamburger-inner
       .left
         span при поддержке
         a.adme(href="//adme.ru/", target="_blank")
@@ -9,17 +12,22 @@
         a.fb(href="#", target="_blank")
     nuxt
     .logo(@click="goTo('/')")
-    ul.menu
-      li(:class="{ click: clicked[1], active: checkPage(1)}", @click="goTo('/metr')") СЛОЖНОМЕТР
-      li(:class="{ click: clicked[2], active: checkPage(2)}", @click="goTo('/about')") О сложном лице
-      li(:class="{ click: clicked[3], active: checkPage(3)}", @click="goTo('/hash')") #ЛИЦОПРОЩЕ С ОРБИТ
-      li(:class="{ click: clicked[4], active: checkPage(4)}", @click="goTo('/promo')") Акция
+    ul.menu(:class="{active: menu}")
+      li(:class="{ click: clicked[1], active: (checkPage == 1)}", @click="goTo('/metr')") СЛОЖНОМЕТР
+      li(:class="{ click: clicked[2], active: (checkPage == 2)}", @click="goTo('/about')") О сложном лице
+      li(:class="{ click: clicked[3], active: (checkPage == 3)}", @click="goTo('/hash')") #ЛИЦОПРОЩЕ С ОРБИТ
+      li#promo(:class="{ click: clicked[4], active: (checkPage == 4)}", @click="goTo('/promo')") Акция
+        ul.drop(:class="{active: drop}")
+          li(@click="popopen[0] = true") Призы
+          li Правила
+          li(@click="popopen[1] = true") Победители
+          li(@click="popopen[2] = true") Обратная связь
     .dots
-      .dot(:class="{ active: checkPage(0)}", @click="goTo('/')")
-      .dot(:class="{ active: checkPage(1)}", @click="goTo('/metr')")
-      .dot(:class="{ active: checkPage(2)}", @click="goTo('/about')")
-      .dot(:class="{ active: checkPage(3)}", @click="goTo('/hash')")
-      .dot(:class="{ active: checkPage(4)}", @click="goTo('/promo')")
+      .dot(:class="{ active: (checkPage == 0)}", @click="goTo('/')")
+      .dot(:class="{ active: (checkPage == 1)}", @click="goTo('/metr')")
+      .dot(:class="{ active: (checkPage == 2)}", @click="goTo('/about')")
+      .dot(:class="{ active: (checkPage == 3)}", @click="goTo('/hash')")
+      .dot(:class="{ active: (checkPage == 4)}", @click="goTo('/promo')")
     .onehk(@click="goTo('/promo')")
     footer
       .grid
@@ -33,9 +41,26 @@
         a.ok(href="#", target="_blank")
         a.tw(href="#", target="_blank")
         a.vk(href="#", target="_blank")
+    transition(name="fadein")
+      template(v-if="popopen[0]")
+        popup1(@closeme="closePop(0)")
+      template(v-if="popopen[1]")
+        popup2(@closeme="closePop(1)")
+      template(v-if="popopen[2]")
+        popup3(@closeme="closePop(2)")
 </template>
 <script>
+import popup1 from '~/components/popup1';
+import popup2 from '~/components/popup2';
+import popup3 from '~/components/popup3';
+
 export default {
+  components: {
+    popup1,
+    popup2,
+    popup3
+  },
+
   data: function() {
     return {
       pagesi: {
@@ -52,11 +77,29 @@ export default {
         false,
         false
       ],
-      working: false
+      working: false,
+      drop: false,
+      popopen: [
+        false,
+        false,
+        false,
+        false
+      ],
+      menu: false
     }
   },
 
   computed: {
+
+    checkPage: function() {
+      var r = 0;
+      if (this.$route.path === "/") r = 0;
+      if (this.$route.path === "/metr") r = 1;
+      if (this.$route.path === "/about") r = 2;
+      if (this.$route.path === "/hash") r = 3;
+      if (this.$route.path === "/promo") r = 4;
+      return r;
+    },
     ipages: function() {
       var r = [];
       for(var c in this.pagesi) {
@@ -74,6 +117,14 @@ export default {
   },
 
   methods: {
+    closePop(i) {
+      this.$set(this.popopen, i, false);
+      console.log(i);
+    },
+    dropHide($event) {
+      if (($event.target.id !== "promo") && this.drop) this.drop = false;
+    },
+
     scrollMe(event) {
       event.preventDefault();
       if (!this.working) {
@@ -107,31 +158,12 @@ export default {
         console.log(that.clicked[uri]);
         that.$set(that.clicked, uri, false);//that.clicked[uri] = false;
       }, 200, this, this.pagesi[uri]);*/
+      if ((this.$route.path === "/promo") && (uri === "/promo")) {
+        this.drop = !this.drop;
+      }
       this.$router.push(uri);
     },
 
-    checkPage(page) {
-      var r = false;
-      switch(page) {
-        case 0:
-          if (this.$route.path === "/") r = true;
-          break;
-        case 1:
-          if (this.$route.path === "/metr") r = true;
-          break;
-        case 2:
-          if (this.$route.path === "/about") r = true;
-          break;
-        case 3:
-          if (this.$route.path === "/hash") r = true;
-          break;
-        case 4:
-          if (this.$route.path === "/promo") r = true;
-          break;
-      }
-
-      return r;
-    }
   },
 }
 </script>
@@ -204,6 +236,15 @@ $w: 100vw/12;
     opacity: 0;
     transform: scaleY(0);
   }
+}
+
+.fadein-enter-active,
+.fadein-leave-active {
+  @include transition;
+}
+.fadein-enter,
+.fadein-leave-to {
+  opacity: 0;
 }
 
 #global {
@@ -302,6 +343,7 @@ $w: 100vw/12;
     list-style: none;
     margin: 0;
     padding: 0;
+    z-index: 20;
 
     li {
       margin: 0;
@@ -337,12 +379,55 @@ $w: 100vw/12;
           transform: translateY(-53%) scaleX(1);
         }
       }
+
+      .drop {
+        list-style: none;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        background: #fff;
+        margin: 0;
+        padding: 30px 0 20px;
+        border-radius: 25px;
+        z-index: -2;
+        @include origin(0 0);
+        transform: scaleY(0);
+
+        li {
+          padding: 10px 40px;
+          margin: 0;
+          font-size: 25px;
+          color: $blue;
+          white-space: nowrap;
+          @include transition;
+          cursor: pointer;
+
+          &::before { display: none;}
+
+          &:hover {
+            background: #daf4fb;
+            &::before { display: none;}
+          }
+        }
+
+        &.active {
+          transform: scaleY(1);
+        }
+      }
     }
   }
 
   @media screen and (max-width: 1280px){
     .menu {
       font-size: 24px;
+
+      li {
+        .drop {
+          li {
+            font-size: 22px;
+          }
+        }
+      }
     }
   }
 
@@ -402,6 +487,10 @@ $w: 100vw/12;
     @include flex(row);
     @include transition;
     justify-content: space-between;
+
+    .hamburger {
+      display: none;
+    }
 
     .left {
       padding-left: $w*2/6;
@@ -541,5 +630,294 @@ $w: 100vw/12;
       }
     }
   }
+}
+@media screen and (max-width: 768px){
+  body {
+    font-size: 14px;
+  }
+
+  #global {
+    overflow: hidden;
+    header {
+      height: 40px;
+      z-index: 100;
+
+      .hamburger {
+        $hamburger-padding-x           : 0px !default;
+        $hamburger-padding-y           : 0px !default;
+        $hamburger-layer-width         : 13px !default;
+        $hamburger-layer-height        : 2px !default;
+        $hamburger-layer-spacing       : 3px !default;
+        $hamburger-layer-color         : #000 !default;
+        $hamburger-layer-border-radius : 4px !default;
+        $hamburger-hover-opacity       : 0.7 !default;
+        $hamburger-active-layer-color  : $hamburger-layer-color !default;
+        $hamburger-active-hover-opacity: $hamburger-hover-opacity !default;
+
+        // To use CSS filters as the hover effect instead of opacity,
+        // set $hamburger-hover-use-filter as true and
+        // change the value of $hamburger-hover-filter accordingly.
+        $hamburger-hover-use-filter   : false !default;
+        $hamburger-hover-filter       : opacity(50%) !default;
+        $hamburger-active-hover-filter: $hamburger-hover-filter !default;
+
+        $hamburger-types: (
+          collapse
+        ) !default;
+
+        padding: $hamburger-padding-y $hamburger-padding-x;
+        display: inline-block;
+        cursor: pointer;
+
+        transition-property: opacity, filter;
+        transition-duration: 0.15s;
+        transition-timing-function: linear;
+
+        // Normalize (<button>)
+        font: inherit;
+        color: inherit;
+        text-transform: none;
+        background-color: transparent;
+        border: 0;
+        margin: 0;
+        overflow: visible;
+
+        &:hover {
+          @if $hamburger-hover-use-filter == true {
+            filter: $hamburger-hover-filter;
+          }
+          @else {
+            opacity: $hamburger-hover-opacity;
+          }
+        }
+
+        &.is-active {
+          &:hover {
+            @if $hamburger-hover-use-filter == true {
+              filter: $hamburger-active-hover-filter;
+            }
+            @else {
+              opacity: $hamburger-active-hover-opacity;
+            }
+          }
+
+          .hamburger-inner,
+          .hamburger-inner::before,
+          .hamburger-inner::after {
+            background-color: $hamburger-active-layer-color;
+          }
+        }
+
+        .hamburger-box {
+          width: $hamburger-layer-width;
+          height: $hamburger-layer-height * 3 + $hamburger-layer-spacing * 2;
+          display: inline-block;
+          position: relative;
+        }
+
+        .hamburger-inner {
+          display: block;
+          top: 50%;
+          margin-top: $hamburger-layer-height / -2;
+
+          &,
+          &::before,
+          &::after {
+            width: $hamburger-layer-width;
+            height: $hamburger-layer-height;
+            background-color: $hamburger-layer-color;
+            border-radius: $hamburger-layer-border-radius;
+            position: absolute;
+            transition-property: transform;
+            transition-duration: 0.15s;
+            transition-timing-function: ease;
+          }
+
+          &::before,
+          &::after {
+            content: "";
+            display: block;
+          }
+
+          &::before {
+            top: ($hamburger-layer-spacing + $hamburger-layer-height) * -1;
+          }
+
+          &::after {
+            bottom: ($hamburger-layer-spacing + $hamburger-layer-height) * -1;
+          }
+        }
+
+
+          &.hamburger--collapse {
+            .hamburger-inner {
+              top: auto;
+              bottom: 0;
+              transition-duration: 0.13s;
+              transition-delay: 0.13s;
+              transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+
+              &::after {
+                top: ($hamburger-layer-spacing * 2 + $hamburger-layer-height * 2) * -1;
+                transition: top 0.2s 0.2s cubic-bezier(0.33333, 0.66667, 0.66667, 1),
+                            opacity 0.1s linear;
+              }
+
+              &::before {
+                transition: top 0.12s 0.2s cubic-bezier(0.33333, 0.66667, 0.66667, 1),
+                            transform 0.13s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+              }
+            }
+
+            &.is-active {
+              .hamburger-inner {
+                transform: translate3d(0, ($hamburger-layer-spacing + $hamburger-layer-height) * -1, 0) rotate(-45deg);
+                transition-delay: 0.22s;
+                transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+
+                &::after {
+                  top: 0;
+                  opacity: 0;
+                  transition: top 0.2s cubic-bezier(0.33333, 0, 0.66667, 0.33333),
+                              opacity 0.1s 0.22s linear;
+                }
+
+                &::before {
+                  top: 0;
+                  transform: rotate(-90deg);
+                  transition: top 0.1s 0.16s cubic-bezier(0.33333, 0, 0.66667, 0.33333),
+                              transform 0.13s 0.25s cubic-bezier(0.215, 0.61, 0.355, 1);
+                }
+              }
+            }
+          }
+
+      }
+
+      .left {
+        width: 100%;
+        padding: 0;
+        justify-content: center;
+        align-items: center;
+
+        span {
+          font-weight: bold;
+          bottom: auto;
+          top: auto;
+          letter-spacing: 0.065em;
+        }
+
+        .adme {
+          height: 13px;
+          width: 60px;
+          margin-left: 0;
+          bottom: 1px;
+        }
+      }
+    }
+
+    .logo {
+      width: 120px;
+      top: 60px;
+      left: 10px;
+    }
+
+    .menu {
+      position: fixed;
+      left: 0;
+      top: 40px;
+      flex-direction: column;
+      justify-content: flex-start;
+      background: $adme;
+      width: 100%;
+      z-index: 300;
+      transform: translateY(-100%);
+      @include transition;
+      padding-top: 40px;
+      pointer-events: none;
+      opacity: 0;
+
+      &.active {
+        pointer-events: initial;
+        transform: none;
+        opacity: 1;
+      }
+
+      li {
+        margin-right: 0;
+        margin-bottom: 20px;
+        color: #000;
+
+        &::before {
+          background: $bg;
+        }
+
+        &.active {
+          color: #fff;
+        }
+      }
+    }
+
+    .dots {
+      left: 0;
+      top: 45px;
+      width: 100%;
+      height: 3px;
+      flex-direction: row;
+
+      .dot {
+        width: 20%;
+        height: 3px;
+        border-radius: 1.5px;
+        margin: 0 2px;
+      }
+    }
+
+    .onehk {
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 35px;
+      background: white;
+      right: auto;
+      top: auto;
+      border-top: 3px solid $pink;
+      padding: 0;
+
+      &::before {
+        background: none;
+        width: 100%;
+        height: 100%;
+        content: 'ВЫИГРАЙ  100 000 руб.';
+        padding: 0;
+        color: $pink;
+        text-align: center;
+        font-size: 16px;
+        line-height: 32px;
+      }
+    }
+
+    footer {
+      display: none;
+    }
+
+    .page {
+      .face {
+        width: 100vw;
+        left: 0;
+        bottom: 0;
+        top: auto;
+        height: 100%;
+        background-size: cover;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 769px){
+  .mobile { display: none; }
+}
+@media screen and (max-width: 768px){
+  .desktop { display: none;}
 }
 </style>

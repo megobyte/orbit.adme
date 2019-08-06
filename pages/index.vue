@@ -10,7 +10,10 @@
             tspan(x="0") ПРОВЕРЬ СЕБЯ НА
             tspan(x="0", dy="123.1") СЛОЖНОЕ ЛИЦО
         .button(@click="$router.push('/metr')")
-
+    .mtext(@click="$router.push('/metr')")
+      span Проверь себя
+      br
+      span  на сложное лицо
 </template>
 
 <script>
@@ -89,6 +92,10 @@ export default {
       background-image: url(/assets/images/face1.jpg);
     }
 
+    .mtext {
+      display: none;
+    }
+
     .text {
       height: 100%;
       @include flex();
@@ -111,6 +118,49 @@ export default {
             }
           }
         }
+      }
+    }
+  }
+
+  @media screen and (max-width: 768px){
+    #page1 {
+      .face {
+        background-image: url(/assets/images/mobile-face/face1.jpg);
+      }
+
+      .text {
+        display: none;
+      }
+
+      .mtext {
+        display: block;
+        text-transform: uppercase;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        color: #fff;
+        bottom: 50px;
+        background: $pink;
+        width: 80%;
+        padding: 10px ;
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 21px;
+        text-align: center;
+        letter-spacing: 0.04em;
+      }
+
+      .bubble1 {
+        width: 42.8125%;
+        left: 5px;
+        top: 55%;
+      }
+
+      .bubble2 {
+        width: 48.8125%;
+        right: -10px;
+        top: 4%;
+        left: auto;
       }
     }
   }
