@@ -1,5 +1,5 @@
 <template lang="pug">
-  #popup
+  #popup.pop3
     .overlay(@click="closeMe()")
     .window
       .h
@@ -23,7 +23,9 @@
 export default {
   data: function() {
     return {
-      vkid: ''
+      email: '',
+      fname: '',
+      message: ''
     }
   },
 
@@ -54,66 +56,9 @@ export default {
 </script>
 <style lang="scss">
   #popup {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 5000;
-
-    .overlay {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(#000, .5);
-      @include transition;
-      cursor: pointer;
-    }
 
     .window {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      @include transition;
-      width: 652px;
-      background: $bg;
-      border-radius: 25px;
-
-      .h {
-        width: 100%;
-        height: 50px;
-        padding: 0 20px;
-        background: $adme;
-        color: $blue;
-        @include flex(row);
-        justify-content: space-between;
-        text-transform: uppercase;
-        font-size: 24px;
-        border-top-left-radius: 25px;
-        border-top-right-radius: 25px;
-
-        span {
-          display: block;
-          line-height: 36px;
-        }
-
-        .close {
-          text-align: right;
-          height: 40px;
-          font-size: 30px;
-          line-height: 36px;
-          cursor: pointer;
-        }
-      }
-
       .content {
-        padding: 40px 40px 20px;
-        text-align: center;
-        color: #fff;
-
         .title {
           font-size: 24px;
           color: $blue;
@@ -207,51 +152,40 @@ export default {
             }
           }
         }
+      }
 
-        .frame {
-          width: 100%;
-          height: 50vh;
-          overflow: hidden;
+    }
+  }
 
-          .item {
-            width: 100%;
-            margin-bottom: 10px;
-            font-size: 22px;
-            text-align: left;
-            text-transform: uppercase;
+  @media screen and (max-width: 768px){
+    #popup.pop3 {
+      .window {
+        .content {
+          .title {
+            font-size: 20px;
+          }
 
-            .date {
-              padding: 0 20px;
-              line-height: 30px;
-              color: #fff;
+          .search {
+            font-size: 20px;
+            flex-direction: column;
+            margin-bottom: 20px;
+
+            .title {
+              width: 100%;
+              font-size: 20px;
             }
 
-            .yellow {
-              height: 30px;
-              color: $blue;
-              background: $adme;
-              @include flex(row);
-              justify-content: space-between;
-              padding: 0 20px;
-              line-height: 30px;
+            .input {
+              height: 40px;
+              width: 100%;
 
-              .id {
-                @include flex(row);
-                justify-content: flex-start;
-              }
-
-              .star {
-                width: 24px;
-                height: 24px;
-                margin-right: 10px;
-                background: url(/assets/images/star.svg) no-repeat center;
-                background-size: contain;
+              input {
+                height: 40px;
               }
             }
           }
         }
       }
-
     }
   }
 </style>

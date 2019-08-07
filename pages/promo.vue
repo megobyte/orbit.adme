@@ -1,19 +1,28 @@
 <template lang="pug">
-  .page#page5
-    .face
-    .faceover
+  .page#page5(
+    v-hammer:swipe="(event)=>goTo(event)"
+  )
+    .desktop
+      .face
+      .faceover
+        .list
+          .item Купи любую<br />жевательную<br />резинку Wrigley’s
+          .item Отправь фото<br />пачки в <span>чат-бот</span>
+          .item Выигрывай до <br />100 000 рубей<br />и <a href="#">другие призы</a><br /><br />Ежедневный розыгрыш &mdash;<br />1000 рублей
+      .bot
+        .outer
+          .inner
+            #vk_community_messages
+              .loading Загружаю чат-бота
+      .text
+        h1 Сделай <br />#лицопроще <br />и <span>выигрывай</span><br />100 000 рублей
+        .juicyfruit
+    .mobile
       .list
-        .item Купи любую<br />жевательную<br />резинку Wrigley’s
-        .item Отправь фото<br />пачки в <span>чат-бот</span>
-        .item Выигрывай до <br />100 000 рубей<br />и <a href="#">другие призы</a><br /><br />Ежедневный розыгрыш &mdash;<br />1000 рублей
-    .bot
-      .outer
-        .inner
-          #vk_community_messages
-            .loading Загружаю чат-бота
-    .text
-      h1 Сделай <br />#лицопроще <br />и <span>выигрывай</span><br />100 000 рублей
-      .juicyfruit
+        .item Купи любую жевательную резинку Wrigley’s
+        .item Отправь фото пачки в<br /><span>чат-бот</span><br />
+          .btn(@click="$router.push('/mobile-chat')") Перейти<br /> в чат-бот
+        .item Выигрывай до 100 000 рубей и <a href="#">другие призы</a><br /><br />Ежедневный розыгрыш &mdash;<br />1000 рублей
 </template>
 
 <script>
@@ -26,11 +35,26 @@ export default {
   },
 
   methods: {
-
+    goTo(event) {
+      var w = window.innerWidth
+              || document.documentElement.clientWidth
+              || document.body.clientWidth;
+      if (w > 768) return;
+      else {
+        if ((event.type=="swipe") && (event.direction == 2)) {
+          this.$router.push('/mobile-last');
+        } else if((event.type=="swipe") && (event.direction == 4)) {
+          this.$router.push('/hash');
+        }
+      }
+    },
   },
 
   mounted: function() {
-    //VK.Widgets.CommunityMessages("vk_community_messages", 140562021, {width: 400, expanded: "1",tooltipButtonText: "Есть вопрос?"});
+    var w = window.innerWidth
+              || document.documentElement.clientWidth
+              || document.body.clientWidth;
+    if (w > 768) VK.Widgets.CommunityMessages("vk_community_messages", 184016686, {expanded: "1",tooltipButtonText: "Есть вопрос?"});
   },
 
   beforeDestroy: function() {
@@ -52,8 +76,14 @@ export default {
   }
 }
 
+$w: 100vw/12;
+
   #page5 {
-    $w: 100vw/12;
+
+    .desktop {
+      width: 100%;
+      height: 100%;
+    }
 
     .face {
       background-image: url(/assets/images/face4.jpg);
@@ -320,6 +350,65 @@ export default {
       .text {
         h1 {
           font-size:55px;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 768px){
+    #page5 {
+      .mobile {
+        width: 100%;
+        height: 100%;
+      }
+
+      .list {
+        $ww: $w*2 * .68;
+        position: absolute;
+        left: 30%;
+        top: 102px;
+        width: 55%;
+        text-transform: uppercase;
+        font-size: 15px;
+
+        .item {
+          margin-bottom: 40px;
+          animation: slideInDown 500ms ease both;
+          color: #fff;
+          font-size: 15px;
+
+          .btn {
+            width: 128px;
+            height: 46px;
+            font-weight: bold;
+            @include flex;
+            background: $pink;
+            text-align: center;
+            margin-top: 20px;
+          }
+
+          &:nth-child(1) { animation-delay: 300ms; }
+          &:nth-child(2) { animation-delay: 600ms; &::before { content: '2.'; } }
+          &:nth-child(3) { animation-delay: 900ms; &::before { content: '3.'; } }
+          &:nth-child(4) { animation-delay: 1200ms; }
+
+          a {
+            color: #fff;
+          }
+
+          &::before {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: $pink;
+            overflow: hidden;
+            @include flex;
+            position: absolute;
+            left: -40px;
+            top: 6px;
+            text-indent: 3px;
+            content: '1.';
+          }
         }
       }
     }

@@ -1,5 +1,7 @@
 <template lang="pug">
-  .page#page3
+  .page#page3(
+    v-hammer:swipe="(event)=>goTo(event)"
+  )
     .title
     .face
     .faceover
@@ -70,12 +72,25 @@ export default {
   },
 
   methods: {
+    goTo(event) {
+      var w = window.innerWidth
+              || document.documentElement.clientWidth
+              || document.body.clientWidth;
+      if (w > 768) return;
+      else {
+        if ((event.type=="swipe") && (event.direction == 2)) {
+          this.$router.push('/about');
+        } else if((event.type=="swipe") && (event.direction == 4)) {
+          this.$router.push('/');
+        }
+      }
+    },
     uploadFace(e) {
       var that = this;
       this.face = this.$refs.face.files[0];
       const fd = new FormData();
       fd.append('face', this.face);
-      this.$axios.post(this.host+'/task/', fd, {
+      this.$axios.post('/task/', fd, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }

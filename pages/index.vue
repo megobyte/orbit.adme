@@ -1,5 +1,5 @@
 <template lang="pug">
-  .page#page1
+  .page#page1(v-hammer:swipe.left="(event)=>goTo('/metr')")
     .face
     .bubble1
     .bubble2
@@ -19,7 +19,11 @@
 <script>
 
 export default {
-
+  methods: {
+    goTo(uri) {
+      this.$router.push(uri);
+    },
+  }
 }
 </script>
 

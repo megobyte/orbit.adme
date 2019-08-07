@@ -40,13 +40,19 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
+    '@nuxtjs/proxy',
     '@nuxtjs/style-resources',
   ],
   /*
   ** Axios module configuration
-  ** See https://axios.nuxtjs.org/options
   */
   axios: {
+    proxy: true
+    // See https://github.com/nuxt-community/axios-module#options
+  },
+
+  proxy: {
+    '/task': { target: 'http://45.67.57.80'}
   },
   /**
    * Styles

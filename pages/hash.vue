@@ -1,5 +1,7 @@
 <template lang="pug">
-  .page#page4
+  .page#page4(
+    v-hammer:swipe="(event)=>goTo(event)"
+  )
     .face
     .faceover
       .inn
@@ -12,16 +14,6 @@
         .item Приоткрытые<br /><span>глаза</span>
         .item Подвижная<br /><span>мимика</span>
         .item Приподнятые<br />уголки <span>рта</span>
-      //- .result
-        .title Лицо может выражать:
-        .items
-          | Презрение
-          br
-          | Печаль
-          br
-          | Скука
-          br
-          | Недовольство
     .text
       h1 #ЛИЦОПРОЩЕ<br />С ORBIT
       p У нас есть совет, как можно выглядеть приветливее! Попробуй жевательную резинку – лицо станет более подвижным, и ты будешь казаться дружелюбнее.
@@ -29,6 +21,10 @@
       .orbit
       .upload
         input(type="file", ref="face", accept="image/*", @change="uploadFace")
+    .mtext(@click="$router.push('/metr')")
+      span Проверь себя
+      br
+      span  на сложное лицо
 </template>
 
 <script>
@@ -54,6 +50,19 @@ export default {
   },
 
   methods: {
+    goTo(event) {
+      var w = window.innerWidth
+              || document.documentElement.clientWidth
+              || document.body.clientWidth;
+      if (w > 768) return;
+      else {
+        if ((event.type=="swipe") && (event.direction == 2)) {
+          this.$router.push('/promo');
+        } else if((event.type=="swipe") && (event.direction == 4)) {
+          this.$router.push('/about');
+        }
+      }
+    },
     uploadFace(e) {
       var that = this;
       this.face = this.$refs.face.files[0];
@@ -175,6 +184,10 @@ export default {
 
     .face {
       background-image: url(/assets/images/face4.jpg);
+    }
+
+    .mtext {
+      display: none;
     }
 
     .faceover{
@@ -371,4 +384,43 @@ export default {
       }
     }
   }
+
+  @media screen and (max-width: 768px){
+    #page4 {
+      .mobile {
+        width: 100%;
+        height: 100%;
+      }
+      .face {
+        background-image: url(/assets/images/mobile-face/face4.jpg);
+      }
+
+      .faceover {
+        display: none;
+      }
+
+      .text {
+        display: none;
+      }
+
+      .mtext {
+        display: block;
+        text-transform: uppercase;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        color: #fff;
+        bottom: 50px;
+        background: $pink;
+        width: 80%;
+        padding: 10px ;
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 21px;
+        text-align: center;
+        letter-spacing: 0.04em;
+      }
+    }
+  }
+
 </style>

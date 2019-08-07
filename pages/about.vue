@@ -1,5 +1,5 @@
 <template lang="pug">
-  .page#page2
+  .page#page2(v-hammer:swipe="(event)=>goTo(event)")
     .desktop
       .face
       .faceover
@@ -366,7 +366,10 @@
           a(href="https://www.washingtonpost.com/news/arts-and-entertainment/wp/2016/02/02/scientists-have-discovered-the-source-of-your-resting-bitch-face/?noredirect=on&utm_term=.d2792a3f18f9", target="_blank") Узнать больше о сложном лице
     .mobile
       .face
-      .title Что такое сложное лицо?
+      .title.cdefault(:class="{ cactive: (swipepos == 0) }") Что такое сложное лицо?
+      .block.cdefault(:class="{ cactive: (swipepos == 1) }")
+        p Есть люди, которые даже в расслабленном состоянии могут выгядеть неприветливо. Это явление известно как сложное лицо, и причина его не в плохом характере, а в особом строении лица.
+      .about-over.cdefault(:class="{ cactive: (swipepos == 2) }")
       .uploadd
         input(type="file", ref="face", accept="image/*", @change="uploadFace")
 </template>
@@ -383,16 +386,40 @@ export default {
       line2: {},
       line3: {},
       line4: {},
+      swipepos: 0,
     }
   },
 
   methods: {
+    goTo(event) {
+      var w = window.innerWidth
+              || document.documentElement.clientWidth
+              || document.body.clientWidth;
+      if (w > 768) {
+        return;
+      } else {
+        console.log(event);
+        if ((event.type=="swipe") && (event.direction == 2)) { // swipe left
+          if (this.swipepos < 2) {
+            this.swipepos += 1;
+          } else {
+            this.$router.push('/hash');
+          }
+        } else if((event.type=="swipe") && (event.direction == 4)) { //swipe right
+          if (this.swipepos > 0) {
+            this.swipepos -= 1;
+          } else {
+            this.$router.push('/metr');
+          }
+        }
+      }
+    },
     uploadFace(e) {
       var that = this;
       this.face = this.$refs.face.files[0];
       const fd = new FormData();
       fd.append('face', this.face);
-      this.$axios.post(this.host+'/task/', fd, {
+      this.$axios.post('/task/', fd, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -811,6 +838,19 @@ export default {
         width: 100%;
         height: 100%;
       }
+
+      .cdefault {
+        pointer-events: none;
+        opacity: 0;
+        @include transition;
+
+        &.cactive {
+          pointer-events: initial;
+          opacity: 1;
+        }
+      }
+
+
       .title {
         position: absolute;
         width: auto;
@@ -821,6 +861,50 @@ export default {
         text-transform: uppercase;
         color: #fff;
       }
+
+      .about-over {
+        width: 54.6875vw;
+        height: 75.3125vw;
+        bottom: 71.25vw;
+        left: 39.0625vw;
+        position: absolute;
+        background: url(/assets/images/mobile-face/about-over.svg) no-repeat center;
+        background-size: contain;
+      }
+
+      .block {
+        position: absolute;
+        left: 0;
+        top: 0px;
+        width: 100%;
+        height: 85px;
+        background: $bg;
+        z-index: 200;
+        color: #fff;
+        text-transform: uppercase;
+
+        p {
+          margin: 0;
+          padding: 0;
+          margin-left: 35%;
+          padding-right: 15px;
+          position: relative;
+
+          &::before {
+            content: '';
+            display: block;
+            width: 38px;
+            height: 55px;
+            background: url(/assets/images/quote.svg) no-repeat center;
+            background-size: contain;
+            position: absolute;
+            left: -58px;
+            top: -5px;
+            @include transition;
+          }
+        }
+      }
+
       .face {
         background-image: url(/assets/images/mobile-face/face3.jpg);
       }

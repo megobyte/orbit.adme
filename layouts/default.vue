@@ -1,5 +1,5 @@
 <template lang="pug">
-  #global(@wheel="scrollMe", :class="[homeClass]", @click="dropHide")
+  #global(@wheel="scrollMe", :class="[homeClass]", @click="dropHide", :style="{height: height}")
     header
       .hamburger.hamburger--collapse(:class="{'is-active': menu}", @click="menu = !menu")
         span.hamburger-box
@@ -28,6 +28,7 @@
       .dot(:class="{ active: (checkPage == 2)}", @click="goTo('/about')")
       .dot(:class="{ active: (checkPage == 3)}", @click="goTo('/hash')")
       .dot(:class="{ active: (checkPage == 4)}", @click="goTo('/promo')")
+      .dot.mobile(:class="{ active: (checkPage == 5)}", @click="goTo('/mobile-last')")
     .onehk(@click="goTo('/promo')")
     footer
       .grid
@@ -63,12 +64,14 @@ export default {
 
   data: function() {
     return {
+      height: 0,
       pagesi: {
         "/": 0,
         "/metr": 1,
         "/about": 2,
         "/hash": 3,
         "/promo": 4,
+        "/mobile-last": 5,
       },
       clicked: [
         false,
@@ -98,6 +101,7 @@ export default {
       if (this.$route.path === "/about") r = 2;
       if (this.$route.path === "/hash") r = 3;
       if (this.$route.path === "/promo") r = 4;
+      if (this.$route.path === "/mobile-last") r = 5;
       return r;
     },
     ipages: function() {
@@ -110,6 +114,10 @@ export default {
     homeClass: function() {
       if (this.$route.path === "/promo") {
         return "hidetop";
+      } else if (this.$route.path === "/mobile-last") {
+        return "hidetop";
+      } else if (this.$route.name === "face-id") {
+        return "hidetop1";
       } else {
         return "";
       }
@@ -119,7 +127,6 @@ export default {
   methods: {
     closePop(i) {
       this.$set(this.popopen, i, false);
-      console.log(i);
     },
     dropHide($event) {
       if (($event.target.id !== "promo") && this.drop) this.drop = false;
@@ -161,10 +168,32 @@ export default {
       if ((this.$route.path === "/promo") && (uri === "/promo")) {
         this.drop = !this.drop;
       }
+      this.menu = false;
       this.$router.push(uri);
     },
 
   },
+
+  mounted: function() {
+    this.height = window.innerHeight + "px";
+    var images = [];
+    var urls = [
+      "/assets/images/mobile-face/face1.jpg",
+      "/assets/images/mobile-face/face2.jpg",
+      "/assets/images/mobile-face/face3.jpg",
+      "/assets/images/mobile-face/face4.jpg",
+      "/assets/images/face1.jpg",
+      "/assets/images/face2.jpg",
+      "/assets/images/face3.jpg",
+      "/assets/images/face4.jpg",
+      "/assets/images/face3.png"
+    ];
+
+    for (var i = 0; i < urls.length; i++) {
+        images[i] = new Image();
+        images[i].src = urls[i];
+    }
+  }
 }
 </script>
 
@@ -219,7 +248,7 @@ $w: 100vw/12;
     filter: blur(15px);
     opacity: 0;
   }
-  .text {
+  .text, .slidetext {
     transform: translateY(-100vh);
   }
 
@@ -254,30 +283,6 @@ $w: 100vw/12;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-
-  &.hidetop {
-    header {
-      transform: scaleY(0);
-      @include origin(0 0);
-    }
-
-    .page {
-      top: 0;
-      height: 100vh;
-    }
-
-    .menu {
-      top: 44px;
-    }
-
-    .onehk {
-      top: 44px;
-    }
-
-    .logo {
-      top: 44px;
-    }
-  }
 
   .page {
     position: absolute;
@@ -631,13 +636,59 @@ $w: 100vw/12;
     }
   }
 }
+@media screen and (min-width: 769px) {
+  #global {
+    &.hidetop {
+      header {
+        transform: scaleY(0);
+        @include origin(0 0);
+      }
+
+      .page {
+        top: 0;
+        height: 100vh;
+      }
+
+      .menu {
+        top: 44px;
+      }
+
+      .onehk {
+        top: 44px;
+      }
+
+      .logo {
+        top: 44px;
+      }
+    }
+  }
+}
 @media screen and (max-width: 768px){
   body {
     font-size: 14px;
+    max-height: 100%;
+    overflow: hidden;
   }
 
   #global {
     overflow: hidden;
+
+    &.hidetop {
+      .logo {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .onehk {
+        transform: translateY(100%);
+      }
+    }
+
+    &.hidetop1 {
+      .logo {
+        display: none;
+      }
+    }
     header {
       height: 40px;
       z-index: 100;
@@ -902,6 +953,9 @@ $w: 100vw/12;
     }
 
     .page {
+      top: auto;
+      bottom: 0;
+      height: calc(100% - 60px);
       .face {
         width: 100vw;
         left: 0;

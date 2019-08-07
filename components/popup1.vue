@@ -258,4 +258,66 @@ export default {
 
     }
   }
+
+  @media screen and (max-width: 768px){
+    #popup {
+      .window {
+        width: 100%;
+        height: 100vh;
+        border-radius: 0;
+
+        .h {
+          border-radius: 0;
+        }
+
+        .content {
+          padding: 10px;
+
+          h2 {
+            font-size: 35px;
+          }
+
+          .small {
+            font-size: 20px;
+            margin-bottom: 20px;
+          }
+
+          .big {
+            font-size: 25px;
+          }
+
+          .slides {
+            $w: 100%;
+            overflow: hidden;
+            width: $w;
+
+
+            .slides-in {
+              width: $w*5;
+              @include flex(row);
+              justify-content: flex-start;
+              @include transition;
+
+              &.dispos1 { margin-left: 0; }
+              &.dispos2 { margin-left: -$w; }
+              &.dispos3 { margin-left: -$w*2; }
+              &.dispos4 { margin-left: -$w*3; }
+              &.dispos5 { margin-left: -$w*4; }
+
+              .slide {
+                width: $w;
+
+                &:nth-child(1) {
+                  .big {
+                    font-size: 50px;
+                    margin-bottom: 10px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 </style>
