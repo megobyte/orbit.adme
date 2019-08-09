@@ -17,6 +17,10 @@
       .text
         h1 Сделай <br />#лицопроще <br />и <span>выигрывай</span><br />100 000 рублей
         .juicyfruit
+          .in.in1
+          .in.in2
+          .in.in3
+          .in.in4
     .mobile
       .list
         .item Купи любую жевательную резинку Wrigley’s
@@ -296,11 +300,34 @@ $w: 100vw/12;
         margin-bottom: 40px;
       }
 
+      @keyframes boxes {
+        0% { transform: scaleX(0); }
+        1% { transform: scaleX(1); }
+        24% { transform: scaleX(1); }
+        25% { transform: scaleX(0); }
+        100% { transform: scaleX(0); }
+      }
+
       .juicyfruit {
         width: $w*2.3;
         padding-top: ($w*2.3) * 0.33426966292134831;
-        background: url(/assets/images/juicyfruit.png) no-repeat center;
-        background-size: contain;
+
+        .in {
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          left: 0;
+          top: 0;
+          background: url(/assets/images/boxes/1.png) no-repeat left center;
+          background-size: contain;
+          animation: boxes 12s linear infinite;
+          animation-fill-mode: forwards;
+          animation-delay: 0s;
+
+          &.in2 { background-image: url(/assets/images/boxes/2.png); animation-delay: 3s; }
+          &.in3 { background-image: url(/assets/images/boxes/3.png); animation-delay: 6s;}
+          &.in4 { background-image: url(/assets/images/boxes/4.png); animation-delay: 9s;}
+        }
       }
     }
   }
