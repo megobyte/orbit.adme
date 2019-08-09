@@ -149,10 +149,11 @@ export default {
     top: calc(#{$ww} - 17px);
     width: $w*4;
     height: 71vh;
+    text-align: right;
 
     img {
       max-width: 100%;
-      max-height: 100%;
+      max-height: calc(100% - 80px);
     }
 
   }
@@ -285,6 +286,25 @@ export default {
     .text {
       .level {
         font-size: 60px;
+      }
+    }
+  }
+}
+
+@media screen and (max-height: 700px){
+  #face {
+    .text {
+      .head {
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+
+      .level {
+        font-size: 50px;
+      }
+
+      p {
+        font-size: 23px;
       }
     }
   }
