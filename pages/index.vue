@@ -126,6 +126,20 @@ export default {
     }
   }
 
+  @media screen and (max-height: 700px){
+    #global {
+      #page1 {
+        .face {
+          top: 5%;
+        }
+
+        .bubble2 {
+          top: 14%;
+        }
+      }
+    }
+  }
+
   @media screen and (max-width: 768px){
     #page1 {
       .face {

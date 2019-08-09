@@ -6,7 +6,7 @@
       h2 сложнометр<br />о сложном лице<br />#ЛИЦОПРОЩЕ С ORBIT<br />промо
       .line
       p.center
-        a(href="#") правила участия
+        a(href="/rules/pdf", target="_blank") правила участия
         br
         a(href="#") политика конфиденциальности
       .share

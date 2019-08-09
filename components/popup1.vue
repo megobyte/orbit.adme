@@ -9,7 +9,8 @@
         .slides
           .slides-in(:class="['dispos'+slide]")
             .slide
-              h2 КАЖДУЮ НЕДЕЛЮ
+              h2 ГАРАНТИРОВАННЫЙ
+                small за первую упаковку
               .img(:style="{backgroundImage: 'url(/assets/images/prizes/prize1.svg)'}")
               .small Зачисление на кошелек VK Pay
               .big 5 РУБЛЕЙ
@@ -177,6 +178,13 @@ export default {
           margin: 0;
           margin-bottom: 40px;
           text-transform: uppercase;
+
+          small {
+            display: block;
+            margin: 0px auto;
+            font-size: 24px;
+            font-weight: normal;
+          }
         }
 
         .subh {
@@ -256,6 +264,67 @@ export default {
         }
       }
 
+    }
+  }
+
+  @media screen and (max-height: 700px){
+    #popup {
+      .window {
+        width: 500px;
+        .content {
+          padding: 20px;
+          h2 {
+            font-size: 45px;
+
+            small {
+              font-size: 18px;
+            }
+          }
+
+          .img {
+            height: 27vh;
+          }
+
+          .small {
+            font-size: 18px;
+          }
+
+          .arrows {
+            .arrow {
+              width: 60px;
+              height: 60px;
+            }
+          }
+
+          .prize-dots {
+            padding-top: 10px;
+          }
+
+          .slides {
+            $w: 460px;
+            overflow: hidden;
+            width: $w;
+
+
+            .slides-in {
+              width: $w*5;
+              @include flex(row);
+              justify-content: flex-start;
+              @include transition;
+
+              &.dispos1 { margin-left: 0; }
+              &.dispos2 { margin-left: -$w; }
+              &.dispos3 { margin-left: -$w*2; }
+              &.dispos4 { margin-left: -$w*3; }
+              &.dispos5 { margin-left: -$w*4; }
+
+              .slide {
+                width: $w;
+              }
+            }
+          }
+        }
+      }
     }
   }
 

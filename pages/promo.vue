@@ -355,6 +355,34 @@ $w: 100vw/12;
     }
   }
 
+  @media screen and (max-height: 700px){
+    #page5 {
+      .faceover {
+        .list {
+          .item {
+            margin-bottom: 40px;
+            font-size: 24px;
+            line-height: 1.2em;
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (max-height: 650px){
+    #page5 {
+      .faceover {
+        .list {
+          .item {
+            margin-bottom: 30px;
+            font-size: 19px;
+            line-height: 1.2em;
+          }
+        }
+      }
+    }
+  }
+
   @media screen and (max-width: 768px){
     #page5 {
       .mobile {

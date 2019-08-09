@@ -22,9 +22,9 @@
     .text
       p Думаешь, у тебя сложное лицо? Проверь себя на сложнометре от Orbit! Он определит уровень сложности твоего лица, и ты узнаешь, какое впечатление производишь на окружающих.
       .upload(@click="clicked=true", :class="{click: clicked}")
-        input(type="file", ref="face", accept="image/*", @change="uploadFace")
+        input(type="file", ref="face", accept="image/*", @change="uploadFace($event, 'face')")
     .uploadd(@click="clicked=true", :class="{click: clicked}")
-      input(type="file", ref="face", accept="image/*", @change="uploadFace")
+      input(type="file", ref="facem", accept="image/*", @change="uploadFace($event, 'facem')")
 </template>
 
 <script>
@@ -85,9 +85,9 @@ export default {
         }
       }
     },
-    uploadFace(e) {
+    uploadFace(e, ref) {
       var that = this;
-      this.face = this.$refs.face.files[0];
+      this.face = this.$refs[ref].files[0];
       const fd = new FormData();
       fd.append('face', this.face);
       this.$axios.post('/task/', fd, {
@@ -130,7 +130,7 @@ export default {
       }
       if (i < 4) {
           that.results[i].now+= 1;
-          setTimeout(nextTick, 30);
+          setTimeout(nextTick, 20);
       }
     };
 
@@ -291,6 +291,32 @@ export default {
         p {
           font-size: 28px;
         }
+      }
+    }
+  }
+
+  @media screen and (max-height: 750px){
+    #page3 {
+      .title {
+        height: 20%;
+      }
+    }
+  }
+
+  @media screen and (max-height: 700px){
+    #page3 {
+      .title {
+        height: 17%;
+        top: 10vw;
+      }
+    }
+  }
+
+  @media screen and (max-height: 650px){
+    #page3 {
+      .title {
+        height: 17%;
+        top: 8vw;
       }
     }
   }

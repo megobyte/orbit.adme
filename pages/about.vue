@@ -7,13 +7,13 @@
         .in(:style="instyle")
           .line(v-if="Boolean(showSVG)", :style="line1")
           .line(v-if="Boolean(showSVG)", :style="line2")
+          //.line(v-if="Boolean(showSVG)", :style="line3")
           .line(v-if="Boolean(showSVG)", :style="line3")
-          .line(v-if="Boolean(showSVG)", :style="line4")
         .circle
         .list
           .item Приподнятые<br /><span>брови</span>
           .item Прикрытые<br /><span>глаза</span>
-          .item Опущенные<br />уголки <span>рта</span>
+          //.item Опущенные<br />уголки <span>рта</span>
           .item Сжатые <span>губы</span>
         //-.result
           .title Лицо может выражать:
@@ -30,8 +30,8 @@
         p Есть люди, которые даже в расслабленном состоянии могут выгядеть неприветливо. Это явление известно как сложное лицо, и причина его не в плохом характере, а в особом строении лица.
         .row
           p.center Посмотри истории
-          .video
-            .container
+          .video.
+            <iframe src="https://www.youtube.com/embed/9TvSKAn9nSw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           .video
             .container
             //-.arrow-container
@@ -363,7 +363,8 @@
               span Посмотри истории
         .guardians
           i
-          a(href="https://www.washingtonpost.com/news/arts-and-entertainment/wp/2016/02/02/scientists-have-discovered-the-source-of-your-resting-bitch-face/?noredirect=on&utm_term=.d2792a3f18f9", target="_blank") Узнать больше о сложном лице
+          //-a(href="https://www.washingtonpost.com/news/arts-and-entertainment/wp/2016/02/02/scientists-have-discovered-the-source-of-your-resting-bitch-face/?noredirect=on&utm_term=.d2792a3f18f9", target="_blank") Узнать больше о сложном лице
+          a(href="https://www.wonderzine.com/wonderzine/life/life/245187-let-it-rest?utm_source=facebook.com&utm_medium=social&utm_campaign=russkiy-analog-frazy-resting-bitch-face", target="_blank") Узнать больше о сложном лице
     .mobile
       .face
       .title.cdefault(:class="{ cactive: (swipepos == 0) }") Что такое сложное лицо?
@@ -452,20 +453,20 @@ export default {
         case 1:
           var text = this.$el.querySelector(".faceover .list .item:nth-child(1) span").getBoundingClientRect();
           x2 = (face.width / 100) * (429 / (facew / 100));
-          y2 = (face.height / 100) * (314 / (faceh / 100) );
+          y2 = (face.height / 100) * (334 / (faceh / 100) );
         break;
         case 2:
           var text = this.$el.querySelector(".faceover .list .item:nth-child(2) span").getBoundingClientRect();
           x2 = (face.width / 100) * (409 / (facew / 100));
-          y2 = (face.height / 100) * (372 / (faceh / 100) );
+          y2 = (face.height / 100) * (382 / (faceh / 100) );
         break;
-        case 3:
+        /*case 3:
           var text = this.$el.querySelector(".faceover .list .item:nth-child(3) span").getBoundingClientRect();
           x2 = (face.width / 100) * (473 / (facew / 100));
           y2 = (face.height / 100) * (550 / (faceh / 100) );
-        break;
-        case 4:
-          var text = this.$el.querySelector(".faceover .list .item:nth-child(4) span").getBoundingClientRect();
+        break;*/
+        case 3:
+          var text = this.$el.querySelector(".faceover .list .item:nth-child(3) span").getBoundingClientRect();
           x2 = (face.width / 100) * (547 / (facew / 100));
           y2 = (face.height / 100) * (551 / (faceh / 100) );
         break;
@@ -507,7 +508,7 @@ export default {
       that.line1 = that.takeLineCss(1);
       that.line2 = that.takeLineCss(2);
       that.line3 = that.takeLineCss(3);
-      that.line4 = that.takeLineCss(4);
+      //that.line4 = that.takeLineCss(4);
     }, 300, this);
   },
 
@@ -700,6 +701,14 @@ export default {
         height: 0;
         padding-top: $w*2 / 16 * 9;
 
+        iframe {
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          left: 0;
+          top: 0;
+        }
+
         .container {
           width: 100%;
           padding-top: 56.25%;
@@ -832,6 +841,83 @@ export default {
       }
     }
   }
+
+  @media screen and (max-height: 750px){
+    #page2 {
+      .text {
+
+        h1 {
+          font-size: 50px;
+
+          &::before {
+            transform: scale(0.5) translateX(0px);
+          }
+        }
+        p {
+          font-size: 24px;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-height: 650px){
+    #page2 {
+      .text {
+
+        h1 {
+          font-size: 45px;
+          margin-bottom: 20px;
+
+          &::before {
+            transform: scale(0.5) translateX(0px);
+          }
+        }
+        p {
+          font-size: 24px;
+          margin-bottom: 20px;
+        }
+
+        .guardians {
+          font-size: 24px;
+
+          i {
+            width: 30px;
+            height: 30px;
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (max-height: 600px){
+    #page2 {
+      .text {
+
+        h1 {
+          font-size: 40px;
+          margin-bottom: 20px;
+
+          &::before {
+            transform: scale(0.5) translateX(0px);
+          }
+        }
+        p {
+          font-size: 20px;
+          margin-bottom: 20px;
+        }
+
+        .guardians {
+          font-size: 20px;
+
+          i {
+            width: 30px;
+            height: 30px;
+          }
+        }
+      }
+    }
+  }
+
   @media screen and (max-width: 768px){
     #page2 {
       .mobile {

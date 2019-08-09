@@ -30,7 +30,7 @@
       .dot(:class="{ active: (checkPage == 4)}", @click="goTo('/promo')")
       .dot.mobile(:class="{ active: (checkPage == 5)}", @click="goTo('/mobile-last')")
     .onehk(@click="goTo('/promo')")
-    footer
+    footer(:class="{active: showfooter}")
       .grid
         div
         div
@@ -42,6 +42,24 @@
         a.ok(href="#", target="_blank")
         a.tw(href="#", target="_blank")
         a.vk(href="#", target="_blank")
+      .content
+        .col
+          .logo
+        .col
+          .bubble
+            img(src="/assets/images/pink-bubble.svg")
+            span
+              | Уровень сложности лица – это шуточный показатель,
+              |  который мы придумали для этой кампании,
+              |  а сложнометр – это шуточный инструмент
+          p
+            | Акция действует на территории РФ. Организатором акции является ООО «АЙКОН». Общий период акции с 12.08.2019 по 30.11.2019. Прием заявок на участие с 12.08.2019 по 12.10.2019.
+            |  Полная информация об организаторе акции, правилах ее проведения, количестве призов, сроках, месте и порядке их получения приведена <a href="/rules.pdf" target="_blank">здесь</a>. Количество призов ограничено.
+          .row
+            a(href="#", target="_blank") Политика конфиденциальности
+            a(href="#", target="_blank") Cookie
+            a(href="https://www.adme.ru", target="_blank") ADME
+        .col
     transition(name="fadein")
       template(v-if="popopen[0]")
         popup1(@closeme="closePop(0)")
@@ -88,7 +106,8 @@ export default {
         false,
         false
       ],
-      menu: false
+      menu: false,
+      showfooter: false
     }
   },
 
@@ -137,11 +156,26 @@ export default {
       if (!this.working) {
         const deltaY = event.deltaY;
         this.working = true;
-        setTimeout(function(that) { that.working = false; }, 3000, this);
-        if (deltaY > 0) {
-          this.goToPage(1);
+        setTimeout(function(that) { that.working = false; }, 2000, this);
+        var i = this.pagesi[this.$route.path];
+        if (i == 4) {
+          if (this.showfooter) {
+            if (deltaY < 0) {
+              this.showfooter = false;
+            }
+          } else {
+            if (deltaY > 0) {
+              this.showfooter = true;
+            } else {
+              this.goToPage(-1);
+            }
+          }
         } else {
-          this.goToPage(-1);
+          if (deltaY > 0) {
+            this.goToPage(1);
+          } else {
+            this.goToPage(-1);
+          }
         }
       }
     },
@@ -172,6 +206,11 @@ export default {
       this.$router.push(uri);
     },
 
+    resizeWindow() {
+      this.height = window.innerHeight + "px";
+      setTimeout( function(that) { that.resizeWindow(); }, 500, this);
+    }
+
   },
 
   mounted: function() {
@@ -193,6 +232,9 @@ export default {
         images[i] = new Image();
         images[i].src = urls[i];
     }
+
+    this.resizeWindow();
+
   }
 }
 </script>
@@ -221,6 +263,7 @@ body {
 }
 
 $w: 100vw/12;
+$wp: 100%/12;
 .col {
   width: calc(#{$w} - 20px);
   margin-left: 10px;
@@ -561,6 +604,7 @@ $w: 100vw/12;
     width: $dw;
     @include flex();
     justify-content: space-between;
+    z-index: 100;
 
     .dot {
       width: $dw;
@@ -582,6 +626,88 @@ $w: 100vw/12;
     bottom: 0;
     left: 0;
     width: 100%;
+
+    &.active {
+      .content {
+        transform: none;
+      }
+    }
+
+    .content {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      background: #24297a;
+      font-size: 18px;
+      color: #fff;
+      width: 100%;
+      padding: 40px 22px;
+      z-index: 200;
+      @include flex(row);
+      justify-content: space-between;
+      align-items: flex-start;
+      transform: translateY(100%);
+      @include transition;
+
+      .col {
+        margin: 0;
+        width: 21.09375%;
+        &:nth-child(2) {
+          width: 57.8125%
+        }
+
+        a {
+          color: #fff;
+        }
+
+        .logo {
+          position: relative;
+          left: 0;
+          top: 0;
+          width: 90%;
+          height: 200px;
+          max-width: 310px;
+        }
+
+        p {
+          padding-top: 40px;
+        }
+
+        .bubble {
+          font-size: 35px;
+          text-transform: uppercase;
+          font-weight: bold;
+          text-align: center;
+
+          span {
+            position: relative;
+            z-index: 2;
+            display: block;
+            width: 100%;
+            padding: 0 10%;
+          }
+
+          img {
+            position: absolute;
+            left: -4%;
+            top: -20px;
+            width: 105%;
+            height: calc(100% + 40px);
+          }
+        }
+
+        .row {
+          @include flex(row);
+          padding-top: 40px;
+
+          a {
+            display: block;
+            margin: 0 45px;
+            color: #fff;
+          }
+        }
+      }
+    }
 
     .social {
       position: absolute;
@@ -636,6 +762,20 @@ $w: 100vw/12;
     }
   }
 }
+
+@media screen and (max-height: 700px){
+  #global {
+    .dots {
+      height: 150px;
+
+      .dot {
+        width: 15px;
+        height: 15px;
+      }
+    }
+  }
+}
+
 @media screen and (min-width: 769px) {
   #global {
     &.hidetop {

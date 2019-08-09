@@ -385,6 +385,36 @@ export default {
     }
   }
 
+  @media screen and (max-height: 750px){
+    #page4 {
+      .faceover {
+        .list {
+          .item {
+            margin-bottom: 40px;
+          }
+        }
+      }
+
+      .text {
+        justify-content: flex-end;
+        padding-bottom: 40px;
+        h1 {
+          font-size: 40px;
+          margin-bottom: 20px;
+        }
+
+        p {
+          font-size: 24px;
+          margin-bottom: 20px;
+        }
+
+        .upload {
+          padding-top: 11vh;
+        }
+      }
+    }
+  }
+
   @media screen and (max-width: 768px){
     #page4 {
       .mobile {
