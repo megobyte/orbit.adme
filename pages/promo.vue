@@ -7,7 +7,7 @@
       .faceover
         .list
           .item Купи любую<br />жевательную<br />резинку Wrigley’s
-          .item Отправь фото<br />пачки в <span>чат-бот</span>
+          .item Отправь фото<br />пачки в <span class="chatbot">чат-бот</span>
           .item Выигрывай до <br />100 000 рубей<br />и <a href="#">другие призы</a><br /><br />Ежедневный розыгрыш &mdash;<br />1000 рублей
       .bot
         .outer
@@ -151,6 +151,27 @@ $w: 100vw/12;
             left: calc(#{-$w} + 45px);
             top: 6px;
             content: '1.';
+          }
+
+          .chatbot {
+            position: relative;
+
+            &::before {
+              content: '';
+              display: block;
+              width: 140%;
+              height: 130%;
+              position: absolute;
+              left: -12%;
+              top: -15%;
+              background: url(/assets/images/chatbot.svg) no-repeat center;
+              background-size: contain;
+              animation-name: loading;
+              animation-duration: 2s;
+              transform-origin:50% 50%;
+              animation-iteration-count: infinite;
+              animation-timing-function: linear;
+            }
           }
         }
       }

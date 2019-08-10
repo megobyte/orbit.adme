@@ -9,7 +9,7 @@
         .slides
           .slides-in(:class="['dispos'+slide]")
             .slide
-              h2 ГАРАНТИРОВАННЫЙ
+              h2 ГАРАНТИРОВАННЫЙ ПРИЗ
                 small за первую упаковку
               .img(:style="{backgroundImage: 'url(/assets/images/prizes/prize1.svg)'}")
               .small Зачисление на кошелек VK Pay

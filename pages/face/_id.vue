@@ -108,10 +108,12 @@ export default {
 
     imgl(e, ref) {
       var img = this.$refs[ref];
-      this.imgstyle.width = img.clientWidth+'px';
-      this.imgstyle.height = img.clientHeight+'px';
-      this.imgstyle.left = img.offsetLeft+'px';
-      this.imgstyle.top = img.offsetTop+'px';
+      if (img) {
+        this.imgstyle.width = img.clientWidth+'px';
+        this.imgstyle.height = img.clientHeight+'px';
+        this.imgstyle.left = img.offsetLeft+'px';
+        this.imgstyle.top = img.offsetTop+'px';
+      }
     },
 
     async reloadMe() {
@@ -127,6 +129,9 @@ export default {
         this.border.top = (r.data.result.face_border.top*100) + '%';
         this.border.width = (r.data.result.face_border.width*100) + '%';
         this.border.height = (r.data.result.face_border.height*100) + '%';
+
+        this.imgl(null, 'imgb');
+        this.imgl(null, 'mimg');
       } else {
         setTimeout(function(that) { that.reloadMe(); }, 500, this);
       }
@@ -218,6 +223,7 @@ export default {
             border-radius: 50%;
             background: #fff;
             margin: 0 10px;
+            @include transition;
 
             svg {
               width: 30px !important;
@@ -226,6 +232,15 @@ export default {
 
             path {
               fill: $pink;
+              @include transition;
+            }
+
+            &:hover {
+              background: $pink;
+
+              path {
+                fill: #FFF;
+              }
             }
           }
         }

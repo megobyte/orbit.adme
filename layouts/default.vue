@@ -39,7 +39,7 @@
         div
         div
       .social
-        a.heart(href="#", target="_blank")
+        a.heart(ref="favorite", @click="addToFavorite()")
         a.fb(href="#", target="_blank")
         a.ok(href="#", target="_blank")
         a.tw(href="#", target="_blank")
@@ -131,6 +131,33 @@ export default {
   },
 
   methods: {
+    addToFavorite() {
+      var pageTitle=document.title;
+      var pageURL=document.location;
+      try {
+        // Internet Explorer solution
+        eval("window.external.AddFavorite(pageURL, pageTitle)".replace(/-/g,''));
+      }
+      catch (e) {
+        try {
+          // Mozilla Firefox solution
+          window.sidebar.addPanel(pageTitle, pageURL, "");
+        }
+        catch (e) {
+          // Opera solution
+          if (typeof(opera)=="object") {
+            this.$refs['favorite'].rel="sidebar";
+            this.$refs['favorite'].title=pageTitle;
+            this.$refs['favorite'].url=pageURL;
+            return true;
+          } else {
+            // The rest browsers (i.e Chrome, Safari)
+            alert('Нажмите ' + (navigator.userAgent.toLowerCase().indexOf('mac') != -1 ? 'Cmd' : 'Ctrl') + '+D чтобы сохранить в закладках.');
+          }
+        }
+      }
+      return false;
+    },
     closePop(i) {
       this.$set(this.popopen, i, false);
     },
@@ -350,7 +377,12 @@ $wp: 100%/12;
     position: absolute;
     left: 22px;
     top: 60px + 44px;
+    cursor: pointer;
     @include transition;
+
+    &:hover {
+      transform: scale(0.95);
+    }
 
     &::before {
       background: url(/assets/images/logo.png) no-repeat center;
@@ -468,7 +500,12 @@ $wp: 100%/12;
 
   .button {
     width: 19.791666666666667vw;
+    cursor: pointer;
     @include transition;
+
+    &:hover {
+      transform: scale(1.05);
+    }
     &:active {
       transform: scale(.9);
     }
@@ -493,8 +530,12 @@ $wp: 100%/12;
     @include origin(100% 100%);
     cursor: pointer;
 
+    &:hover {
+      transform: scaleX(.95);
+    }
+
     &:active {
-      transform: scaleX(.9);
+      transform: scaleX(.8);
     }
 
     &::before {
