@@ -345,16 +345,16 @@ $wp: 100%/12;
     position: absolute;
     left: 0;
     top: 60px;
-    width: 100vw;
+    width: 100%;
     height: calc(100vh - 60px);
     @include transition;
 
     .face {
-      $tw: $w*7;
+      $tw: $wp*7;
       width: calc(#{$tw} - 20px);
       height: 100%;
       position: absolute;
-      left: calc(#{$w} + 22px);
+      left: calc(#{$wp} + 22px);
       top: 0;
       background-size: contain;
       background-repeat: no-repeat;
@@ -364,9 +364,9 @@ $wp: 100%/12;
 
     .text {
       color: #fff;
-      width: $w*4;
+      width: $wp*4;
       position: absolute;
-      left: calc(42px + #{$w * 7});
+      left: calc(42px + #{$wp * 7});
     }
   }
 
