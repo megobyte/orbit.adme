@@ -414,15 +414,17 @@ export default {
     }
 
     .text {
+      top: 0 !important;
       .head {
         letter-spacing: 0.075em;
-        margin-bottom: 10px;
+        margin-bottom: 5px;
         br { display: none; }
       }
 
       .level {
         font-size: 24px;
         letter-spacing: 0.075em;
+        margin-bottom: 10px;
       }
 
       p {
@@ -442,20 +444,31 @@ export default {
       }
 
       .faces {
-        width: 274px;
-        height: 50px;
-        margin: 20px auto 40px;
+        width: 204px;
+        height: 40px;
+        margin: 10px auto 10px;
+
       }
 
       .photom {
-        height: 204px;
+        height: 160px;
         display: block;
 
         img {
-          max-height: 204px;
+          max-height: 160px;
           max-width: 100%;
           margin: 0 auto;
         }
+      }
+
+      .share {
+        margin-bottom: 10px;
+      }
+
+      .reload {
+        font-size: 14px;
+        text-align: left;
+        margin: 0 20px;
       }
     }
 

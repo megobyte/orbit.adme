@@ -249,6 +249,12 @@ export default {
 
     this.resizeWindow();
 
+  },
+
+  created: function() {
+    this.$nuxt.$on('openprize', () => {
+      this.$set(this.popopen, 0, true);
+    });
   }
 }
 </script>

@@ -8,7 +8,7 @@
         .list
           .item Купи любую<br />жевательную<br />резинку Wrigley’s
           .item Отправь фото<br />пачки в <span class="chatbot">чат-бот</span>
-          .item Выигрывай до <br />100 000 рубей<br />и <a href="#">другие призы</a><br /><br />Ежедневный розыгрыш &mdash;<br />1000 рублей
+          .item Выигрывай до <br />100 000 рубей<br />и <a href="#" @click="$nuxt.$emit('openprize')">другие призы</a><br /><br />Ежедневный розыгрыш &mdash;<br />1000 рублей
       .bot
         .outer
           .inner
@@ -28,7 +28,7 @@
         .item Купи любую жевательную резинку Wrigley’s
         .item Отправь фото пачки в<br /><span>чат-бот</span><br />
           .btn(@click="$router.push('/mobile-chat')") Перейти<br /> в чат-бот
-        .item Выигрывай до 100 000 рубей и <a href="#">другие призы</a><br /><br />Ежедневный розыгрыш &mdash;<br />1000 рублей
+        .item Выигрывай до 100 000 рубей и <a href="#" @click="$nuxt.$emit('openprize')">другие призы</a><br /><br />Ежедневный розыгрыш &mdash;<br />1000 рублей
 </template>
 
 <script>
