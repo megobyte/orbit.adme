@@ -919,6 +919,9 @@ export default {
   }
 
   @media screen and (max-width: 768px){
+    #global #page2.page .face {
+      background-position: center -110px;
+    }
     #page2 {
       .mobile {
         width: 100%;
@@ -951,7 +954,7 @@ export default {
       .about-over {
         width: 54.6875vw;
         height: 75.3125vw;
-        bottom: 71.25vw;
+        bottom: 41.25vw;
         left: 39.0625vw;
         position: absolute;
         background: url(/assets/images/mobile-face/about-over.svg) no-repeat center;
@@ -972,7 +975,7 @@ export default {
         p {
           margin: 0;
           padding: 0;
-          margin-left: 35%;
+          margin-left: 20%;
           padding-right: 15px;
           position: relative;
 

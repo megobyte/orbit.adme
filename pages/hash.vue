@@ -324,7 +324,7 @@ export default {
       .orbit {
         width: $w*2.3;
         padding-top: ($w*2.3) * 0.33426966292134831;
-        background: url(/assets/images/orbit.png) no-repeat center;
+        background: url(/assets/images/boxes/1.png) no-repeat left center;
         background-size: contain;
         margin-bottom: 40px;
       }
@@ -334,6 +334,16 @@ export default {
         padding-top: 9.21875vw;
         background: url(/assets/images/upload2.svg) no-repeat left center;
         background-size: contain;
+        cursor: pointer;
+        @include transition;
+
+        &:hover {
+          transform: scale(1.1);
+        }
+
+        &:active {
+          transform: scale(.9);
+        }
 
         input {
           opacity: 0;
@@ -342,6 +352,7 @@ export default {
           top: 0;
           width: 100%;
           height: 100%;
+          cursor: pointer;
         }
       }
     }
@@ -416,6 +427,9 @@ export default {
   }
 
   @media screen and (max-width: 768px){
+    #global #page4.page .face {
+      background-position: center -100px;
+    }
     #page4 {
       .mobile {
         width: 100%;

@@ -21,6 +21,8 @@
           .in.in2
           .in.in3
           .in.in4
+          .in.in5
+          .in.in6
     .mobile
       .list
         .item Купи любую жевательную резинку Wrigley’s
@@ -58,7 +60,7 @@ export default {
     var w = window.innerWidth
               || document.documentElement.clientWidth
               || document.body.clientWidth;
-    if (w > 768) VK.Widgets.CommunityMessages("vk_community_messages", 184016686, {expanded: "1",tooltipButtonText: "Есть вопрос?"});
+    if (w > 768) VK.Widgets.CommunityMessages("vk_community_messages", 137753974, {expanded: "1",tooltipButtonText: "Есть вопрос?"});
   },
 
   beforeDestroy: function() {
@@ -303,8 +305,8 @@ $w: 100vw/12;
       @keyframes boxes {
         0% { transform: scaleX(0); }
         1% { transform: scaleX(1); }
-        24% { transform: scaleX(1); }
-        25% { transform: scaleX(0); }
+        15.67% { transform: scaleX(1); }
+        16.67% { transform: scaleX(0); }
         100% { transform: scaleX(0); }
       }
 
@@ -320,13 +322,16 @@ $w: 100vw/12;
           top: 0;
           background: url(/assets/images/boxes/1.png) no-repeat left center;
           background-size: contain;
-          animation: boxes 12s linear infinite;
+          transform: scaleX(0);
+          animation: boxes 18s linear infinite;
           animation-fill-mode: forwards;
           animation-delay: 0s;
 
-          &.in2 { background-image: url(/assets/images/boxes/2.png); animation-delay: 3s; }
+          &.in2 { background-image: url(/assets/images/boxes/2.png); animation-delay: 3s; height: 200%; }
           &.in3 { background-image: url(/assets/images/boxes/3.png); animation-delay: 6s;}
           &.in4 { background-image: url(/assets/images/boxes/4.png); animation-delay: 9s;}
+          &.in5 { background-image: url(/assets/images/boxes/5.png); animation-delay: 12s;}
+          &.in6 { background-image: url(/assets/images/boxes/6.png); animation-delay: 15s;}
         }
       }
     }

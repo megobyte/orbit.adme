@@ -16,7 +16,9 @@
       li(:class="{ click: clicked[1], active: (checkPage == 1)}", @click="goTo('/metr')") СЛОЖНОМЕТР
       li(:class="{ click: clicked[2], active: (checkPage == 2)}", @click="goTo('/about')") О сложном лице
       li(:class="{ click: clicked[3], active: (checkPage == 3)}", @click="goTo('/hash')") #ЛИЦОПРОЩЕ С ОРБИТ
-      li#promo(:class="{ click: clicked[4], active: (checkPage == 4)}", @click="goTo('/promo')") Акция
+      li#promo(:class="{ click: clicked[4], active: (checkPage == 4)}", @click="goTo('/promo')")
+        template(v-if="(checkPage == 4)") Условия акции
+        template(v-if="(checkPage != 4)") Акция
         ul.drop(:class="{active: drop}")
           li(@click="popopen[0] = true") Призы
           li Правила
@@ -42,24 +44,7 @@
         a.ok(href="#", target="_blank")
         a.tw(href="#", target="_blank")
         a.vk(href="#", target="_blank")
-      .content
-        .col
-          .logo
-        .col
-          .bubble
-            img(src="/assets/images/pink-bubble.svg")
-            span
-              | Уровень сложности лица – это шуточный показатель,
-              |  который мы придумали для этой кампании,
-              |  а сложнометр – это шуточный инструмент
-          p
-            | Акция действует на территории РФ. Организатором акции является ООО «АЙКОН». Общий период акции с 12.08.2019 по 30.11.2019. Прием заявок на участие с 12.08.2019 по 12.10.2019.
-            |  Полная информация об организаторе акции, правилах ее проведения, количестве призов, сроках, месте и порядке их получения приведена <a href="/rules.pdf" target="_blank">здесь</a>. Количество призов ограничено.
-          .row
-            a(href="#", target="_blank") Политика конфиденциальности
-            a(href="#", target="_blank") Cookie
-            a(href="https://www.adme.ru", target="_blank") ADME
-        .col
+      c_footer(@close="showfooter = false")
     transition(name="fadein")
       template(v-if="popopen[0]")
         popup1(@closeme="closePop(0)")
@@ -72,12 +57,14 @@
 import popup1 from '~/components/popup1';
 import popup2 from '~/components/popup2';
 import popup3 from '~/components/popup3';
+import c_footer from '~/components/c_footer';
 
 export default {
   components: {
     popup1,
     popup2,
-    popup3
+    popup3,
+    c_footer
   },
 
   data: function() {
@@ -628,84 +615,8 @@ $wp: 100%/12;
     width: 100%;
 
     &.active {
-      .content {
+      .footer_content {
         transform: none;
-      }
-    }
-
-    .content {
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      background: #24297a;
-      font-size: 18px;
-      color: #fff;
-      width: 100%;
-      padding: 40px 22px;
-      z-index: 200;
-      @include flex(row);
-      justify-content: space-between;
-      align-items: flex-start;
-      transform: translateY(100%);
-      @include transition;
-
-      .col {
-        margin: 0;
-        width: 21.09375%;
-        &:nth-child(2) {
-          width: 57.8125%
-        }
-
-        a {
-          color: #fff;
-        }
-
-        .logo {
-          position: relative;
-          left: 0;
-          top: 0;
-          width: 90%;
-          height: 200px;
-          max-width: 310px;
-        }
-
-        p {
-          padding-top: 40px;
-        }
-
-        .bubble {
-          font-size: 35px;
-          text-transform: uppercase;
-          font-weight: bold;
-          text-align: center;
-
-          span {
-            position: relative;
-            z-index: 2;
-            display: block;
-            width: 100%;
-            padding: 0 10%;
-          }
-
-          img {
-            position: absolute;
-            left: -4%;
-            top: -20px;
-            width: 105%;
-            height: calc(100% + 40px);
-          }
-        }
-
-        .row {
-          @include flex(row);
-          padding-top: 40px;
-
-          a {
-            display: block;
-            margin: 0 45px;
-            color: #fff;
-          }
-        }
       }
     }
 
@@ -763,7 +674,7 @@ $wp: 100%/12;
   }
 }
 
-@media screen and (max-height: 700px){
+@media screen and (min-width: 769px) and (max-height: 700px){
   #global {
     .dots {
       height: 150px;
@@ -1099,10 +1010,11 @@ $wp: 100%/12;
       .face {
         width: 100vw;
         left: 0;
-        bottom: 0;
+        bottom: -10%;
         top: auto;
         height: 100%;
         background-size: cover;
+        background-position: center -150px;
       }
     }
   }

@@ -266,7 +266,12 @@ export default {
         padding-top: $w * 3 * .31438721136767318;
         background: url(/assets/images/upload.svg) no-repeat left center;
         background-size: contain;
+        cursor: pointer;
         @include transition;
+
+        &:hover {
+          transform: scale(1.1);
+        }
 
         &:active {
           transform: scale(.9);
@@ -279,6 +284,7 @@ export default {
           top: 0;
           width: 100%;
           height: 100%;
+          cursor: pointer;
         }
       }
     }
@@ -295,7 +301,7 @@ export default {
     }
   }
 
-  @media screen and (max-height: 750px){
+  @media screen and (min-width: 769px) and (max-height: 750px){
     #page3 {
       .title {
         height: 20%;
@@ -303,7 +309,7 @@ export default {
     }
   }
 
-  @media screen and (max-height: 700px){
+  @media screen and (min-width: 769px) and (max-height: 700px){
     #page3 {
       .title {
         height: 17%;
@@ -312,7 +318,7 @@ export default {
     }
   }
 
-  @media screen and (max-height: 650px){
+  @media screen and (min-width: 769px) and (max-height: 650px){
     #page3 {
       .title {
         height: 17%;

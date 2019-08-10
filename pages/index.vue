@@ -126,7 +126,7 @@ export default {
     }
   }
 
-  @media screen and (max-height: 700px){
+  @media screen and (min-width: 769px) and (max-height: 700px){
     #global {
       #page1 {
         .face {
@@ -140,7 +140,14 @@ export default {
     }
   }
 
-  @media screen and (max-width: 768px){
+  @media screen and (max-width: 768px) {
+    #global {
+      .page {
+        .face {
+          bottom: -10%;
+        }
+      }
+    }
     #page1 {
       .face {
         background-image: url(/assets/images/mobile-face/face1.jpg);
@@ -177,7 +184,7 @@ export default {
       .bubble2 {
         width: 48.8125%;
         right: -10px;
-        top: 4%;
+        top: 0;
         left: auto;
       }
     }
