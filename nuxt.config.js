@@ -1,6 +1,6 @@
 
 export default {
-  mode: 'spa',
+  mode: 'universal',
   /*
   ** Headers of the page
   */
@@ -61,9 +61,10 @@ export default {
     // See https://github.com/nuxt-community/axios-module#options
   },
 
-  proxy: {
-    '/task': { target: 'http://45.67.57.80'}
-  },
+  proxy: [
+    //'/task': { target: 'http://45.67.57.80'}
+    'https://orbit.adme.ru/task'
+  ],
   /**
    * Styles
    */
@@ -83,9 +84,5 @@ export default {
     extractCSS: process.env.NODE_ENV === 'production',
     extend(config, ctx) {
     }
-  },
-
-  server: {
-    host: '0.0.0.0'
-  },
+  }
 }

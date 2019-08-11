@@ -53,8 +53,6 @@
       template(v-if="popopen[2]")
         popup3(@closeme="closePop(2)")
     .pixels
-      noscript.
-        <img src="https://top-fwz1.mail.ru/counter?id=3133969;js=na" style="border:0;position:absolute;left:-9999px;" alt="Top.Mail.Ru" />
       img(:src='"https://top-fwz1.mail.ru/tracker?id=3133969;e=RG%3A/trg-pixel-4981532-1565166227757;_="+Math.random()')
       img(:src='"https://top-fwz1.mail.ru/tracker?id=3133969;e=RG%3A/trg-pixel-4981532-1565167858320;_="+Math.random()')
       img(:src='"https://top-fwz1.mail.ru/tracker?id=3133969;e=RG%3A/trg-pixel-4981532-1565166294782;_="+Math.random()')
@@ -108,7 +106,6 @@ export default {
 
     checkPage: function() {
       var r = 0;
-      console.log(this.$route.name)
       if (this.$route.name === "index") r = 0;
       if (this.$route.name === "metr") r = 1;
       if (this.$route.name === "about") r = 2;
