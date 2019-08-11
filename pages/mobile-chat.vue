@@ -56,7 +56,7 @@ export default {
             transform-origin:50% 50%;
             animation-iteration-count: infinite;
             animation-timing-function: linear;
-            left: 26px;
+            left: 0px;
             color: #fff;
           }
     }

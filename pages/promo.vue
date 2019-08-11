@@ -232,7 +232,7 @@ $w: 100vw/12;
           width: 320px;
           overflow: hidden;
           border-radius: 10px;
-          background: #fff;
+          background: #4a76a8;
 
           $gap: 0.2;
           @keyframes loading {
@@ -258,7 +258,7 @@ $w: 100vw/12;
             transform-origin:50% 50%;
             animation-iteration-count: infinite;
             animation-timing-function: linear;
-            left: 26px;
+            left: 0px;
             background: #4a76a8;
             color: #fff;
           }
