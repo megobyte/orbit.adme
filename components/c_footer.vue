@@ -13,8 +13,8 @@
         | Акция действует на территории РФ. Организатором акции является ООО «АЙКОН». Общий период акции с 12.08.2019 по 30.11.2019. Прием заявок на участие с 12.08.2019 по 12.10.2019.
         |  Полная информация об организаторе акции, правилах ее проведения, количестве призов, сроках, месте и порядке их получения приведена <a href="/rules.pdf" target="_blank">здесь</a>. Количество призов ограничено.
       .row
-        a(href="#", target="_blank") Политика конфиденциальности
-        a(href="#", target="_blank") Cookie
+        a(href="https://www.adme.ru/privacy/", target="_blank") Политика конфиденциальности
+        a(href="https://www.adme.ru/cookies/", target="_blank") Cookie
         a(href="https://www.adme.ru", target="_blank") ADME
     .col
       .close(@click="$emit('close')") &times;
