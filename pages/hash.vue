@@ -315,6 +315,7 @@ export default {
         line-height: 1em;
         @include transition;
         margin-bottom: 40px;
+        width: 100%;
       }
 
       .button {

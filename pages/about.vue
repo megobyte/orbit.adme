@@ -679,6 +679,7 @@ export default {
         font-size: 32px;
         line-height: 1em;
         @include transition;
+        width: 100%;
         margin-bottom: 40px;
 
         &.center {
