@@ -40,7 +40,7 @@
         div
       .social
         a.heart(ref="favorite", @click="addToFavorite()")
-        a.fb(href="#", target="_blank")
+        a.fb(href="#", target="_blank", @click="share('fb')")
         a.ok(href="#", target="_blank")
         a.tw(href="#", target="_blank")
         a.vk(href="#", target="_blank")
@@ -71,12 +71,12 @@ export default {
     return {
       height: 0,
       pagesi: {
-        "/": 0,
-        "/metr": 1,
-        "/about": 2,
-        "/hash": 3,
-        "/promo": 4,
-        "/mobile-last": 5,
+        "index": 0,
+        "metr": 1,
+        "about": 2,
+        "hash": 3,
+        "promo": 4,
+        "mobile-last": 5,
       },
       clicked: [
         false,
@@ -102,12 +102,13 @@ export default {
 
     checkPage: function() {
       var r = 0;
-      if (this.$route.path === "/") r = 0;
-      if (this.$route.path === "/metr") r = 1;
-      if (this.$route.path === "/about") r = 2;
-      if (this.$route.path === "/hash") r = 3;
-      if (this.$route.path === "/promo") r = 4;
-      if (this.$route.path === "/mobile-last") r = 5;
+      console.log(this.$route.name)
+      if (this.$route.name === "index") r = 0;
+      if (this.$route.name === "metr") r = 1;
+      if (this.$route.name === "about") r = 2;
+      if (this.$route.name === "hash") r = 3;
+      if (this.$route.name === "promo") r = 4;
+      if (this.$route.name === "mobile-last") r = 5;
       return r;
     },
     ipages: function() {
@@ -118,9 +119,10 @@ export default {
       return r;
     },
     homeClass: function() {
-      if (this.$route.path === "/promo") {
+
+      if (this.$route.name === "promo") {
         return "hidetop";
-      } else if (this.$route.path === "/mobile-last") {
+      } else if (this.$route.name === "mobile-last") {
         return "hidetop";
       } else if (this.$route.name === "face-id") {
         return "hidetop1";
@@ -131,6 +133,28 @@ export default {
   },
 
   methods: {
+    share(type) {
+      switch(type) {
+        case 'fb':
+          FB.ui({
+              method: 'share_open_graph',
+              action_type: 'og.shares',
+              action_properties: JSON.stringify({
+                  object: {
+                      'og:url': 'https://orbit.adme.ru/' ,
+                      'og:title': '#Лицопроще с Orbit',
+                      'og:description':'Думаешь, у тебя сложное лицо? Проверь себя на сложнометре от Orbit!',
+                      'og:image': 'https://orbit.adme.ru/assets/images/share/fb.png' ,
+
+                  }
+              })
+          },
+          function (response) {
+          //your code goes here
+          });
+          break;
+      }
+    },
     addToFavorite() {
       var pageTitle=document.title;
       var pageURL=document.location;
@@ -171,7 +195,7 @@ export default {
         const deltaY = event.deltaY;
         this.working = true;
         setTimeout(function(that) { that.working = false; }, 2000, this);
-        var i = this.pagesi[this.$route.path];
+        var i = this.pagesi[this.$route.name];
         if (i == 4) {
           if (this.showfooter) {
             if (deltaY < 0) {
@@ -195,7 +219,7 @@ export default {
     },
 
     goToPage(direction) {
-      var i = this.pagesi[this.$route.path];
+      var i = this.pagesi[this.$route.name];
       if (direction < 0) {
         if (i > 0) {
           this.goTo(this.ipages[i-1]);
@@ -213,7 +237,7 @@ export default {
         console.log(that.clicked[uri]);
         that.$set(that.clicked, uri, false);//that.clicked[uri] = false;
       }, 200, this, this.pagesi[uri]);*/
-      if ((this.$route.path === "/promo") && (uri === "/promo")) {
+      if ((this.$route.name === "promo") && (uri === "/promo")) {
         this.drop = !this.drop;
       }
       this.menu = false;

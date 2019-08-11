@@ -396,7 +396,28 @@ export default {
     }
   }
 
-  @media screen and (max-height: 750px){
+  @media screen and (min-width: 769px) and (max-height: 800px){
+    #page4 {
+      .text {
+        justify-content: center;
+        padding-top: 80px;
+        h1 {
+          font-size: 60px;
+          margin-bottom: 20px;
+        }
+
+        p {
+          font-size: 24px;
+          margin-bottom: 20px;
+        }
+
+        .upload {
+          padding-top: 11vh;
+        }
+      }
+    }
+  }
+  @media screen and (min-width: 769px) and (max-height: 770px){
     #page4 {
       .faceover {
         .list {
@@ -407,8 +428,8 @@ export default {
       }
 
       .text {
-        justify-content: flex-end;
-        padding-bottom: 40px;
+        justify-content: center;
+        padding-top: 80px;
         h1 {
           font-size: 40px;
           margin-bottom: 20px;

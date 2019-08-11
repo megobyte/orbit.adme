@@ -9,7 +9,11 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' },
-      { hid: 'description', name: 'description', content: 'Думаешь, у тебя сложное лицо? Проверь себя на сложнометре от Orbit!' }
+      { hid: 'description', name: 'description', content: 'Думаешь, у тебя сложное лицо? Проверь себя на сложнометре от Orbit!' },
+      { hid: 'og:title', property: 'og:title', content: '#Лицопроще с Orbit' },
+      { hid: 'og:url', property: 'og:url', content: 'https://orbit.adme.ru' },
+      { hid: 'og:image', property: 'og:image', content: 'https://orbit.adme.ru/assets/images/share/fb.png' },
+      { hid: 'og:description', property: 'og:description', content: 'Думаешь, у тебя сложное лицо? Проверь себя на сложнометре от Orbit!' },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
@@ -17,7 +21,9 @@ export default {
       { rel: 'stylesheet', href: '/assets/fonts/stylesheet.css' }
     ],
     script: [
-      { src: 'https://vk.com/js/api/openapi.js?162', type: 'text/javascript' }
+      { src: '/assets/js/g.js', type: 'text/javascript' },
+      { src: 'https://vk.com/js/api/openapi.js?162', type: 'text/javascript' },
+      { src: 'https://connect.facebook.net/en_US/sdk.js', type: 'text/javascript' }
     ]
   },
   /*
