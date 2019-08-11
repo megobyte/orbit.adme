@@ -16,7 +16,7 @@
             input(type="text", v-model="fname", placeholder="")
         .title Текст сообщения
         textarea(v-model="message")
-        .btn Отправить
+        .btn(@click="send", :class="{ disabled: ((fname === '') || (email === ''))}") Отправить
 
 </template>
 <script>
@@ -50,6 +50,19 @@ export default {
     },
     setSlide(i) {
       this.slide = i;
+    },
+
+    send() {
+      const fd = new FormData();
+      fd.append('email', this.email);
+      fd.append('fname', this.fname);
+      fd.append('message', this.message);
+      this.$axios.post('/feedback/', fd).then( r => {
+        this.email = '';
+        this.fname = '';
+        this.message = '';
+        alert('Спасибо! Ваше сообщение отправлено.');
+      });
     }
   }
 }
@@ -107,6 +120,10 @@ export default {
             border: 1px solid #3c819e;
             @include flex(row);
 
+            &.error {
+              border: 1px solid $pink;
+            }
+
             .vk {
               width: 80px;
               height: 80px;
@@ -149,6 +166,11 @@ export default {
               height: 66px;
               background: url(/assets/images/search.svg) no-repeat center;
               background-size: contain;
+            }
+
+            &.disabled {
+              opacity: .7;
+              pointer-events: none;
             }
           }
         }

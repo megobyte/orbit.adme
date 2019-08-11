@@ -57,13 +57,15 @@ export default {
     let meta = [
       { hid: 'description', name: 'description', content: r.data.result.msg },
       { hid: 'twitter:title', name: 'twitter:title', content: 'Уровень сложности лица - '+r.data.result.code },
-      { hid: 'twitter:image:src', name: 'twitter:image:src', content: (r.data.result.sharing) ? r.data.result.sharing.twitter : 'https://orbit.adme.ru/assets/images/share/tw.png' },
+      { hid: 'twitter:image:src', name: 'twitter:image:src', content: (r.data.result.sharing) ? r.data.result.sharing.fb : 'https://orbit.adme.ru/assets/images/share/tw.png' },
       { hid: 'twitter:card', name: 'twitter:card', content: 'summary_large_image' },
       { hid: 'og:title', property: 'og:title',content: 'Уровень сложности лица - '+r.data.result.code },
       { hid: 'og:url', property: 'og:url', content: 'https://orbit.adme.ru/face/'+params.id+'/' },
       { hid: 'og:image', property: 'og:image', content: (r.data.result.sharing) ? r.data.result.sharing.fb : 'https://orbit.adme.ru/assets/images/share/fb.png' },
       { hid: 'og:description', property: 'og:description', content: r.data.result.msg },
     ];
+
+    let sharing = (r.data.result.sharing) ? r.data.result.sharing : false;
 
     let border = {
       left: 0,
@@ -79,8 +81,9 @@ export default {
 
     return {
       meta:meta,
-      border: border
-    }
+      border: border,
+      sharing: sharing
+    };
   },
 
   data: function() {
@@ -100,6 +103,7 @@ export default {
         width: 0,
         height: 0
       },
+      sharing: false,
       description: 'Есть люди, которые даже в расслабленном состоянии выглядят неприветливо. Это явление известно как сложноe лицо, и причина его не в плохом характере, а в особом строении лица.'
     }
   },
@@ -139,10 +143,10 @@ export default {
           return '//www.facebook.com/share.php?u='+encodeURIComponent('https://orbit.adme.ru/face/'+this.$route.params.id+'/');
           break;
         case 'vk':
-          return '//vk.com/share.php?url='+encodeURIComponent('https://orbit.adme.ru/face/'+this.$route.params.id+'/')+'&image='+encodeURIComponent('https://orbit.adme.ru/assets/images/share/vk.png')
+          return '//vk.com/share.php?url='+encodeURIComponent('https://orbit.adme.ru/face/'+this.$route.params.id+'/')+'&image='+encodeURIComponent((this.sharing) ? this.sharing.vk : 'https://orbit.adme.ru/assets/images/share/vk.png')
           break;
         case 'ok':
-          return '//connect.ok.ru/offer?url='+encodeURIComponent('https://orbit.adme.ru/face/'+this.$route.params.id+'/')+'&imageUrl='+encodeURIComponent('https://orbit.adme.ru/assets/images/share/ok.png')
+          return '//connect.ok.ru/offer?url='+encodeURIComponent('https://orbit.adme.ru/face/'+this.$route.params.id+'/')+'&imageUrl='+encodeURIComponent((this.sharing) ? this.sharing.ok : 'https://orbit.adme.ru/assets/images/share/ok.png')
           break;
         case 'tw':
           return '//twitter.com/share?url='+encodeURIComponent('https://orbit.adme.ru/face/'+this.$route.params.id+'/')
@@ -176,6 +180,10 @@ export default {
         this.border.top = (r.data.result.face_border.top*100) + '%';
         this.border.width = (r.data.result.face_border.width*100) + '%';
         this.border.height = (r.data.result.face_border.height*100) + '%';
+
+        if (r.data.result.sharing) {
+          this.sharing = r.data.result.sharing;
+        }
 
         this.imgl(null, 'imgb');
         this.imgl(null, 'mimg');

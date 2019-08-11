@@ -63,7 +63,8 @@ export default {
 
   proxy: [
     //'/task': { target: 'http://45.67.57.80'}
-    'https://orbit.adme.ru/task'
+    'https://orbit.adme.ru/task',
+    'https://orbit.adme.ru/feedback',
   ],
   /**
    * Styles

@@ -61,7 +61,13 @@ export default {
     var w = window.innerWidth
               || document.documentElement.clientWidth
               || document.body.clientWidth;
-    if (w > 768) VK.Widgets.CommunityMessages("vk_community_messages", 137753974, {expanded: "1",tooltipButtonText: "Есть вопрос?"});
+    if (w > 768) {
+      if (process.client) {
+        setTimeout(function() {
+          VK.Widgets.CommunityMessages("vk_community_messages", 137753974, {expanded: "1",tooltipButtonText: "Есть вопрос?"});
+        }, 3000);
+      }
+    }
   },
 
   beforeDestroy: function() {
