@@ -33,7 +33,7 @@
       .dot.mobile(:class="{ active: (checkPage == 5)}", @click="goTo('/mobile-last')")
     .onehk(@click="goTo('/promo')")
     footer(:class="{active: showfooter}")
-      .grid
+      .grid(@mouseover="showFooter()")
         div
         div
         div
@@ -52,6 +52,12 @@
         popup2(@closeme="closePop(1)")
       template(v-if="popopen[2]")
         popup3(@closeme="closePop(2)")
+    .pixels
+      noscript.
+        <img src="https://top-fwz1.mail.ru/counter?id=3133969;js=na" style="border:0;position:absolute;left:-9999px;" alt="Top.Mail.Ru" />
+      img(:src='"https://top-fwz1.mail.ru/tracker?id=3133969;e=RG%3A/trg-pixel-4981532-1565166227757;_="+Math.random()')
+      img(:src='"https://top-fwz1.mail.ru/tracker?id=3133969;e=RG%3A/trg-pixel-4981532-1565167858320;_="+Math.random()')
+      img(:src='"https://top-fwz1.mail.ru/tracker?id=3133969;e=RG%3A/trg-pixel-4981532-1565166294782;_="+Math.random()')
 </template>
 <script>
 import popup1 from '~/components/popup1';
@@ -205,6 +211,10 @@ export default {
       if (($event.target.id !== "promo") && this.drop) this.drop = false;
     },
 
+    showFooter() {
+      if (this.$route.name === "promo") this.showfooter = true;
+    },
+
     scrollMe(event) {
       event.preventDefault();
       if (!this.working) {
@@ -320,6 +330,15 @@ body {
 * {
   position: relative;
   box-sizing: border-box;
+}
+
+.pixels {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -3;
+  opacity: 0;
+  pointer-events: none;
 }
 
 $w: 100vw/12;
@@ -700,6 +719,7 @@ $wp: 100%/12;
     bottom: 0;
     left: 0;
     width: 100%;
+    z-index: 3000;
 
     &.active {
       .footer_content {

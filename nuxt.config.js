@@ -25,8 +25,8 @@ export default {
     ],
     script: [
       { src: '/assets/js/g.js', type: 'text/javascript' },
-      { src: 'https://vk.com/js/api/openapi.js?162', type: 'text/javascript' },
-      { src: 'https://connect.facebook.net/en_US/sdk.js', type: 'text/javascript' }
+      //{ src: 'https://vk.com/js/api/openapi.js?162', type: 'text/javascript' },
+      //{ src: 'https://connect.facebook.net/en_US/sdk.js', type: 'text/javascript' }
     ]
   },
   /*
