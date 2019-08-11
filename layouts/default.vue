@@ -40,10 +40,10 @@
         div
       .social
         a.heart(ref="favorite", @click="addToFavorite()")
-        a.fb(href="#", target="_blank", @click="share('fb')")
-        a.ok(href="#", target="_blank")
-        a.tw(href="#", target="_blank")
-        a.vk(href="#", target="_blank")
+        a.fb(:href="getShareLink('fb')", target="_blank")
+        a.ok(:href="getShareLink('ok')", target="_blank")
+        a.tw(:href="getShareLink('tw')", target="_blank")
+        a.vk(:href="getShareLink('vk')", target="_blank")
       c_footer(@close="showfooter = false")
     transition(name="fadein")
       template(v-if="popopen[0]")
@@ -133,6 +133,22 @@ export default {
   },
 
   methods: {
+    getShareLink(type) {
+      switch(type) {
+        case 'fb':
+          return '//www.facebook.com/share.php?u='+encodeURIComponent('https://orbit.adme.ru/');
+          break;
+        case 'vk':
+          return '//vk.com/share.php?url='+encodeURIComponent('https://orbit.adme.ru/')+'&image='+encodeURIComponent('https://orbit.adme.ru/assets/images/share/vk.png')
+          break;
+        case 'ok':
+          return '//connect.ok.ru/offer?url='+encodeURIComponent('https://orbit.adme.ru/')+'&imageUrl='+encodeURIComponent('https://orbit.adme.ru/assets/images/share/ok.png')
+          break;
+        case 'tw':
+          return '//twitter.com/share?url='+encodeURIComponent('https://orbit.adme.ru/')
+          break;
+      }
+    },
     share(type) {
       switch(type) {
         case 'fb':
