@@ -25,7 +25,7 @@ export default {
     var w = window.innerWidth
               || document.documentElement.clientWidth
               || document.body.clientWidth;
-    if (w <= 768) VK.Widgets.CommunityMessages("vk_community_messages", 184016686, {expanded: "1",tooltipButtonText: "Есть вопрос?"});
+    if (w <= 768) VK.Widgets.CommunityMessages("vk_community_messages", 137753974, {expanded: "1",tooltipButtonText: "Есть вопрос?"});
   },
 
   beforeDestroy: function() {

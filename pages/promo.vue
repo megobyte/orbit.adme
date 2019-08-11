@@ -14,6 +14,7 @@
           .inner
             #vk_community_messages
               .loading Загружаю чат-бота
+            .close
       .text
         h1 Сделай <br />#лицопроще <br />и <span>выигрывай</span><br />100 000 рублей
         .juicyfruit
@@ -258,8 +259,25 @@ $w: 100vw/12;
             animation-iteration-count: infinite;
             animation-timing-function: linear;
             left: 26px;
-            color: $violet;
+            background: #4a76a8;
+            color: #fff;
           }
+        }
+
+        .close {
+          position: absolute;
+          z-index: 4;
+          left: 50%;
+          top: 10px;
+          margin-left: 125px;
+          width: 30px;
+          height: 30px;
+          background: #4a76a8;
+
+          @include flex;
+          color: #b1c4d9;
+          font-weight: bold;
+          font-size: 1.4em;
         }
 
         #vk_community_messages {
