@@ -21,7 +21,8 @@
         template(v-if="(checkPage != 4)") Акция
         ul.drop(:class="{active: drop}")
           li(@click="popopen[0] = true") Призы
-          li Правила
+          li
+            a(href="/rules.pdf", target="_blank") Правила
           li(@click="popopen[1] = true") Победители
           li(@click="popopen[2] = true") Обратная связь
     .dots
@@ -530,6 +531,11 @@ $wp: 100%/12;
           white-space: nowrap;
           @include transition;
           cursor: pointer;
+
+          a {
+            color: $blue;
+            text-decoration: none;
+          }
 
           &::before { display: none;}
 
