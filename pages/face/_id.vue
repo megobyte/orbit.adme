@@ -53,31 +53,38 @@ export default {
   },
 
   async asyncData ({ params }) {
-    let r = await axios.get('https://orbit.adme.ru/task/'+params.id+'/');
-    let meta = [
-      { hid: 'description', name: 'description', content: r.data.result.msg },
-      { hid: 'twitter:title', name: 'twitter:title', content: 'Уровень сложности лица - '+r.data.result.code },
-      { hid: 'twitter:image:src', name: 'twitter:image:src', content: (r.data.result.sharing) ? r.data.result.sharing.fb : 'https://orbit.adme.ru/assets/images/share/tw.png' },
-      { hid: 'twitter:card', name: 'twitter:card', content: 'summary_large_image' },
-      { hid: 'og:title', property: 'og:title',content: 'Уровень сложности лица - '+r.data.result.code },
-      { hid: 'og:url', property: 'og:url', content: 'https://orbit.adme.ru/face/'+params.id+'/' },
-      { hid: 'og:image', property: 'og:image', content: (r.data.result.sharing) ? r.data.result.sharing.fb : 'https://orbit.adme.ru/assets/images/share/fb.png' },
-      { hid: 'og:description', property: 'og:description', content: r.data.result.msg },
-    ];
-
-    let sharing = (r.data.result.sharing) ? r.data.result.sharing : false;
-
+    let meta = [];
     let border = {
-      left: 0,
-      top: 0,
-      width: 0,
-      height: 0
+        left: 0,
+        top: 0,
+        width: 0,
+        height: 0
     };
+    let sharing = false;
 
-    border.left = (r.data.result.face_border.left*100) + '%';
-    border.top = (r.data.result.face_border.top*100) + '%';
-    border.width = (r.data.result.face_border.width*100) + '%';
-    border.height = (r.data.result.face_border.height*100) + '%';
+    try {
+      let r = await axios.get('https://orbit.adme.ru/task/'+params.id+'/');
+      meta = [
+        { hid: 'description', name: 'description', content: r.data.result.msg },
+        { hid: 'twitter:title', name: 'twitter:title', content: 'Уровень сложности лица - '+r.data.result.code },
+        { hid: 'twitter:image:src', name: 'twitter:image:src', content: (r.data.result.sharing) ? r.data.result.sharing.fb : 'https://orbit.adme.ru/assets/images/share/tw.png' },
+        { hid: 'twitter:card', name: 'twitter:card', content: 'summary_large_image' },
+        { hid: 'og:title', property: 'og:title',content: 'Уровень сложности лица - '+r.data.result.code },
+        { hid: 'og:url', property: 'og:url', content: 'https://orbit.adme.ru/face/'+params.id+'/' },
+        { hid: 'og:image', property: 'og:image', content: (r.data.result.sharing) ? r.data.result.sharing.fb : 'https://orbit.adme.ru/assets/images/share/fb.png' },
+        { hid: 'og:description', property: 'og:description', content: r.data.result.msg },
+      ];
+
+      sharing = (r.data.result.sharing) ? r.data.result.sharing : false;
+      if (r.data.result.face_border) {
+        border.left = (r.data.result.face_border.left*100) + '%';
+        border.top = (r.data.result.face_border.top*100) + '%';
+        border.width = (r.data.result.face_border.width*100) + '%';
+        border.height = (r.data.result.face_border.height*100) + '%';
+      }
+    } catch(err) {
+
+    }
 
     return {
       meta:meta,

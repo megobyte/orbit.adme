@@ -85,5 +85,8 @@ export default {
     extractCSS: process.env.NODE_ENV === 'production',
     extend(config, ctx) {
     }
+  },
+  server: {
+    port: 3000
   }
 }
