@@ -68,7 +68,7 @@ export default {
       this.face = this.$refs.face.files[0];
       const fd = new FormData();
       fd.append('face', this.face);
-      this.$axios.post(this.host+'/task/', fd, {
+      this.$axios.post('/task/', fd, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
