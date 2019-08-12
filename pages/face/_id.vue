@@ -39,7 +39,7 @@
           .upload(@click="goTo('/metr')")
           .txt Первое впечатление может быть обманчивым. <a @click="goTo('/metr')">Загрузи</a> другое свое фото и сравни результаты.
       .text(v-if="!loaded")
-        .head Обрабатываем<Br />результат
+        .head Обрабатываем <Br />результат
 </template>
 <script>
 import axios from 'axios';
