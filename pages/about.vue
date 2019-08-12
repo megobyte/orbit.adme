@@ -367,10 +367,10 @@
           a(href="https://www.wonderzine.com/wonderzine/life/life/245187-let-it-rest?utm_source=facebook.com&utm_medium=social&utm_campaign=russkiy-analog-frazy-resting-bitch-face", target="_blank") Узнать больше о сложном лице
     .mobile
       .face
+        .about-over.cdefault(:class="{ cactive: (swipepos == 2) }")
       .title.cdefault(:class="{ cactive: (swipepos == 0) }") Что такое сложное лицо?
       .block.cdefault(:class="{ cactive: (swipepos == 1) }")
         p Есть люди, которые даже в расслабленном состоянии могут выгядеть неприветливо. Это явление известно как сложное лицо, и причина его не в плохом характере, а в особом строении лица.
-      .about-over.cdefault(:class="{ cactive: (swipepos == 2) }")
       .uploadd
         input(type="file", ref="face", accept="image/*", @change="uploadFace")
 </template>
@@ -953,13 +953,14 @@ export default {
       }
 
       .about-over {
-        width: 54.6875vw;
-        height: 75.3125vw;
-        bottom: 41.25vw;
-        left: 39.0625vw;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
         position: absolute;
-        background: url(/assets/images/mobile-face/about-over.svg) no-repeat center;
-        background-size: contain;
+        background: url(/assets/images/mobile-face/face3-over.jpg) no-repeat;
+        background-position: center -110px;
+        background-size: cover;
       }
 
       .block {
