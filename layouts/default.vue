@@ -843,6 +843,16 @@ $wp: 100%/12;
       .onehk {
         transform: translateY(100%);
       }
+
+      .menu {
+        li {
+          .drop {
+            left: 50%;
+            top: auto;
+            transform: translateX(-50%);
+          }
+        }
+      }
     }
 
     &.hidetop1 {
