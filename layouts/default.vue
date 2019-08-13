@@ -265,6 +265,7 @@ export default {
         this.drop = !this.drop;
       }
       this.menu = false;
+      if (uri === 'index') uri = '/';
       this.$router.push(uri);
     },
 
