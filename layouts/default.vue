@@ -265,6 +265,7 @@ export default {
         this.drop = !this.drop;
       }
       this.menu = false;
+      if (uri === 'index') uri = '/';
       this.$router.push(uri);
     },
 
@@ -841,6 +842,12 @@ $wp: 100%/12;
         transform: translateX(-50%);
       }
 
+      .left {
+        @include transition;
+        opacity: 0;
+        transform: translateY(-100%);
+      }
+
       .onehk {
         transform: translateY(100%);
       }
@@ -853,6 +860,10 @@ $wp: 100%/12;
             transform: translateX(-50%);
           }
         }
+      }
+
+      header {
+        background: $bg;
       }
     }
 

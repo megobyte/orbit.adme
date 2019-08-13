@@ -8,7 +8,7 @@
       p.center
         a(href="/rules.pdf", target="_blank") правила участия
         br
-        a(href="https://www.adme.ru/privacy/", target="_blank") политика конфиденциальности
+        a(href="https://www.mars.com/privacy-policy-russia", target="_blank") политика конфиденциальности
         | ,&nbsp;
         a(href="https://www.adme.ru/cookie/", target="_blank") cookie
       .share

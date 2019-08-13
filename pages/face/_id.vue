@@ -77,6 +77,8 @@ export default {
         { hid: 'og:title', property: 'og:title',content: 'Уровень сложности лица - '+r.data.result.code },
         { hid: 'og:url', property: 'og:url', content: 'https://orbit.adme.ru/face/'+params.id+'/' },
         { hid: 'og:image', property: 'og:image', content: (r.data.result.sharing) ? r.data.result.sharing.fb : 'https://orbit.adme.ru/assets/images/share/fb.png' },
+        { hid: 'og:image:width', property: 'og:image:width', content: '1200' },
+        { hid: 'og:image:height', property: 'og:image:height', content: '630' },
         { hid: 'og:description', property: 'og:description', content: r.data.result.msg },
       ];
 
@@ -155,7 +157,7 @@ export default {
           return '//www.facebook.com/share.php?u='+encodeURIComponent('https://orbit.adme.ru/face/'+this.$route.params.id+'/');
           break;
         case 'vk':
-          return '//vk.com/share.php?url='+encodeURIComponent('https://orbit.adme.ru/face/'+this.$route.params.id+'/')+'&image='+encodeURIComponent((this.sharing) ? this.sharing.vk : 'https://orbit.adme.ru/assets/images/share/vk.png')
+          return '//vk.com/share.php?noparse=true&url='+encodeURIComponent('https://orbit.adme.ru/face/'+this.$route.params.id+'/')+'&title='+encodeURIComponent('Уровень сложности лица - '+this.level)+'&description='+encodeURIComponent(this.description)+'&image='+encodeURIComponent((this.sharing) ? this.sharing.vk : 'https://orbit.adme.ru/assets/images/share/vk.png')
           break;
         case 'ok':
           return '//connect.ok.ru/offer?url='+encodeURIComponent('https://orbit.adme.ru/face/'+this.$route.params.id+'/')+'&imageUrl='+encodeURIComponent((this.sharing) ? this.sharing.ok : 'https://orbit.adme.ru/assets/images/share/ok.png')
