@@ -25,7 +25,7 @@ export default {
     ],
     script: [
       { src: '/assets/js/gtag.js', type: 'text/javascript' },
-      { src: 'https://www.googletagmanager.com/gtag/js?id=UA-145448819-1', type: 'text/javascript' },
+      //{ src: 'https://www.googletagmanager.com/gtag/js?id=UA-145448819-1', type: 'text/javascript' },
       { src: '/assets/js/g.js', type: 'text/javascript' },
       //{ src: 'https://vk.com/js/api/openapi.js?162', type: 'text/javascript' },
       //{ src: 'https://connect.facebook.net/en_US/sdk.js', type: 'text/javascript' }
