@@ -22,14 +22,21 @@
     .text
       p Думаешь, у тебя сложное лицо? Проверь себя на сложнометре от Orbit! Он определит уровень сложности твоего лица, и ты узнаешь, какое впечатление производишь на окружающих.
       .upload(@click="clicked=true", :class="{click: clicked}")
-        input(type="file", ref="face", accept="image/*", @change="uploadFace($event, 'face')")
+        //-input(type="file", ref="face", accept="image/*", @change="uploadFace($event, 'face')")
+        upload
     .uploadd(@click="clicked=true", :class="{click: clicked}")
-      input(type="file", ref="facem", accept="image/*", @change="uploadFace($event, 'facem')")
+      //-input(type="file", ref="facem", accept="image/*", @change="uploadFace($event, 'facem')")
+      upload
 </template>
 
 <script>
 
+import upload from '~/components/upload.vue'
+
 export default {
+  components: {
+    upload
+  },
   data: function() {
     return {
       interv: false,
@@ -84,23 +91,6 @@ export default {
           this.$router.push('/');
         }
       }
-    },
-    uploadFace(e, ref) {
-      var that = this;
-      this.face = this.$refs[ref].files[0];
-      const fd = new FormData();
-      fd.append('face', this.face);
-      this.$axios.post('/task/', fd, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      })
-        .then(response => {
-          that.$router.push('/face/'+response.data.id+'/');
-        })
-        .catch(error => {
-          console.log(error.response)
-        })
     }
   },
 

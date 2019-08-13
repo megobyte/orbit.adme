@@ -631,6 +631,7 @@ $wp: 100%/12;
     @include flex(row);
     @include transition;
     justify-content: space-between;
+    z-index: 10;
 
     .hamburger {
       display: none;

@@ -5,6 +5,7 @@
     .face
     .faceover
       .inn
+        //-video(preload="auto", muted, autoplay, playsinline, loop, :poster="trailerBack", :src="bgVideo", type="video/mp4")
       .in(:style="instyle")
         .line(v-if="Boolean(showSVG)", :style="line1")
         .line(v-if="Boolean(showSVG)", :style="line2")
@@ -20,7 +21,8 @@
       //-.button
       .orbit
       .upload
-        input(type="file", ref="face", accept="image/*", @change="uploadFace")
+        //-input(type="file", ref="face", accept="image/*", @change="uploadFace")
+        upload
     .mtext(@click="$router.push('/metr')")
       span Проверь себя
       br
@@ -28,10 +30,15 @@
 </template>
 
 <script>
-
+import upload from '~/components/upload.vue'
 export default {
+  components: {
+    upload
+  },
   data: function() {
     return {
+      trailerBack: '/assets/images/face4.jpg',
+      bgVideo: '/assets/images/video.mp4',
       face: false,
       showSVG: false,
       interv: false,
@@ -62,23 +69,6 @@ export default {
           this.$router.push('/about');
         }
       }
-    },
-    uploadFace(e) {
-      var that = this;
-      this.face = this.$refs.face.files[0];
-      const fd = new FormData();
-      fd.append('face', this.face);
-      this.$axios.post('/task/', fd, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      })
-        .then(response => {
-          that.$router.push('/face/'+response.data.id+'/');
-        })
-        .catch(error => {
-          console.log(error.response)
-        })
     },
 
     takeLineCss(i) {
@@ -214,6 +204,14 @@ export default {
         left: 50%;
         bottom: 0;
         transform: translateX(-50%);
+
+        video {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+        }
       }
 
       .line {

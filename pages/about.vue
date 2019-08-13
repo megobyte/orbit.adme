@@ -372,12 +372,17 @@
       .block.cdefault(:class="{ cactive: (swipepos == 1) }")
         p Есть люди, которые даже в расслабленном состоянии могут выгядеть неприветливо. Это явление известно как сложное лицо, и причина его не в плохом характере, а в особом строении лица.
       .uploadd
-        input(type="file", ref="face", accept="image/*", @change="uploadFace")
+        //-input(type="file", ref="face", accept="image/*", @change="uploadFace")
+        upload
 </template>
 
 <script>
+import upload from '~/components/upload.vue'
 
 export default {
+  components: {
+    upload
+  },
   data: function() {
     return {
       showSVG: false,
@@ -415,23 +420,7 @@ export default {
         }
       }
     },
-    uploadFace(e) {
-      var that = this;
-      this.face = this.$refs.face.files[0];
-      const fd = new FormData();
-      fd.append('face', this.face);
-      this.$axios.post('/task/', fd, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      })
-        .then(response => {
-          that.$router.push('/face/'+response.data.id+'/');
-        })
-        .catch(error => {
-          console.log(error.response)
-        })
-    },
+
     takeLineCss(i) {
       var r = {
         transform: '',
