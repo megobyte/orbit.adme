@@ -21,21 +21,26 @@
               span(:class="{ active : (results[2].now == results[2].to)}") {{results[3].now}}%
     .text
       p Думаешь, у тебя сложное лицо? Проверь себя на сложнометре от Orbit! Он определит уровень сложности твоего лица, и ты узнаешь, какое впечатление производишь на окружающих.
-      .upload(@click="$funcs.hit('metr-click-upload');", :class="{click: clicked}")
-        //-input(type="file", ref="face", accept="image/*", @change="uploadFace($event, 'face')")
-        upload
+      .uploads
+        .upload(@click="$funcs.hit('metr-click-upload');", :class="{click: clicked}")
+          upload
+        .webcam(@click="web_cam = true")
     .uploadd(@click="$funcs.hit('metr-click-upload');", :class="{click: clicked}")
       //-input(type="file", ref="facem", accept="image/*", @change="uploadFace($event, 'facem')")
       upload
+    template(v-if="web_cam")
+      webcam(@close="web_cam = false")
 </template>
 
 <script>
-
 import upload from '~/components/upload.vue'
+import webcam from '~/components/webcam.vue'
 
 export default {
+  name: 'metr',
   components: {
-    upload
+    upload,
+    webcam
   },
   data: function() {
     return {
@@ -43,6 +48,7 @@ export default {
       instyle: {},
       face: false,
       clicked: false,
+      web_cam: false,
       results: [
         {
           now: 0,
@@ -251,10 +257,17 @@ export default {
         margin-bottom: 40px;
       }
 
-      .upload {
-        width: $w * 3.5;
-        padding-top: $w * 3 * .31438721136767318;
-        background: url(/assets/images/upload.svg) no-repeat left center;
+      .uploads {
+        @include flex(row);
+        justify-content: space-between;
+        width: 100%;
+      }
+
+      .upload,
+      .webcam {
+        width: 48%;
+        padding-top: 48% * .31438721136767318;
+        background: url(/assets/images/upload-photo.svg) no-repeat left center;
         background-size: contain;
         cursor: pointer;
         @include transition;
@@ -276,6 +289,10 @@ export default {
           height: 100%;
           cursor: pointer;
         }
+      }
+
+      .webcam {
+        background-image: url(/assets/images/upload-camera.svg);
       }
     }
   }
