@@ -291,6 +291,15 @@ export default {
     }
   }
 
+  @media screen and (min-width: 769px) and (max-height: 800px){
+    #page3 {
+      .title {
+        height: 20%;
+        top: 18%;
+      }
+    }
+  }
+
   @media screen and (min-width: 769px) and (max-height: 750px){
     #page3 {
       .title {
