@@ -41,7 +41,7 @@ export default {
     getShareLink(type) {
       switch(type) {
         case 'fb':
-          return '//www.facebook.com/share.php?u='+encodeURIComponent('https://orbit.adme.ru/');
+          return '//www.facebook.com/dialog/share?app_id=2348221251964050&display=page&href='+encodeURIComponent('https://orbit.adme.ru/');
           break;
         case 'vk':
           return '//vk.com/share.php?url='+encodeURIComponent('https://orbit.adme.ru/')+'&image='+encodeURIComponent('https://orbit.adme.ru/assets/images/share/vk.png')
