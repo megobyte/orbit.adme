@@ -20,7 +20,7 @@
       p У нас есть совет, как можно выглядеть приветливее! Попробуй жевательную резинку – лицо станет более подвижным, и ты будешь казаться дружелюбнее.
       //-.button
       .orbit
-      .upload
+      .upload(@click="$funcs.hit('hash-click-upload');")
         //-input(type="file", ref="face", accept="image/*", @change="uploadFace")
         upload
     .mtext(@click="$router.push('/metr')")

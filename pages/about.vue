@@ -364,14 +364,14 @@
         .guardians
           i
           //-a(href="https://www.washingtonpost.com/news/arts-and-entertainment/wp/2016/02/02/scientists-have-discovered-the-source-of-your-resting-bitch-face/?noredirect=on&utm_term=.d2792a3f18f9", target="_blank") Узнать больше о сложном лице
-          a(href="https://www.wonderzine.com/wonderzine/life/life/245187-let-it-rest?utm_source=facebook.com&utm_medium=social&utm_campaign=russkiy-analog-frazy-resting-bitch-face", target="_blank") Узнать больше о сложном лице
+          a(@click="$funcs.hit('about-click-article'); return true;", href="https://www.wonderzine.com/wonderzine/life/life/245187-let-it-rest?utm_source=facebook.com&utm_medium=social&utm_campaign=russkiy-analog-frazy-resting-bitch-face", target="_blank") Узнать больше о сложном лице
     .mobile
       .face
         .about-over.cdefault(:class="{ cactive: (swipepos == 2) }")
       .title.cdefault(:class="{ cactive: (swipepos == 0) }") Что такое сложное лицо?
       .block.cdefault(:class="{ cactive: (swipepos == 1) }")
         p Есть люди, которые даже в расслабленном состоянии могут выгядеть неприветливо. Это явление известно как сложное лицо, и причина его не в плохом характере, а в особом строении лица.
-      .uploadd
+      .uploadd(@click="$funcs.hit('about-click-upload');")
         //-input(type="file", ref="face", accept="image/*", @change="uploadFace")
         upload
 </template>

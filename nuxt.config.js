@@ -44,7 +44,8 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    { src: '~/plugins/hammer.js', ssr: false }
+    { src: '~/plugins/hammer.js', ssr: false },
+    { src: '~/plugins/hit.js', ssr: false }
   ],
   /*
   ** Nuxt.js modules

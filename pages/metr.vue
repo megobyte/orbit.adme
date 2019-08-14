@@ -21,10 +21,10 @@
               span(:class="{ active : (results[2].now == results[2].to)}") {{results[3].now}}%
     .text
       p Думаешь, у тебя сложное лицо? Проверь себя на сложнометре от Orbit! Он определит уровень сложности твоего лица, и ты узнаешь, какое впечатление производишь на окружающих.
-      .upload(@click="clicked=true", :class="{click: clicked}")
+      .upload(@click="$funcs.hit('metr-click-upload');", :class="{click: clicked}")
         //-input(type="file", ref="face", accept="image/*", @change="uploadFace($event, 'face')")
         upload
-    .uploadd(@click="clicked=true", :class="{click: clicked}")
+    .uploadd(@click="$funcs.hit('metr-click-upload');", :class="{click: clicked}")
       //-input(type="file", ref="facem", accept="image/*", @change="uploadFace($event, 'facem')")
       upload
 </template>

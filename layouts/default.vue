@@ -20,11 +20,11 @@
         template(v-if="(checkPage == 4)") Условия акции
         template(v-if="(checkPage != 4)") Акция
         ul.drop(:class="{active: drop}")
-          li(@click="popopen[0] = true") Призы
-          li
+          li(@click="$funcs.hit('promo-submenu-click-prize'); popopen[0] = true") Призы
+          li(@click="$funcs.hit('promo-submenu-click-rules'); ")
             a(href="/rules.pdf", target="_blank") Правила
-          li(@click="popopen[1] = true") Победители
-          li(@click="popopen[2] = true") Обратная связь
+          li(@click="$funcs.hit('promo-submenu-click-winners'); popopen[1] = true") Победители
+          li(@click="$funcs.hit('promo-submenu-click-feedback'); popopen[2] = true") Обратная связь
     .dots
       .dot(:class="{ active: (checkPage == 0)}", @click="goTo('/')")
       .dot(:class="{ active: (checkPage == 1)}", @click="goTo('/metr')")
@@ -32,7 +32,7 @@
       .dot(:class="{ active: (checkPage == 3)}", @click="goTo('/hash')")
       .dot(:class="{ active: (checkPage == 4)}", @click="goTo('/promo')")
       .dot.mobile(:class="{ active: (checkPage == 5)}", @click="goTo('/mobile-last')")
-    .onehk(@click="goTo('/promo')")
+    .onehk(@click="$funcs.hit('click-100k'); goTo('/promo')")
     footer(:class="{active: showfooter}")
       .grid(@mouseover="showFooter()")
         div
