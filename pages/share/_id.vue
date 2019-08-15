@@ -1,55 +1,10 @@
 <template lang="pug">
-  .page#face(v-hammer:swipe.right="(event)=>goTo('/metr')")
-    template(v-if="photo")
-      .photo
-        img(:src="photo", @load="imgl($event, 'imgb')", ref='imgb')
-        .border(:style="imgstyle")
-          .in(:style="border")
-      .text(v-if="loaded")
-        .head Уровень <br />сложности лица:
-        .level {{level}}
-        p.mob {{description}}
-        .photom
-          img(:src="photo", @load="imgl($event, 'mimg')", ref='mimg')
-          .border(:style="imgstyle")
-            .in(:style="border")
-        .faces(:class="lstar")
-          .f
-          .f
-          .f
-          .f
-          .f
-        p {{description}}
-        .share
-          //.t поделиться
-          .icons
-            a.vk(:href="getShareLink('vk')", target="_blank", @click="$funcs.hit('face-share-vk')").
-              <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-                  <path d="M20.8,7.74C20.93,7.32 20.8,7 20.18,7H18.16C17.64,7 17.41,7.27 17.28,7.57C17.28,7.57 16.25,10.08 14.79,11.72C14.31,12.19 14.1,12.34 13.84,12.34C13.71,12.34 13.5,12.19 13.5,11.76V7.74C13.5,7.23 13.38,7 12.95,7H9.76C9.44,7 9.25,7.24 9.25,7.47C9.25,7.95 10,8.07 10.05,9.44V12.42C10.05,13.08 9.93,13.2 9.68,13.2C9,13.2 7.32,10.67 6.33,7.79C6.13,7.23 5.94,7 5.42,7H3.39C2.82,7 2.7,7.27 2.7,7.57C2.7,8.11 3.39,10.77 5.9,14.29C7.57,16.7 9.93,18 12.08,18C13.37,18 13.53,17.71 13.53,17.21V15.39C13.53,14.82 13.65,14.7 14.06,14.7C14.36,14.7 14.87,14.85 16.07,16C17.45,17.38 17.67,18 18.45,18H20.47C21.05,18 21.34,17.71 21.18,17.14C21,16.57 20.34,15.74 19.47,14.76C19,14.21 18.29,13.61 18.07,13.3C17.77,12.92 17.86,12.75 18.07,12.4C18.07,12.4 20.54,8.93 20.8,7.74Z" />
-              </svg>
-            a.fb(:href="getShareLink('fb')", target="_blank", @click="$funcs.hit('face-share-fb')").
-              <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-                  <path d="M17,2V2H17V6H15C14.31,6 14,6.81 14,7.5V10H14L17,10V14H14V22H10V14H7V10H10V6A4,4 0 0,1 14,2H17Z" />
-              </svg>
-            a.ok(:href="getShareLink('ok')", target="_blank", @click="$funcs.hit('face-share-ok')").
-              <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-                  <path d="M17.83,12.74C17.55,12.17 16.76,11.69 15.71,12.5C14.28,13.64 12,13.64 12,13.64C12,13.64 9.72,13.64 8.29,12.5C7.24,11.69 6.45,12.17 6.17,12.74C5.67,13.74 6.23,14.23 7.5,15.04C8.59,15.74 10.08,16 11.04,16.1L10.24,16.9C9.1,18.03 8,19.12 7.25,19.88C6.8,20.34 6.8,21.07 7.25,21.5L7.39,21.66C7.84,22.11 8.58,22.11 9.03,21.66L12,18.68C13.15,19.81 14.24,20.9 15,21.66C15.45,22.11 16.18,22.11 16.64,21.66L16.77,21.5C17.23,21.07 17.23,20.34 16.77,19.88L13.79,16.9L13,16.09C13.95,16 15.42,15.73 16.5,15.04C17.77,14.23 18.33,13.74 17.83,12.74M12,4.57C13.38,4.57 14.5,5.69 14.5,7.06C14.5,8.44 13.38,9.55 12,9.55C10.62,9.55 9.5,8.44 9.5,7.06C9.5,5.69 10.62,4.57 12,4.57M12,12.12C14.8,12.12 17.06,9.86 17.06,7.06C17.06,4.27 14.8,2 12,2C9.2,2 6.94,4.27 6.94,7.06C6.94,9.86 9.2,12.12 12,12.12Z" />
-              </svg>
-        .reload
-          .upload(@click="$funcs.hit('face-click-upload'); ")
-            upload
-          .txt Первое впечатление может быть обманчивым. <a @click="$funcs.hit('face-click-upload');">Загрузи <upload /></a> другое свое фото и сравни результаты.
-      .text(v-if="!loaded")
-        .head Обрабатываем <Br />результат
+  .page
 </template>
 <script>
 import axios from 'axios';
-import upload from '~/components/upload.vue'
 
 export default {
-  components: {
-    upload
-  },
   head () {
     return {
       title: this.level,
@@ -70,16 +25,16 @@ export default {
     try {
       let r = await axios.get('https://orbit.adme.ru/task/'+params.id+'/');
       meta = [
-        { hid: 'description', name: 'description', content: 'Проверь себя на сложнометре от Орбит' },
-        { hid: 'twitter:title', name: 'twitter:title', content: 'Проверь себя на сложнометре от Орбит' },
+        { hid: 'description', name: 'description', content: r.data.result.msg },
+        { hid: 'twitter:title', name: 'twitter:title', content: 'Проверь себя на #сложноелицо!' },
         { hid: 'twitter:image:src', name: 'twitter:image:src', content: (r.data.result.sharing) ? r.data.result.sharing.fb : 'https://orbit.adme.ru/assets/images/share/tw.png' },
         { hid: 'twitter:card', name: 'twitter:card', content: 'summary_large_image' },
-        { hid: 'og:title', property: 'og:title',content: 'Проверь себя на сложнометре от Орбит' },
-        { hid: 'og:url', property: 'og:url', content: 'https://orbit.adme.ru/share/'+params.id+'/' },
+        { hid: 'og:title', property: 'og:title',content: 'Проверь себя на #сложноелицо!' },
+        { hid: 'og:url', property: 'og:url', content: 'https://orbit.adme.ru/face/'+params.id+'/' },
         { hid: 'og:image', property: 'og:image', content: (r.data.result.sharing) ? r.data.result.sharing.fb : 'https://orbit.adme.ru/assets/images/share/fb.png' },
         { hid: 'og:image:width', property: 'og:image:width', content: '1200' },
         { hid: 'og:image:height', property: 'og:image:height', content: '630' },
-        { hid: 'og:description', property: 'og:description', content: 'Проверь себя на сложнометре от Орбит' },
+        { hid: 'og:description', property: 'og:description', content: r.data.result.msg+' #лицопрощеorbit' },
       ];
 
       sharing = (r.data.result.sharing) ? r.data.result.sharing : false;
@@ -154,17 +109,17 @@ export default {
     getShareLink(type) {
       switch(type) {
         case 'fb':
-          //-return '//www.facebook.com/share.php?u='+encodeURIComponent('https://orbit.adme.ru/share/'+this.$route.params.id+'/');
-          return '//www.facebook.com/dialog/share?app_id=2348221251964050&display=page&href='+encodeURIComponent('https://orbit.adme.ru/share/'+this.$route.params.id+'/');
+          //-return '//www.facebook.com/share.php?u='+encodeURIComponent('https://orbit.adme.ru/face/'+this.$route.params.id+'/');
+          return '//www.facebook.com/dialog/share?app_id=2348221251964050&display=page&href='+encodeURIComponent('https://orbit.adme.ru/face/'+this.$route.params.id+'/');
           break;
         case 'vk':
-          return '//vk.com/share.php?noparse=true&url='+encodeURIComponent('https://orbit.adme.ru/share/'+this.$route.params.id+'/')+'&title='+encodeURIComponent('Проверь себя на сложнометре от Орбит')+'&description='+encodeURIComponent(this.description)+'&image='+encodeURIComponent((this.sharing) ? this.sharing.vk : 'https://orbit.adme.ru/assets/images/share/vk.png')
+          return '//vk.com/share.php?noparse=true&url='+encodeURIComponent('https://orbit.adme.ru/face/'+this.$route.params.id+'/')+'&title='+encodeURIComponent(this.description+' #лицопрощеorbit')+'&description='+encodeURIComponent(this.description)+'&image='+encodeURIComponent((this.sharing) ? this.sharing.vk : 'https://orbit.adme.ru/assets/images/share/vk.png')
           break;
         case 'ok':
-          return '//connect.ok.ru/offer?url='+encodeURIComponent('https://orbit.adme.ru/share/'+this.$route.params.id+'/')+'&imageUrl='+encodeURIComponent((this.sharing) ? this.sharing.ok : 'https://orbit.adme.ru/assets/images/share/ok.png')
+          return '//connect.ok.ru/offer?url='+encodeURIComponent('https://orbit.adme.ru/face/'+this.$route.params.id+'/')+'&imageUrl='+encodeURIComponent((this.sharing) ? this.sharing.ok : 'https://orbit.adme.ru/assets/images/share/ok.png')
           break;
         case 'tw':
-          return '//twitter.com/share?url='+encodeURIComponent('https://orbit.adme.ru/share/'+this.$route.params.id+'/')
+          return '//twitter.com/share?url='+encodeURIComponent('https://orbit.adme.ru/face/'+this.$route.params.id+'/')
           break;
       }
     },
@@ -202,6 +157,7 @@ export default {
 
         this.imgl(null, 'imgb');
         this.imgl(null, 'mimg');
+        this.$router.push('/');
       } else {
         setTimeout(function(that) { that.reloadMe(); }, 500, this);
       }
