@@ -10,6 +10,7 @@
             tspan(x="0") ПРОВЕРЬ СЕБЯ НА
             tspan(x="0", dy="123.1") СЛОЖНОЕ ЛИЦО
         .button(@click="$funcs.hit('index-click-check'); $router.push('/metr')")
+          span ПРОВЕРИТЬ
     .mtext(@click="$funcs.hit('index-click-check'); $router.push('/metr')")
       span Проверь себя
       br

@@ -385,7 +385,6 @@ $wp: 100%/12;
 
   .faceover {
     opacity: 0;
-    transform: scaleY(0);
   }
 }
 
@@ -571,24 +570,67 @@ $wp: 100%/12;
   .button {
     width: 19.791666666666667vw;
     cursor: pointer;
+    text-transform: uppercase;
+    background: $pink;
+    color: #fff;
+    font-weight: 400;
+    text-align: center;
+    padding: 17px 0 11px;
     @include transition;
 
-    &:hover {
-      transform: scale(1.05);
+    span {
+      z-index: 2;
+      position: relative;
     }
+
+    @keyframes slidedownbtn {
+      0% { transform: scaleY(0); }
+      45% { transform: scaleY(1); }
+      55% { transform: translateY(0%) scaleY(1); }
+      100% { transform: translateY(100%) scaleY(0); }
+    }
+
+    &:hover {
+      //transform: scale(1.05);
+      &::before {
+        content: '';
+        display: block;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: $adme;
+        z-index: 1;
+        @include origin(0 0);
+        transform: scaleY(0);
+        animation: slidedownbtn 500ms ease;
+        animation-fill-mode: forwards;
+        animation-iteration-count: 1;
+      }
+      &::after {
+        content: '';
+        display: block;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: $violet;
+        z-index: 1;
+        @include origin(0 0);
+        transform: scaleY(0);
+        animation: slidedownbtn 500ms ease;
+        animation-fill-mode: forwards;
+        animation-iteration-count: 1;
+        animation-delay: 150ms;
+      }
+    }
+
     &:active {
       transform: scale(.9);
     }
 
-    &::before {
-      background: url(/assets/images/button-check.svg) no-repeat center $pink;
-      background-size: contain;
-      content: '';
-      display: block;
-      width: 100%;
-      height: 0;
-      padding-top: 26.315789473684211%;
-    }
   }
 
   .onehk {

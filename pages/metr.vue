@@ -130,7 +130,7 @@ export default {
       }
     };
 
-    nextTick();
+    setTimeout(nextTick, 1200);
   },
 
   beforeDestroy: function() {
@@ -202,17 +202,27 @@ export default {
           top: 35.955737704918033%;
           @include transition;
 
+          @keyframes resultsslide {
+            0% { width: 0px;}
+            100% { width: 200px;}
+          }
+
           .results {
             position: absolute;
             left: 0;
             top: 0;
             transform: translateX(-105%);
+            width: 200px;
+            overflow: hidden;
             padding: 10px 20px;
             background: #95d1f1;
             font-size: 24px;
             color: #fff;
             @include flex(row);
             line-height: 1.1em;
+            //animation: resultsslide 0.5s ease 1;
+            animation-fill-mode: forwards;
+            animation-delay: 1s;
             @include transition;
 
             span {
@@ -221,6 +231,7 @@ export default {
               opacity: 0;
               min-width: 36px;
               @include transition;
+
 
               &.active {
                 height: 30px;

@@ -7,10 +7,14 @@
       .inn
         //-video(preload="auto", muted, autoplay, playsinline, loop, :poster="trailerBack", :src="bgVideo", type="video/mp4")
       .in(:style="instyle")
-        .line(v-if="Boolean(showSVG)", :style="line1")
-        .line(v-if="Boolean(showSVG)", :style="line2")
-        .line(v-if="Boolean(showSVG)", :style="line3")
+        .line(:style="line1")
+        .line(:style="line2")
+        .line(:style="line3")
       .circle
+        .half
+          .halfcircle
+        .half
+          .halfcircle
       .list
         .item Приоткрытые<br /><span>глаза</span>
         .item Подвижная<br /><span>мимика</span>
@@ -147,6 +151,11 @@ export default {
       that.line1 = that.takeLineCss(1);
       that.line2 = that.takeLineCss(2);
       that.line3 = that.takeLineCss(3);
+
+      that.line1.opacity = 1;
+      that.line2.opacity = 1;
+      that.line3.opacity = 1;
+
     }, 600, this);
   },
 
@@ -215,12 +224,14 @@ export default {
       }
 
       .line {
-        width: 100px;
+        width: 0px;
         height: 1px;
         background: #fff;
         position: absolute;
         @include origin(0 100%);
         @include transition;
+        transition-property: width, opacity;
+        opacity: 0;
 
         &::before,
         &::after {
@@ -237,19 +248,63 @@ export default {
         &::after {
           left: 100%;
         }
+
+        &:nth-child(1) { transition-delay: 1s;}
+        &:nth-child(2) { transition-delay: 1.4s;}
+        &:nth-child(3) { transition-delay: 1.8s;}
       }
 
       .circle {
         width: $w*2.7;
         height:$w*2.7;
-        border-radius: 50%;
-        border: 2px solid #fff;
+        //border-radius: 50%;
+        //border: 2px solid #fff;
         position: absolute;
         left: 51%;
         bottom: 25%;
         transform: translateX(-50%);
-        @include transition;
+        //@include transition;
+        .half {
+          width: 50%;
+          height: 100%;
+          right: 0;
+          top: 0;
+          position: absolute;
+          overflow: hidden;
+          transform-origin: left center;
+
+          .halfcircle {
+            box-sizing: border-box;
+            height: 100%;
+            width: 200%;
+            right: 0px;
+            position: absolute;
+            border: solid 2px transparent;
+            border-top-color: #fff;
+            border-left-color: #fff;
+            border-radius: 50%;
+            transform: rotate(-45deg);
+            animation: rrotate 0.5s linear 1;
+            animation-fill-mode: forwards;
+            animation-delay: 1s;
+          }
+
+          &:nth-child(2) {
+            transform: rotate(180deg);
+
+            .halfcircle {
+              animation-delay: 1.5s;
+            }
+          }
+
+          @keyframes rrotate {
+            0% {transform: rotate(-45deg);}
+            100% {transform: rotate(135deg);}
+          }
+        }
       }
+
+
 
       .list {
         position: absolute;
