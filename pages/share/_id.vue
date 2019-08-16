@@ -25,16 +25,17 @@ export default {
     try {
       let r = await axios.get('https://orbit.adme.ru/task/'+params.id+'/');
       meta = [
-        { hid: 'description', name: 'description', content: r.data.result.msg },
-        { hid: 'twitter:title', name: 'twitter:title', content: 'Проверь себя на #сложноелицо!' },
+        { hid: 'title', name: 'title', content: '#лицопрощеorbit' },
+        { hid: 'description', name: 'description', content: '#лицопрощеorbit' },
+        { hid: 'twitter:title', name: 'twitter:title', content: 'Проверь себя на сложнометре от Орбит' },
         { hid: 'twitter:image:src', name: 'twitter:image:src', content: (r.data.result.sharing) ? r.data.result.sharing.fb : 'https://orbit.adme.ru/assets/images/share/tw.png' },
         { hid: 'twitter:card', name: 'twitter:card', content: 'summary_large_image' },
-        { hid: 'og:title', property: 'og:title',content: 'Проверь себя на #сложноелицо!' },
-        { hid: 'og:url', property: 'og:url', content: 'https://orbit.adme.ru/face/'+params.id+'/' },
+        { hid: 'og:title', property: 'og:title',content: 'Проверь себя на сложнометре от Орбит' },
+        { hid: 'og:url', property: 'og:url', content: 'https://orbit.adme.ru/share/'+params.id+'/' },
         { hid: 'og:image', property: 'og:image', content: (r.data.result.sharing) ? r.data.result.sharing.fb : 'https://orbit.adme.ru/assets/images/share/fb.png' },
         { hid: 'og:image:width', property: 'og:image:width', content: '1200' },
         { hid: 'og:image:height', property: 'og:image:height', content: '630' },
-        { hid: 'og:description', property: 'og:description', content: r.data.result.msg+' #лицопрощеorbit' },
+        { hid: 'og:description', property: 'og:description', content: '#лицопрощеorbit' },
       ];
 
       sharing = (r.data.result.sharing) ? r.data.result.sharing : false;
