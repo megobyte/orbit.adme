@@ -13,12 +13,13 @@
     nuxt
     .logo(@click="goTo('/')")
     ul.menu(:class="{active: menu}")
-      li(:class="{ click: clicked[1], active: (checkPage == 1)}", @click="goTo('/metr')") СЛОЖНОМЕТР
-      li(:class="{ click: clicked[2], active: (checkPage == 2)}", @click="goTo('/about')") О сложном лице
-      li(:class="{ click: clicked[3], active: (checkPage == 3)}", @click="goTo('/hash')") #ЛИЦОПРОЩЕ С ОРБИТ
+      li(:class="{ click: clicked[1], active: (checkPage == 1)}", @click="goTo('/metr')") <a href="/metr" onclick="return false;">СЛОЖНОМЕТР</a>
+      li(:class="{ click: clicked[2], active: (checkPage == 2)}", @click="goTo('/about')") <a href="/about" onclick="return false;">О сложном лице</a>
+      li(:class="{ click: clicked[3], active: (checkPage == 3)}", @click="goTo('/hash')") <a href="/hash" onclick="return false;">#ЛИЦОПРОЩЕ С ОРБИТ</a>
       li#promo(:class="{ click: clicked[4], active: (checkPage == 4)}", @click="goTo('/promo')")
-        template(v-if="(checkPage == 4)") Условия акции
-        template(v-if="(checkPage != 4)") Акция
+        a(href="/promo", onclick="return false;")
+          template(v-if="(checkPage == 4)") Условия акции
+          template(v-if="(checkPage != 4)") Акция
         ul.drop(:class="{active: drop}")
           li(@click="$funcs.hit('promo-submenu-click-prize'); popopen[0] = true") Призы
           li(@click="$funcs.hit('promo-submenu-click-rules'); ")
@@ -405,6 +406,11 @@ $wp: 100%/12;
   height: 100vh;
   overflow: hidden;
 
+  a {
+    color: #fff;
+    text-decoration: none;
+  }
+
   .page {
     position: absolute;
     left: 0;
@@ -485,6 +491,11 @@ $wp: 100%/12;
       position: relative;
       display: block;
       @include transition(100ms transform ease);
+
+      a {
+        color: #fff;
+        text-decoration: none;
+      }
 
       &:active {
         transform: scale(0.9);
