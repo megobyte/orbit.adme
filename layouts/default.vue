@@ -109,30 +109,31 @@ export default {
   computed: {
     menu_before_style: function() {
       if (!this.$el) { return {}; }
-      var rect = false;
-      var menur = this.$el.querySelector("ul.menu").getBoundingClientRect();
-      if (!this.hover) {
-        if (this.checkPage == 1) {
-          rect = this.$el.querySelector("li#link_metr").getBoundingClientRect();
+      if (this.checkPage == 0) { return {}; } else {
+        var rect = false;
+        var menur = this.$el.querySelector("ul.menu").getBoundingClientRect();
+        if (!this.hover) {
+          if (this.checkPage == 1) {
+            rect = this.$el.querySelector("li#link_metr").getBoundingClientRect();
+          }
+          if (this.checkPage == 2) {
+            rect = this.$el.querySelector("li#link_about").getBoundingClientRect();
+          }
+          if (this.checkPage == 3) {
+            rect = this.$el.querySelector("li#link_hash").getBoundingClientRect();
+          }
+          if (this.checkPage == 4) {
+            rect = this.$el.querySelector("li#promo").getBoundingClientRect();
+          }
+        } else {
+          rect = this.$el.querySelector("li"+this.hover).getBoundingClientRect();
         }
-        if (this.checkPage == 2) {
-          rect = this.$el.querySelector("li#link_about").getBoundingClientRect();
-        }
-        if (this.checkPage == 3) {
-          rect = this.$el.querySelector("li#link_hash").getBoundingClientRect();
-        }
-        if (this.checkPage == 4) {
-          rect = this.$el.querySelector("li#promo").getBoundingClientRect();
-        }
-      } else {
-        rect = this.$el.querySelector("li"+this.hover).getBoundingClientRect();
-      }
 
-      console.log(rect);
-      return {
-        left: (rect.left - menur.left - 10) + 'px',
-        width: (rect.width + 20) + 'px'
-      };
+        return {
+          left: (rect.left - menur.left - 10) + 'px',
+          width: (rect.width + 20) + 'px'
+        };
+      }
     },
 
     checkPage: function() {
