@@ -1,6 +1,16 @@
 <template lang="pug">
   .page#page1(v-hammer:swipe.left="(event)=>goTo('/metr')")
     h1 Проверь мимику лица вместе с Orbit
+    .fulltext
+      p  Есть люди, которые даже в расслабленном состоянии могут выгядеть неприветливо. Это явление известно как сложное лицо, и причина его не в плохом характере, а в особом строении лица.
+      p  Думаешь, у тебя сложное лицо? Проверь себя на сложнометре от Orbit! Он определит уровень сложности твоего лица, и ты узнаешь, какое впечатление производишь на окружающих.
+      p  У нас есть совет, как можно выглядеть приветливее! Попробуй жевательную резинку – лицо станет более подвижным, и ты будешь казаться дружелюбнее.
+      p
+        b  #ЛИЦОПРОЩЕ С ORBIT
+      ul
+        li  Купи любую жевательную резинку Wrigley’s
+        li  Отправь фото пачки в чат-бот
+        li  Выигрывай до 100 000 рубей и другие призы. Ежедневный розыгрыш &mdash; 1000 рублей
     .face
     .bubble1(:class="{active: bubble1}")
     .bubble2(:class="{active: bubble2}")
@@ -54,9 +64,18 @@ export default {
       position: absolute;
       left: 0;
       top: 0;
-      color: $bg;
-      text-indent: -9999px;
       overflow: hidden;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .fulltext {
+      position: absolute;
+      left: 0;
+      top: 0;
+      overflow: hidden;
+      opacity: 0;
+      pointer-events: none;
     }
 
     @keyframes bubbles {
