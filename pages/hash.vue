@@ -36,6 +36,16 @@
 <script>
 import upload from '~/components/upload.vue'
 export default {
+  transition(to, from) {
+    if (from) {
+      if (from.name === 'promo') {
+        return {
+          name: 'from-promo',
+          duration: {enter: 500, leave: 500}
+        };
+      }
+    }
+  },
   components: {
     upload
   },

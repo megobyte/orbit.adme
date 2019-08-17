@@ -388,6 +388,119 @@ $wp: 100%/12;
   .faceover {
     opacity: 0;
   }
+
+}
+
+#global {
+  /* переход с хэша на промо */
+  #page5.from-hash-enter {
+    .face {
+      filter: blur(0px);
+    }
+
+    .bot {
+      transform: translateY(100%);
+    }
+
+    .text {
+      opacity: 0;
+    }
+  }
+
+  #page5.from-hash-enter-to {
+    .face {
+      filter: blur(15px);
+    }
+
+    .bot {
+      transform: translateY(0);
+    }
+
+    .text {
+      opacity: 1;
+    }
+  }
+
+  #page5.from-hash-enter-active,
+  #page4.from-hash-leave-active {
+    * {
+      @include transition(all 500ms ease);
+    }
+  }
+
+  #page4.from-hash-leave-to {
+    .text {
+      opacity: 0;
+    }
+
+    .faceover {
+      opacity: 0;
+    }
+  }
+
+  /* переход с промо на хэш */
+
+  #page5.from-promo-leave {
+    .face {
+      filter: blur(15px);
+    }
+
+    .faceover {
+      opacity: 1;
+    }
+
+    .bot {
+      transform: translateY(0%);
+    }
+
+    .text {
+      opacity: 1;
+    }
+  }
+
+  #page5.from-promo-leave-to {
+    .face {
+      filter: blur(0px);
+    }
+
+    .faceover {
+      opacity: 0;
+    }
+
+    .bot {
+      transform: translateY(100%);
+    }
+
+    .text {
+      opacity: 0;
+    }
+  }
+
+  #page4.from-promo-enter {
+    .faceover {
+      opacity: 0;
+    }
+
+    .text {
+      opacity: 0;
+    }
+  }
+  #page4.from-promo-enter-to {
+    .faceover {
+      opacity: 1;
+    }
+
+    .text {
+      opacity: 1;
+    }
+  }
+
+  #page4.from-promo-enter-active,
+  #page5.from-promo-leave-active {
+    * {
+      @include transition(all 500ms ease);
+    }
+  }
 }
 
 .fadein-enter-active,

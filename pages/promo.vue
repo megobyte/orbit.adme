@@ -361,6 +361,16 @@
 <script>
 
 export default {
+  transition(to, from) {
+    if (from) {
+      if (from.name === 'hash') {
+        return {
+          name: 'from-hash',
+          duration: {enter: 500, leave: 500}
+        };
+      }
+    }
+  },
   data: function() {
     return {
 
@@ -388,7 +398,7 @@ export default {
               || document.documentElement.clientWidth
               || document.body.clientWidth;
     if (w > 768) {
-      if (process.client) {
+      if (process.client && (window.location.hostname !== 'localhost')) {
         setTimeout(function() {
           VK.Widgets.CommunityMessages("vk_community_messages", 137753974, {expanded: "1",tooltipButtonText: "Есть вопрос?"});
         }, 3000);
@@ -404,6 +414,9 @@ export default {
 </script>
 
 <style lang="scss">
+
+
+
 @keyframes slideInDown {
   from {
     transform: translate3d(0, -100px, 0);
