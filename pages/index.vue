@@ -1,5 +1,6 @@
 <template lang="pug">
   .page#page1(v-hammer:swipe.left="(event)=>goTo('/metr')")
+    h1 Проверь мимику лица вместе с Orbit
     .face
     .bubble1
     .bubble2
@@ -32,6 +33,15 @@ export default {
   #page1 {
     $w: 100vw/12;
     $gap: 0.2;
+
+    h1 {
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: $bg;
+      text-indent: -9999px;
+      overflow: hidden;
+    }
 
     @keyframes bubbles {
       0% {   transform: translate(2px*$gap, 1px*$gap) rotate(0deg); }
