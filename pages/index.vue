@@ -2,8 +2,8 @@
   .page#page1(v-hammer:swipe.left="(event)=>goTo('/metr')")
     h1 Проверь мимику лица вместе с Orbit
     .face
-    .bubble1
-    .bubble2
+    .bubble1(:class="{active: bubble1}")
+    .bubble2(:class="{active: bubble2}")
     .text
       .head
         svg(x="0px", y="0px", viewBox="0 0 857.7 264.8", xml:space="preserve")
@@ -21,10 +21,26 @@
 <script>
 
 export default {
+  data() {
+    return {
+      bubble1: false,
+      bubble2: false,
+    };
+  },
   methods: {
     goTo(uri) {
       this.$router.push(uri);
     },
+  },
+
+  mounted() {
+    var that = this;
+    setTimeout(function() {
+      that.bubble1 = true;
+      setTimeout(function() {
+        that.bubble2 = true;
+      },500);
+    }, 500);
   }
 }
 </script>
@@ -62,14 +78,20 @@ export default {
       position: absolute;
       left: calc(#{$w*2/6} + 22px);
       top: 50%;
-      transform: translateY(-50%);
-      animation-name: bubbles;
-      animation-duration: 3.8s;
-      transform-origin:50% 50%;
-      animation-iteration-count: infinite;
-      animation-timing-function: linear;
+      transform: scaleX(0);
+      @include transition;
+      @include origin(0 0);
+
+      &.active {
+        transform: scaleX(1);
+      }
 
       &::before {
+        animation-name: bubbles;
+        animation-duration: 3.8s;
+        transform-origin:0% 0%;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
         background: url(/assets/images/bubble1.svg) no-repeat center;
         background-size: contain;
         content: '';
@@ -85,14 +107,21 @@ export default {
       position: absolute;
       left: 49%;
       top: 12%;
-      animation-name: bubbles;
-      animation-duration: 3.8s;
-      transform-origin:50% 50%;
-      animation-delay: 1s;
-      animation-iteration-count: infinite;
-      animation-timing-function: ease-in-out;
+      transform: scaleX(0);
+      @include transition;
+      @include origin(100% 0);
+
+      &.active {
+        transform: scaleX(1);
+      }
 
       &::before {
+        animation-name: bubbles;
+        animation-duration: 3.8s;
+        transform-origin:50% 50%;
+        animation-delay: 1s;
+        animation-iteration-count: infinite;
+        animation-timing-function: ease-in-out;
         background: url(/assets/images/bubble2.svg) no-repeat center;
         background-size: contain;
         content: '';

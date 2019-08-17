@@ -10,10 +10,11 @@
         .facedetect
           .results
             .ls
-              span.active Спокойствие
-              span(:class="{ active : (results[0].now == results[0].to)}") Радость
-              span(:class="{ active : (results[1].now == results[1].to)}") Грусть
-              span(:class="{ active : (results[2].now == results[2].to)}") Презрение
+              .inner
+                span.active Спокойствие
+                span.active(:class="{ active : (results[0].now == results[0].to)}") Радость
+                span.active(:class="{ active : (results[1].now == results[1].to)}") Грусть
+                span.active(:class="{ active : (results[2].now == results[2].to)}") Презрение
             .rs
               span.active {{results[0].now}}%
               span(:class="{ active : (results[0].now == results[0].to)}") {{results[1].now}}%
@@ -130,7 +131,7 @@ export default {
       }
     };
 
-    setTimeout(nextTick, 1200);
+    setTimeout(nextTick, 3200);
   },
 
   beforeDestroy: function() {
@@ -148,14 +149,14 @@ export default {
     .uploadd { display: none; }
 
     .title {
-      width: calc(#{$w*10} - 40px);
+      width: calc(#{$w*9} - 40px);
       $ww: $w*2 * .68;
       height: 22.2222vh;
       position: absolute;
       transform: translateX(-50%);
       left: 50%;
       top: calc(54px + #{$ww});
-      background: url(/assets/images/title.svg) no-repeat center top;
+      background: url(/assets/images/title.svg) no-repeat right top;
       background-size: contain;
       @include transition;
     }
@@ -192,6 +193,10 @@ export default {
 
       .in {
         @include transition;
+        @keyframes fadein {
+          0% { opacity: 0;}
+          100% { opacity: 1;}
+        }
         .facedetect {
           width: 30.202578268876611%;
           height: 36.782786885245902%;
@@ -200,11 +205,15 @@ export default {
           position: absolute;
           left: 34.141252302025783%;
           top: 35.955737704918033%;
+          opacity: 0;
+          animation: fadein 1s ease 1;
+          animation-fill-mode: forwards;
+          animation-delay: 1s;
           @include transition;
 
           @keyframes resultsslide {
-            0% { width: 0px;}
-            100% { width: 200px;}
+            0% { width: 0px; padding-left: 0px; padding-right: 0px;}
+            100% { width: 200px; padding-left: 20px; padding-right: 20px;}
           }
 
           .results {
@@ -212,17 +221,19 @@ export default {
             left: 0;
             top: 0;
             transform: translateX(-105%);
-            width: 200px;
+            width: 0px;
             overflow: hidden;
-            padding: 10px 20px;
+            padding: 10px 0px;
             background: #95d1f1;
             font-size: 24px;
             color: #fff;
             @include flex(row);
+            justify-content: flex-end;
+            align-items: flex-start;
             line-height: 1.1em;
-            //animation: resultsslide 0.5s ease 1;
+            animation: resultsslide 1s ease 1;
             animation-fill-mode: forwards;
-            animation-delay: 1s;
+            animation-delay: 2s;
             @include transition;
 
             span {
@@ -239,13 +250,36 @@ export default {
               }
             }
 
+            @keyframes lsslide {
+              0% { width: 0px;}
+              100% { width: 105px;}
+            }
+
             .ls {
               text-align: right;
               margin-right: 10px;
+              width: 0px;
+              overflow: hidden;
+              animation: lsslide 1s ease 1;
+              animation-fill-mode: forwards;
+              animation-delay: 3s;
+
+              .inner {
+                width: 105px;
+              }
+            }
+
+            @keyframes rsslide {
+              0% { opacity: 0;}
+              100% { opacity: 1;}
             }
 
             .rs {
               color: $pink;
+              opacity: 0;
+              animation: rsslide .5s ease 1;
+              animation-fill-mode: forwards;
+              animation-delay: 4s;
             }
           }
         }

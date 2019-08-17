@@ -376,12 +376,13 @@ $wp: 100%/12;
   }
 
   .bubble1 {
-    margin-left: -150px;
-    opacity: 0;
+    transition-delay: 300ms !important;
+    transform: scaleX(0) !important;
+    //opacity: 0;
   }
   .bubble2 {
-    transform: translateX(150px);
-    opacity: 0;
+    transform: scaleX(0) !important;
+    //opacity: 0;
   }
 
   .faceover {
