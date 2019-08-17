@@ -1073,6 +1073,10 @@ $wp: 100%/12;
             transform: translateX(-50%);
           }
         }
+
+        .before {
+          display: none !important;
+        }
       }
 
       header {
