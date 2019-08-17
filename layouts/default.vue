@@ -13,10 +13,11 @@
     nuxt
     .logo(@click="goTo('/')")
     ul.menu(:class="{active: menu}")
-      li(:class="{ click: clicked[1], active: (checkPage == 1)}", @click="goTo('/metr')") <a href="/metr" onclick="return false;">СЛОЖНОМЕТР</a>
-      li(:class="{ click: clicked[2], active: (checkPage == 2)}", @click="goTo('/about')") <a href="/about" onclick="return false;">О сложном лице</a>
-      li(:class="{ click: clicked[3], active: (checkPage == 3)}", @click="goTo('/hash')") <a href="/hash" onclick="return false;">#ЛИЦОПРОЩЕ С ОРБИТ</a>
-      li#promo(:class="{ click: clicked[4], active: (checkPage == 4)}", @click="goTo('/promo')")
+      li.before(:style="menu_before_style")
+      li#link_metr(@mouseover="hover='#link_metr'", @mouseleave="hover=false", :class="{ click: clicked[1], active: (checkPage == 1)}", @click="goTo('/metr')") <a href="/metr" onclick="return false;">СЛОЖНОМЕТР</a>
+      li#link_about(@mouseover="hover='#link_about'", @mouseleave="hover=false", :class="{ click: clicked[2], active: (checkPage == 2)}", @click="goTo('/about')") <a href="/about" onclick="return false;">О сложном лице</a>
+      li#link_hash(@mouseover="hover='#link_hash'", @mouseleave="hover=false", :class="{ click: clicked[3], active: (checkPage == 3)}", @click="goTo('/hash')") <a href="/hash" onclick="return false;">#ЛИЦОПРОЩЕ С ОРБИТ</a>
+      li#promo(@mouseover="hover='#promo'", @mouseleave="hover=false", :class="{ click: clicked[4], active: (checkPage == 4)}", @click="goTo('/promo')")
         a(href="/promo", onclick="return false;")
           template(v-if="(checkPage == 4)") Условия акции
           template(v-if="(checkPage != 4)") Акция
@@ -100,11 +101,39 @@ export default {
         false
       ],
       menu: false,
+      hover: false,
       showfooter: false
     }
   },
 
   computed: {
+    menu_before_style: function() {
+      if (!this.$el) { return {}; }
+      var rect = false;
+      var menur = this.$el.querySelector("ul.menu").getBoundingClientRect();
+      if (!this.hover) {
+        if (this.checkPage == 1) {
+          rect = this.$el.querySelector("li#link_metr").getBoundingClientRect();
+        }
+        if (this.checkPage == 2) {
+          rect = this.$el.querySelector("li#link_about").getBoundingClientRect();
+        }
+        if (this.checkPage == 3) {
+          rect = this.$el.querySelector("li#link_hash").getBoundingClientRect();
+        }
+        if (this.checkPage == 4) {
+          rect = this.$el.querySelector("li#promo").getBoundingClientRect();
+        }
+      } else {
+        rect = this.$el.querySelector("li"+this.hover).getBoundingClientRect();
+      }
+
+      console.log(rect);
+      return {
+        left: (rect.left - menur.left - 10) + 'px',
+        width: (rect.width + 20) + 'px'
+      };
+    },
 
     checkPage: function() {
       var r = 0;
@@ -596,6 +625,8 @@ $wp: 100%/12;
     padding: 0;
     z-index: 20;
 
+
+
     li {
       margin: 0;
       padding: 0;
@@ -615,7 +646,7 @@ $wp: 100%/12;
         transform: scale(0.9);
       }
 
-      &::before {
+      /*&::before {
         content: '';
         @include transition;
         width: calc(100% + 40px);
@@ -627,14 +658,14 @@ $wp: 100%/12;
         top: 50%;
         transform: translateY(-53%) scaleX(0);
         background: $pink;
-      }
+      }*/
 
-      &:hover,
+      /*&:hover,
       &.active {
         &::before {
           transform: translateY(-53%) scaleX(1);
         }
-      }
+      }*/
 
       .drop {
         list-style: none;
@@ -675,6 +706,20 @@ $wp: 100%/12;
           transform: scaleY(1);
         }
       }
+    }
+
+    .before {
+      display: block;
+      @include transition;
+      width: 0;
+      z-index: -1;
+      height: 50px;
+      border-radius: 25px;
+      position: absolute;
+      left: -20px;
+      top: 50%;
+      transform: translateY(-53%);
+      background: $pink;
     }
   }
 
