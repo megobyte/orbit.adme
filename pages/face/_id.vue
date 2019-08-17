@@ -210,6 +210,7 @@ export default {
   },
 
   mounted: function() {
+    if (this.meta.length == 0) this.$router.push('/');
     this.reloadMe();
   }
 }

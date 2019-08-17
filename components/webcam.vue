@@ -67,4 +67,10 @@ export default {
       @include flex(row);
     }
   }
+
+  @media screen and (max-width: 768px) {
+    #webcam {
+      display: none;
+    }
+  }
 </style>

@@ -389,6 +389,10 @@ export default {
         }
       }
 
+      .webcam {
+        display: none;
+      }
+
     }
 
     #global {
