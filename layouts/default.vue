@@ -109,10 +109,10 @@ export default {
   computed: {
     menu_before_style: function() {
       if (!this.$el) { return {}; }
-      if (this.checkPage == 0) { return {}; } else {
         var rect = false;
         var menur = this.$el.querySelector("ul.menu").getBoundingClientRect();
         if (!this.hover) {
+          if (this.checkPage == 0) { return {}; }
           if (this.checkPage == 1) {
             rect = this.$el.querySelector("li#link_metr").getBoundingClientRect();
           }
@@ -133,7 +133,6 @@ export default {
           left: (rect.left - menur.left - 10) + 'px',
           width: (rect.width + 20) + 'px'
         };
-      }
     },
 
     checkPage: function() {
