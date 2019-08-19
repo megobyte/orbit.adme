@@ -20,7 +20,7 @@
           .f
           .f
         p {{description}}
-        .share
+        .share(v-if="lstar !== 'l0'")
           //.t поделиться
           .icons
             a.vk(:href="getShareLink('vk')", target="_blank", @click="$funcs.hit('face-share-vk')").
@@ -73,11 +73,11 @@ export default {
         { hid: 'title', name: 'title', content: '#лицопрощеorbit' },
         { hid: 'description', name: 'description', content: '#лицопрощеorbit' },
         { hid: 'twitter:title', name: 'twitter:title', content: 'Проверь себя на сложнометре от Орбит' },
-        { hid: 'twitter:image:src', name: 'twitter:image:src', content: (r.data.result.sharing) ? r.data.result.sharing.fb : 'https://orbit.adme.ru/assets/images/share/tw.png' },
+        { hid: 'twitter:image:src', name: 'twitter:image:src', content: (r.data.result.sharing && (r.data.result.code !== 'Нечитаемое фото')) ? r.data.result.sharing.fb : 'https://orbit.adme.ru/assets/images/share/tw.png' },
         { hid: 'twitter:card', name: 'twitter:card', content: 'summary_large_image' },
         { hid: 'og:title', property: 'og:title',content: 'Проверь себя на сложнометре от Орбит' },
         { hid: 'og:url', property: 'og:url', content: 'https://orbit.adme.ru/share/'+params.id+'/' },
-        { hid: 'og:image', property: 'og:image', content: (r.data.result.sharing) ? r.data.result.sharing.fb : 'https://orbit.adme.ru/assets/images/share/fb.png' },
+        { hid: 'og:image', property: 'og:image', content: ((r.data.result.sharing) && (r.data.result.code !== 'Нечитаемое фото')) ? r.data.result.sharing.fb : 'https://orbit.adme.ru/assets/images/share/fb.png' },
         { hid: 'og:image:width', property: 'og:image:width', content: '1200' },
         { hid: 'og:image:height', property: 'og:image:height', content: '630' },
         { hid: 'og:description', property: 'og:description', content: '#лицопрощеorbit' },
@@ -192,10 +192,12 @@ export default {
         this.level = r.data.result.code;
         this.description = r.data.result.msg;
 
-        this.border.left = (r.data.result.face_border.left*100) + '%';
-        this.border.top = (r.data.result.face_border.top*100) + '%';
-        this.border.width = (r.data.result.face_border.width*100) + '%';
-        this.border.height = (r.data.result.face_border.height*100) + '%';
+        if (r.data.result.face_border) {
+          this.border.left = (r.data.result.face_border.left*100) + '%';
+          this.border.top = (r.data.result.face_border.top*100) + '%';
+          this.border.width = (r.data.result.face_border.width*100) + '%';
+          this.border.height = (r.data.result.face_border.height*100) + '%';
+        }
 
         if (r.data.result.sharing) {
           this.sharing = r.data.result.sharing;
