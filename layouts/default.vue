@@ -25,7 +25,7 @@
           li(@click="$funcs.hit('promo-submenu-click-prize'); popopen[0] = true") Призы
           li(@click="$funcs.hit('promo-submenu-click-rules'); ")
             a(href="/rules.pdf", target="_blank") Правила
-          li(@click="$funcs.hit('promo-submenu-click-winners'); popopen[1] = true") Победители
+          //-li(@click="$funcs.hit('promo-submenu-click-winners'); popopen[1] = true") Победители
           li(@click="$funcs.hit('promo-submenu-click-feedback'); popopen[2] = true") Обратная связь
     .dots
       .dot(:class="{ active: (checkPage == 0)}", @click="goTo('/')")
