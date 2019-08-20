@@ -1294,17 +1294,44 @@ $wp: 100%/12;
         opacity: 1;
       }
 
+      .before {
+        display: none;
+      }
+
       li {
         margin-right: 0;
         margin-bottom: 20px;
         color: #000;
 
+        a {
+          color: #000;
+        }
+
         &::before {
-          background: $bg;
+          content: '';
+          @include transition;
+          width: calc(100% + 40px);
+          z-index: -1;
+          height: 50px;
+          border-radius: 25px;
+          position: absolute;
+          left: -20px;
+          top: 50%;
+          transform: translateY(-53%) scaleX(0);
+          background: $pink;
+        }
+
+        &.active {
+          &::before {
+            transform: translateY(-53%) scaleX(1);
+          }
         }
 
         &.active {
           color: #fff;
+          a {
+            color: #fff;
+          }
         }
       }
     }

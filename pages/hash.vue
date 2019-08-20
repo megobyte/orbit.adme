@@ -27,10 +27,11 @@
       .upload(@click="$funcs.hit('hash-click-upload');")
         //-input(type="file", ref="face", accept="image/*", @change="uploadFace")
         upload
-    .mtext(@click="$router.push('/metr')")
+    .mtext
       span Проверь себя
       br
       span  на сложное лицо
+      upload
 </template>
 
 <script>
