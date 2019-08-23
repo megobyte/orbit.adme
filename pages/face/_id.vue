@@ -38,7 +38,8 @@
         .reload
           .upload(@click="$funcs.hit('face-click-upload'); ")
             upload
-          .txt Первое впечатление может быть обманчивым. <a @click="$funcs.hit('face-click-upload');">Загрузи <upload /></a> другое свое фото и сравни результаты.
+          //-.txt Первое впечатление может быть обманчивым. <a @click="$funcs.hit('face-click-upload');">Загрузи <upload /></a> другое свое фото и сравни результаты.
+          .txt Ты видишь один из 5 результатов. Узнай, каким еще может быть твое лицо. <a @click="$funcs.hit('face-click-upload');">Загрузи <upload /></a> другое фото.
       .text(v-if="!loaded")
         .head Обрабатываем <Br />результат
 </template>

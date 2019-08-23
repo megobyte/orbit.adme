@@ -14,19 +14,19 @@
     .logo(@click="goTo('/')")
     ul.menu(:class="{active: menu}")
       li.before(:style="menu_before_style")
-      li#link_metr(@mouseover="hover='#link_metr'", @mouseleave="hover=false", :class="{ click: clicked[1], active: (checkPage == 1)}", @click="goTo('/metr')") <a href="/metr" onclick="return false;">СЛОЖНОМЕТР</a>
-      li#link_about(@mouseover="hover='#link_about'", @mouseleave="hover=false", :class="{ click: clicked[2], active: (checkPage == 2)}", @click="goTo('/about')") <a href="/about" onclick="return false;">О сложном лице</a>
-      li#link_hash(@mouseover="hover='#link_hash'", @mouseleave="hover=false", :class="{ click: clicked[3], active: (checkPage == 3)}", @click="goTo('/hash')") <a href="/hash" onclick="return false;">#ЛИЦОПРОЩЕ С ОРБИТ</a>
-      li#promo(@mouseover="hover='#promo'", @mouseleave="hover=false", :class="{ click: clicked[4], active: (checkPage == 4)}", @click="goTo('/promo')")
-        a(href="/promo", onclick="return false;")
+      li#link_metr(@mouseover="hover='#link_metr'", @mouseleave="hover=false", :class="{ click: clicked[1], active: (checkPage == 1)}", @click="goTo('/metr', $event)") <a href="/metr" onclick="return false;">СЛОЖНОМЕТР</a>
+      li#link_about(@mouseover="hover='#link_about'", @mouseleave="hover=false", :class="{ click: clicked[2], active: (checkPage == 2)}", @click="goTo('/about', $event)") <a href="/about" onclick="return false;">О сложном лице</a>
+      li#link_hash(@mouseover="hover='#link_hash'", @mouseleave="hover=false", :class="{ click: clicked[3], active: (checkPage == 3)}", @click="goTo('/hash', $event)") <a href="/hash" onclick="return false;">#ЛИЦОПРОЩЕ С ОРБИТ</a>
+      li#promo(@mouseover="hover='#promo'", @mouseleave="hover=false", :class="{ click: clicked[4], active: (checkPage == 4)}")
+        a#promoa(href="/promo", @click="goTo('/promo', $event)")
           template(v-if="(checkPage == 4)") Условия акции
           template(v-if="(checkPage != 4)") Акция
         ul.drop(:class="{active: drop}")
-          li(@click="$funcs.hit('promo-submenu-click-prize'); popopen[0] = true") Призы
-          li(@click="$funcs.hit('promo-submenu-click-rules'); ")
+          li(@click="$funcs.hit('promo-submenu-click-prize'); $set(popopen, 0, true); drop = false;") Призы
+          li(@click="$funcs.hit('promo-submenu-click-rules'); drop = false;")
             a(href="/rules.pdf", target="_blank") Правила
-          //-li(@click="$funcs.hit('promo-submenu-click-winners'); popopen[1] = true") Победители
-          li(@click="$funcs.hit('promo-submenu-click-feedback'); popopen[2] = true") Обратная связь
+          li(@click="$funcs.hit('promo-submenu-click-winners'); $set(popopen, 1, true); drop = false;") Победители
+          li(@click="$funcs.hit('promo-submenu-click-feedback'); $set(popopen, 2, true); drop = false;") Обратная связь
     .dots
       .dot(:class="{ active: (checkPage == 0)}", @click="goTo('/')")
       .dot(:class="{ active: (checkPage == 1)}", @click="goTo('/metr')")
@@ -236,8 +236,9 @@ export default {
     closePop(i) {
       this.$set(this.popopen, i, false);
     },
+
     dropHide($event) {
-      if (($event.target.id !== "promo") && this.drop) this.drop = false;
+      if (($event.target.id !== "promoa") && this.drop) this.drop = false;
     },
 
     showFooter() {
@@ -245,29 +246,31 @@ export default {
     },
 
     scrollMe(event) {
-      event.preventDefault();
-      if (!this.working) {
-        const deltaY = event.deltaY;
-        this.working = true;
-        setTimeout(function(that) { that.working = false; }, 2000, this);
-        var i = this.pagesi[this.$route.name];
-        if (i == 4) {
-          if (this.showfooter) {
-            if (deltaY < 0) {
-              this.showfooter = false;
+      if (!this.popopen[0] && !this.popopen[1] && !this.popopen[2] && !this.popopen[3]) {
+        event.preventDefault();
+        if (!this.working) {
+          const deltaY = event.deltaY;
+          this.working = true;
+          setTimeout(function(that) { that.working = false; }, 2000, this);
+          var i = this.pagesi[this.$route.name];
+          if (i == 4) {
+            if (this.showfooter) {
+              if (deltaY < 0) {
+                this.showfooter = false;
+              }
+            } else {
+              if (deltaY > 0) {
+                this.showfooter = true;
+              } else {
+                this.goToPage(-1);
+              }
             }
           } else {
             if (deltaY > 0) {
-              this.showfooter = true;
+              this.goToPage(1);
             } else {
               this.goToPage(-1);
             }
-          }
-        } else {
-          if (deltaY > 0) {
-            this.goToPage(1);
-          } else {
-            this.goToPage(-1);
           }
         }
       }
@@ -286,7 +289,8 @@ export default {
       }
     },
 
-    goTo(uri) {
+    goTo(uri, e) {
+      if (e) e.preventDefault();
       /*this.clicked[this.pagesi[uri]] = true;
       setTimeout(function(that, uri) {
         console.log(that.clicked[uri]);
@@ -298,6 +302,7 @@ export default {
       this.menu = false;
       if (uri === 'index') uri = '/';
       this.$router.push(uri);
+      return false;
     },
 
     resizeWindow() {

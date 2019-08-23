@@ -12,32 +12,46 @@
             input(type="text", v-model="vkid", placeholder="поиск по id")
           .btn
         .frame
-          .item
-            .date 30.08.2019
-            .yellow
-              .id
-                .star
-                span vk.com/USER_ID
-              .prize Главный приз
-          .item
-            .date 30.08.2019
-            .yellow
-              .id
-                span vk.com/USER_ID
-              .prize PRIZE-02
-          .item
-            .date 30.08.2019
-            .yellow
-              .id
-                span vk.com/USER_ID
-              .prize PRIZE-02
-
+          template(v-for="item in wins")
+            template(v-if="item.vkid")
+              .item
+                .date
+                  //-| 30.08.2019
+                .yellow
+                  .id
+                    //.star
+                    a(:href="'https://vk.com/id'+item.vkid", target="_blank") vk.com/id{{item.vkid}}
+                  .prize {{item.prize}}
 </template>
 <script>
 export default {
   data: function() {
     return {
-      vkid: ''
+      vkid: '',
+      winners: false,
+      winners1k: false
+    }
+  },
+
+  computed: {
+    wins () {
+      var _wins = [];
+      var wins = [];
+      if (this.winners) {
+        _wins = this.winners1k.concat(this.winners);
+      }
+
+      if (this.vkid !== '') {
+        _wins.forEach(element => {
+          if (element.vkid.indexOf(this.vkid) > -1) {
+            wins.push(element);
+          }
+        });
+      } else {
+        wins = _wins;
+      }
+
+      return wins;
     }
   },
 
@@ -63,6 +77,33 @@ export default {
     setSlide(i) {
       this.slide = i;
     }
+  },
+
+  async mounted() {
+    let winners = await this.$axios.get('/winners.csv');
+    let winners1k = await this.$axios.get('/winners1k.csv');
+
+    var csvJSON = function(csv) {
+      var lines = csv.split("\n");
+      var result = [];
+      var headers = lines[0].split(";");
+
+      for (var i = 1; i < lines.length; i++) {
+        var obj = {};
+        var currentline = lines[i].split(";");
+
+        for (var j = 0; j < headers.length; j++) {
+          obj[headers[j]] = currentline[j];
+        }
+
+        result.push(obj);
+      }
+      return result; //JavaScript object
+      //return JSON.stringify(result); //JSON
+    }
+
+    this.winners1k = csvJSON(winners1k.data);
+    this.winners   = csvJSON(winners.data);
   }
 }
 </script>
@@ -133,6 +174,7 @@ export default {
           width: 100%;
           height: 50vh;
           overflow: hidden;
+          overflow-y: auto;
 
           .item {
             width: 100%;
@@ -156,6 +198,10 @@ export default {
               padding: 0 20px;
               line-height: 30px;
 
+              a {
+                color: $blue;
+              }
+
               .id {
                 @include flex(row);
                 justify-content: flex-start;
@@ -167,6 +213,24 @@ export default {
                 margin-right: 10px;
                 background: url(/assets/images/star.svg) no-repeat center;
                 background-size: contain;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 768px){
+    #popup {
+      .window {
+        .content {
+          .frame {
+            height: 70vh;
+            .item {
+              .yellow {
+                flex-direction: column;
+                height: 65px;
               }
             }
           }
