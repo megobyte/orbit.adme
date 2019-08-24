@@ -16,10 +16,10 @@
             template(v-if="item.vkid")
               .item
                 .date
-                  //-| 30.08.2019
+                  template(v-if="item.price.indexOf('.19') > -1") {{item.price}}
                 .yellow
                   .id
-                    //.star
+                    .star(v-if="item.prize === '10000р.'")
                     a(:href="'https://vk.com/id'+item.vkid", target="_blank") vk.com/id{{item.vkid}}
                   .prize {{item.prize}}
 </template>
@@ -84,7 +84,7 @@ export default {
     let winners1k = await this.$axios.get('/winners1k.csv');
 
     var csvJSON = function(csv) {
-      var lines = csv.split("\n");
+      var lines = csv.split("\r\n");
       var result = [];
       var headers = lines[0].split(";");
 

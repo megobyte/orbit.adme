@@ -38,7 +38,7 @@
               .small Зачисление на карту
               .big 100 000 РУБЛЕЙ
             .slide
-              h2 Дополнительный приз
+              h2 Дополнительный приз
               .img(:style="{backgroundImage: 'url(/assets/images/prizes/prize5.svg)'}")
               .small Сертификат ReStore на
               .big 20 000 РУБЛЕЙ
