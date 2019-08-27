@@ -12,11 +12,11 @@
             input(type="text", v-model="vkid", placeholder="поиск по id")
           .btn
         .frame
-          template(v-for="item in wins")
+          template(v-for="item in winners")
             template(v-if="item.vkid")
               .item
                 .date
-                  template(v-if="item.price.indexOf('.19') > -1") {{item.price}}
+                  template {{item.date}}
                 .yellow
                   .id
                     .star(v-if="item.prize === '10000р.'")
@@ -80,30 +80,8 @@ export default {
   },
 
   async mounted() {
-    let winners = await this.$axios.get('/winners.csv');
-    let winners1k = await this.$axios.get('/winners1k.csv');
-
-    var csvJSON = function(csv) {
-      var lines = csv.split("\r\n");
-      var result = [];
-      var headers = lines[0].split(";");
-
-      for (var i = 1; i < lines.length; i++) {
-        var obj = {};
-        var currentline = lines[i].split(";");
-
-        for (var j = 0; j < headers.length; j++) {
-          obj[headers[j]] = currentline[j];
-        }
-
-        result.push(obj);
-      }
-      return result; //JavaScript object
-      //return JSON.stringify(result); //JSON
-    }
-
-    this.winners1k = csvJSON(winners1k.data);
-    this.winners   = csvJSON(winners.data);
+    let winners = await this.$axios.get('/winners.json');
+    this.winners   = winners.data;
   }
 }
 </script>
