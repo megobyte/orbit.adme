@@ -35,8 +35,8 @@
           p.center Посмотри истории
           .video.
             <iframe src="https://www.youtube.com/embed/9TvSKAn9nSw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          .video
-            .container
+          .video.
+            <iframe src="https://www.youtube.com/embed/i9KDYGr0rtI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             //  span Посмотри истории
         .guardians
           i
