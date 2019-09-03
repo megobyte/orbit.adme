@@ -334,7 +334,7 @@
                     C26.2,36.7,26.2,37,26.2,36.9z M17.1,34.2l0.1-0.2L17.1,34.2L17.1,34.2z"/>
                   </svg>
 
-          .item Выигрывай до <br />100 000 рубей<br />и <a href="#" @click="$funcs.hit('promo-click-otherprize'); $nuxt.$emit('openprize')">другие призы</a><br /><br />Ежедневный розыгрыш &mdash;<br />1000 рублей
+          .item Выигрывай до <br />100 000 рублей<br />и <a href="#" @click="$funcs.hit('promo-click-otherprize'); $nuxt.$emit('openprize')">другие призы</a><br /><br />Ежедневный розыгрыш &mdash;<br />1000 рублей
       .bot
         .outer
           .inner
@@ -355,7 +355,7 @@
         .item Купи любую жевательную резинку Wrigley’s
         .item Отправь фото пачки в<br /><span>чат-бот</span><br />
           .btn(@click="$router.push('/mobile-chat')") Перейти<br /> в чат-бот
-        .item Выигрывай до 100 000 рубей и <a href="#" @click="$nuxt.$emit('openprize')">другие призы</a><br /><br />Ежедневный розыгрыш &mdash;<br />1000 рублей
+        .item Выигрывай до 100 000 рублей и <a href="#" @click="$nuxt.$emit('openprize')">другие призы</a><br /><br />Ежедневный розыгрыш &mdash;<br />1000 рублей
 </template>
 
 <script>
