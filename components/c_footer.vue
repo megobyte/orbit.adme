@@ -13,6 +13,8 @@
         | Акция действует на территории РФ. Организатором акции является ООО «АЙКОН». Общий период акции с 12.08.2019 по 30.11.2019. Прием заявок на участие с 12.08.2019 по 12.10.2019.
         |  Полная информация об организаторе акции, правилах ее проведения, количестве призов, сроках, месте и порядке их получения приведена <a href="/rules.pdf" target="_blank">здесь</a>. Количество призов ограничено.
       .row
+        a(@click="$funcs.hit('about-click-article'); return true;", href="https://www.wonderzine.com/wonderzine/life/life/245187-let-it-rest?utm_source=facebook.com&utm_medium=social&utm_campaign=russkiy-analog-frazy-resting-bitch-face", target="_blank") Узнать больше о сложном лице
+      .row
         a(href="https://www.mars.com/privacy-policy-russia", target="_blank") Политика конфиденциальности
         a(href="https://www.adme.ru/cookies/", target="_blank") Cookie
         a(href="https://www.adme.ru", target="_blank") ADME
