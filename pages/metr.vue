@@ -373,7 +373,7 @@ export default {
   @media screen and (min-width: 769px) and (max-height: 700px){
     #page3 {
       .title {
-        height: 17%;
+        height: 22%;
         top: 10vw;
       }
     }
@@ -382,8 +382,16 @@ export default {
   @media screen and (min-width: 769px) and (max-height: 650px){
     #page3 {
       .title {
-        height: 17%;
+        height: 12%;
         top: 8vw;
+      }
+    }
+  }
+
+  @media screen and (min-width: 769px) and (max-width: 1279px) and (max-height: 650px){
+    #page3 {
+      .title {
+        height: 10%;
       }
     }
   }
