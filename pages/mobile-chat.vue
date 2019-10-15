@@ -1,8 +1,12 @@
 <template lang="pug">
   .page#chatbot
     .mobile
-      #vk_community_messages
-        .loading Загружаю чат-бота
+      .loading
+        p Привет!
+        p Вот наша акция и подошла к концу. Спасибо большое всем 110 тысячам, которые так активно участвовали. Вы загрузили целых 150 000 фоток – и это очень круто!
+        p Следите за новостями, мы скоро к вам вернемся с новыми акциями :)
+        p Всегда ваши,
+        p Orbit®
       .close(@click="goTo('/promo')") &times;
 </template>
 
@@ -53,17 +57,21 @@ export default {
       z-index: 2000;
 
       .loading {
-        font-size: 30px;
             width: 100%;
             height: 100%;
             @include flex;
-            animation-name: loading;
-            animation-duration: 2s;
-            transform-origin:50% 50%;
-            animation-iteration-count: infinite;
-            animation-timing-function: linear;
             left: 0px;
             color: #fff;
+            font-size: 1.1rem;
+            padding: 20px;
+            overflow-y: auto;
+            align-items: flex-start;
+
+            p {
+              margin: 0;
+              padding: 0;
+              margin-bottom: 20px;
+            }
           }
     }
 
